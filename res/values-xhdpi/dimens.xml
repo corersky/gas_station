@@ -1,0 +1,4 @@
+<resources>
+	<dimen name="treasure_pullrich_height">160dip</dimen>
+	<dimen name="draw_luck_whole_height">225dip</dimen>
+</resources>

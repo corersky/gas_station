@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include 
+        layout="@layout/main_title"/>
+	<com.linkage.gas_station.myview.GonglveListView 
+	    android:id="@+id/order_list"
+	    android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:divider="@android:color/transparent"
+   		android:background="@drawable/double_banzi_bg"
+    	android:fadingEdge="none"
+    	android:listSelector="@android:color/white">
+	    
+	</com.linkage.gas_station.myview.GonglveListView>
+</LinearLayout>

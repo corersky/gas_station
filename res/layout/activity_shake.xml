@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/yao_layout" >
+    <include 
+        layout="@layout/main_title"/>
+    <ProgressBar
+        android:id="@+id/shake_bar"
+        android:layout_width="321px"
+		android:layout_height="358px"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="50dip"
+		android:visibility="gone"
+		style="@style/shake"/>
+	<ImageView 
+	    android:id="@+id/shake_image"
+	    android:layout_width="321px"
+		android:layout_height="358px"
+		android:src="@drawable/y1"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="50dip"/>
+</RelativeLayout>

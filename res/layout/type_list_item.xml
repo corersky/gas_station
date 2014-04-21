@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:orientation="vertical"
+	android:gravity="center">
+	<RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingTop="2dip" >
+		<LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:layout_marginLeft="10dip" >
+		    <TextView 
+		        android:id="@+id/typename"
+			    android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="left"
+				android:textColor="@color/share_text_num"
+				android:layout_marginBottom="3dip"
+			    android:textSize="17sp"
+			    android:text="10元包100M"/>
+		    <TextView 
+		        android:id="@+id/typename2"
+			    android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="left"
+				android:textColor="@color/share_text_num"
+				android:layout_marginBottom="3dip"
+			    android:textSize="17sp"
+			    android:text="10元包100M"/>
+		    <TextView 
+		        android:id="@+id/typedes"
+			    android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/more_phone_num"
+			    android:textSize="14sp"
+			    android:text="10元包100M赠送100M"/>
+		</LinearLayout>
+
+		<ImageView
+		    android:id="@+id/itemImageCoin"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_centerVertical="true"
+		    android:layout_alignParentRight="true"
+		    android:layout_marginRight="10dip"
+		    android:src="@drawable/pop_select" />
+	</RelativeLayout>
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="5dip"
+   		android:layout_marginRight="5dip"
+   		android:layout_marginTop="2dip"
+   		android:layout_gravity="center"
+	    android:background="@drawable/line_more"/>
+</LinearLayout> 

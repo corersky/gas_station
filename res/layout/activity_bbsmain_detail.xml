@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include 
+        android:id="@+id/main_title_layout"
+        android:visibility="gone"
+        layout="@layout/main_title"/>
+    <com.linkage.gas_station.myview.XListView
+        android:id="@+id/bbs_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:fadingEdge="none"
+        android:cacheColorHint="#00000000"/>
+	<TextView 
+	    android:visibility="gone"
+	    android:id="@+id/bbs_mainno"
+		android:text="暂无评论"	    
+		android:textSize="20sp"
+		android:gravity="center"
+		android:textColor="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:padding="10dip"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

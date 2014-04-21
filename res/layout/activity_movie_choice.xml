@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include 
+        layout="@layout/main_title"/>
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:gravity="right"
+		android:background="@drawable/double_banzi_bg"
+	    android:orientation="vertical" >
+        <GridView
+		    android:layout_margin="10dip"
+	        android:id="@+id/movie_gridview"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:columnWidth="60dp"
+	        android:gravity="center"
+	        android:horizontalSpacing="5dp"
+	        android:numColumns="3"
+	        android:fadeScrollbars="true"
+	        android:scrollbars="none"
+		    android:layout_weight="1"
+	        android:stretchMode="columnWidth"
+	        android:listSelector="#00000000"/>
+		<TextView 
+		    android:id="@+id/order_detail"
+		    android:textColor="#666666"
+		    android:background="@drawable/order_detail_bg"
+		    android:padding="15dip"
+		    android:text="订单查询"
+		    android:textSize="18sp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"/>
+    </LinearLayout>
+    
+</LinearLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="50dip"
+    android:layout_margin="5dip"
+    android:background="@drawable/activity_treasure_buy_choice" >           
+    <TextView 
+        android:id="@+id/view_treasure_buy_title"
+	    android:text="10元60MB"
+	    android:padding="5dip"
+	    android:textSize="15sp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+   	<ImageView 
+   	    android:id="@+id/view_treasure_buy_choice"
+     	android:layout_alignParentRight="true"
+      	android:layout_alignParentBottom="true"
+       	android:src="@drawable/activity_treasure_buy_select"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+</RelativeLayout>
+

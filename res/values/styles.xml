@@ -1,0 +1,79 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    
+    <!-- 主页面tabhost -->
+    <style name="MainTab">
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/main_tab</item>       
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="updateDialog" parent="android:style/Theme.Dialog">
+	    <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item><!--模糊-->
+    </style>
+    
+    <style name="myProgress" parent="@android:style/Widget.ProgressBar.Horizontal">
+	    <item name="android:maxHeight">50dip</item>
+	    <item name="android:minHeight">8dip</item>
+	    <item name="android:indeterminateOnly">false</item>
+	    <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+	    <item name="android:progressDrawable">@drawable/progress_drawable</item>
+	</style>
+	
+    <style name="myProgress_" parent="@android:style/Widget.ProgressBar.Horizontal">
+	    <item name="android:maxHeight">50dip</item>
+	    <item name="android:minHeight">8dip</item>
+	    <item name="android:indeterminateOnly">false</item>
+	    <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+	    <item name="android:progressDrawable">@drawable/progress_with11_drawable</item>
+	</style>
+	
+    <style name="download_progress" parent="@android:style/Widget.ProgressBar.Horizontal">
+	    <item name="android:maxHeight">50dip</item>
+	    <item name="android:minHeight">8dip</item>
+	    <item name="android:indeterminateOnly">false</item>
+	    <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+	    <item name="android:progressDrawable">@drawable/progress_download</item>
+	</style>
+	
+    <style name="translucent">
+  		<item name="android:windowBackground">@color/transparent</item>
+  		<item name="android:windowIsTranslucent">true</item>
+  		<item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>
+ 	</style>
+ 	
+    <style name="shake" parent="@android:style/Widget.ProgressBar.Large">
+		<item name="android:indeterminateDrawable">@anim/shake</item>
+	</style>
+	
+    <style name="apkplugstyle" parent="AppBaseTheme">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    
+
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        <TextView 
+	        android:id="@+id/jiayou_num"
+	        android:textColor="@android:color/black"
+	        android:textSize="18sp"
+	        android:gravity="center"
+	        android:padding="5dip"
+	        android:layout_weight="5"
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"/>
+        <LinearLayout 
+            android:id="@+id/jiayou_money_layout"
+            android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="2"
+	    	android:orientation="horizontal">
+            <RelativeLayout 
+	            android:layout_width="8dip"
+			    android:layout_height="match_parent"
+			    android:background="#d6e2e5">
+	            <LinearLayout
+				    android:layout_width="2dip"
+				    android:layout_centerInParent="true"
+				    android:layout_height="match_parent"
+				    android:background="@android:color/black"
+				    android:orientation="horizontal" >
+		            
+		        </LinearLayout>
+	        </RelativeLayout>	        
+	        <TextView 
+		        android:id="@+id/jiayou_money"
+		        android:textColor="@android:color/black"
+		        android:textSize="18sp"
+		        android:padding="5dip"
+		        android:gravity="center"
+		        android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="share_text_num">#757575</color>
+    <color name="more_phone_num">#ff8d1d</color>
+    <color name="share_content">#9f9344</color>
+    <color name="about_text">#4c6d9a</color>
+    <color name="login_hqyz">#9b5b2c</color>
+    <color name="home2_item_title">#3b5998</color>
+    <color name="holo_red_dark">#ffcc0000</color>
+    <color name="jiayou_desp2">#93974d</color>
+    <color name="login_bg">#1563c1</color>
+    <color name="transparent">#00000000</color>
+    <color name="zjifu_choice">#3a6bb4</color>
+    <color name="zjifu_nochoice">#c2c1c1</color>
+    <color name="area_city">#b1bac3</color>
+    <color name="transparent">#00000000</color>
+    <color name="background">#F7F4F0</color>
+    <color name="title_color">#333333</color>
+</resources>

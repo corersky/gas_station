@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <LinearLayout
+		android:layout_width="280dip"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="5dip"
+    	android:orientation="vertical" 
+    	android:background="@drawable/pop_bg">
+    	<TextView 
+    	    android:id="@+id/selecttype_title"
+    	    android:layout_width="fill_parent"
+	   		android:layout_height="wrap_content"
+	   		android:gravity="center"
+			android:text="请选择加餐包档次"
+			android:layout_marginBottom="10dip"
+	   		android:layout_marginLeft="30dip"
+	   		android:layout_marginRight="30dip"
+	   		android:paddingTop="10dip"
+	   		android:textColor="#707475"
+	   		android:textSize="20sp"/>
+    	<ListView 
+    	    android:background="@drawable/pop_inside_bg"
+    	    android:id="@+id/listview"
+    	    android:layout_width="fill_parent"
+    	    android:layout_height="230dip"
+    	    android:layout_marginLeft="7dip"
+	   		android:layout_marginRight="7dip"
+	   		android:paddingTop="5dip"
+	   		android:paddingBottom="5dip"
+    	    android:divider="@android:color/black"
+	    	android:fadingEdge="none"
+	    	android:listSelector="@android:color/transparent"
+	    	android:scrollbars="none"
+    	    />
+    	
+    	<Button 
+    	    android:id="@+id/sure_button"
+    	    android:layout_width="100dip"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/pop_button"
+	   		android:gravity="center"
+	   		android:layout_gravity="center"
+		    android:text="抢购"
+		    android:textSize="18sp"
+		    android:layout_marginBottom="5dip"
+		    android:layout_marginTop="5dip"
+    	    />
+    </LinearLayout>   
+</LinearLayout>
+

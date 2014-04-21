@@ -1,0 +1,107 @@
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-ignorewarnings
+-verbose
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+-keep class **.R$* {*;}
+
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class com.android.vending.licensing.ILicensingService
+
+-dontwarn com.linkage.**
+-keep class com.linkage.gas_station.jpush.** { *; }
+-keep class com.linkage.gas_station.util.hessian.** { *; }
+
+-dontwarn com.ast.**
+-keep class com.ast.** { *; }
+-dontwarn com.caucho.**
+-keep class com.caucho.** { *; }
+
+-libraryjars libs/ksoap2.jar
+-dontwarn org.kobjects.**
+-keep class org.kobjects.** { *; }
+-dontwarn org.ksoap2.**
+-keep class org.ksoap2.** { *; }
+-dontwarn org.kxml2.**
+-keep class org.kxml2.** { *; }
+-dontwarn org.xmlpull.**
+-keep class org.xmlpull.** { *; }
+
+-libraryjars libs/pinyin4j-2.5.0.jar
+
+-libraryjars libs/android_api_3_4.jar
+-dontwarn com.baidu.mobstat.**
+-keep class com.baidu.mobstat.** { *;}
+-keep class * extends com.baidu.mobstat.**  
+-keep class com.baidu.kirin.** {*; }
+
+-libraryjars libs/Bundle1.6.5.build.jar
+-dontwarn org.apkplug.**
+-keep class org.apkplug.** { *; }
+-dontwarn org.osgi.**
+-keep class org.osgi.** { *; }
+
+-libraryjars libs/open_sdk.jar
+-libraryjars libs/mta-sdk-1.0.0.jar
+-dontwarn com.tencent.**
+-keep class com.tencent.** { *; }
+-keep class * extends android.app.Dialog
+
+-libraryjars libs/weibosdkcore.jar
+-dontwarn com.sina.**
+-keep class com.sina.** { *; }
+
+-libraryjars libs/jpush-sdk-release1.5.2.jar
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+
+-keep class im.yixin.sdk.api.YXMessage {*;}
+-keep class im.yixin.sdk.api.** implements im.yixin.sdk.api.YXMessage$YXMessageData{*;}
+
+-keep class com.tencent.mm.sdk.openapi.WXMediaMessage { *;}
+-keep class com.tencent.mm.sdk.openapi.** implements com.tencent.mm.sdk.openapi.WXMediaMessage$IMediaObject {*;}
+
+-dontwarn io.vov.vitamio.**
+-keep class io.vov.vitamio.** { *; }
+
+-libraryjars   libs/android-support-v4.jar
+-dontwarn android.support.v4.**  
+-keep class android.support.v4.** { *; }  
+-keep public class * extends android.support.v4.**  
+-keep public class * extends android.app.Fragment  
+
+-dontwarn
+-dontskipnonpubliclibraryclassmembers
+
+-keepclasseswithmembernames class * {  
+    native <methods>;  
+}  
+  
+-keepclasseswithmembers class * {  
+    public <init>(android.content.Context, android.util.AttributeSet);  
+}  
+  
+-keepclasseswithmembers class * {  
+    public <init>(android.content.Context, android.util.AttributeSet, int);  
+}  
+  
+-keepclassmembers class * extends android.app.Activity {  
+   public void *(android.view.View);  
+}  
+  
+-keepclassmembers enum * {  
+    public static **[] values();  
+    public static ** valueOf(java.lang.String);  
+}  
+  
+-keep class * implements android.os.Parcelable {  
+  public static final android.os.Parcelable$Creator *;  
+}  
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/title_background"
+    android:orientation="vertical" >
+    <RelativeLayout 
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_centerVertical="true">
+        <ImageView 
+	        android:id="@+id/title_back"
+	        android:visibility="gone"
+	        android:src="@drawable/button_back"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"/>
+        <ImageView 
+            android:id="@+id/title_new_strategy"
+            android:visibility="gone"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginLeft="30dip"
+	    	android:src="@drawable/list_newmessage"/>
+    </RelativeLayout>
+    
+    <TextView 
+        android:id="@+id/title_name"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:textColor="@android:color/white"
+    	android:textSize="22sp"
+    	android:layout_centerInParent="true"/>
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dip"
+        android:layout_centerVertical="true"        
+        android:layout_alignParentRight="true">
+        <ImageView 
+	        android:id="@+id/title_refresh"
+	        android:src="@drawable/refresh"        
+	        android:visibility="invisible"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_centerInParent="true"/>
+        <ProgressBar 
+          	android:id="@+id/title_refresh_progress"
+          	android:visibility="invisible"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+          	android:indeterminateDrawable="@drawable/progress_refresh"/>
+    </RelativeLayout>
+	
+</RelativeLayout>
