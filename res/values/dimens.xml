@@ -8,5 +8,6 @@
     <dimen name="footer_height">90dp</dimen>
     <dimen name="footer_padding">10dp</dimen>
     
-    <dimen name="treasure_pullrich_height">80dip</dimen>
+    <dimen name="treasure_pullrich_height">80dip</dimen>    
+    
 </resources>

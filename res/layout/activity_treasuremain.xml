@@ -258,14 +258,17 @@
 			    		android:layout_height="wrap_content"/>
 				</LinearLayout>
 			</LinearLayout>
-			
-			<LinearLayout 
+			<LinearLayout 			    
 	        	android:layout_weight="2"
-			    android:background="#eeefef"
 			    android:layout_margin="5dip"
 		    	android:orientation="horizontal"
-		       	android:layout_width="match_parent"
-		    	android:layout_height="match_parent" >	
+		       	android:layout_width="fill_parent"
+		    	android:layout_height="fill_parent">
+				<ImageView 
+				    android:id="@+id/treasure_adv"
+				    android:src="@drawable/yicaidaodi"
+			       	android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content" />	
 	    	</LinearLayout>
 		</LinearLayout>
     </LinearLayout>

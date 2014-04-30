@@ -47,6 +47,7 @@ public class TreasureDetailActivity extends BaseActivity {
 	TextView treasure_detail_headview_fromsend=null;
 	TextView treasure_detail_headview_weixin=null;
 	TextView treasure_detail_headview_yixin=null;
+	TextView treasure_detail_headview_activity=null;
 	LinearLayout treasure_detail_headview_use_layout=null;
 	LinearLayout treasure_detail_headview_get_layout=null;
 	TextView treasure_detail_headview_use_total=null;
@@ -156,6 +157,7 @@ public class TreasureDetailActivity extends BaseActivity {
 		treasure_detail_headview_fromsend=(TextView) view.findViewById(R.id.treasure_detail_headview_fromsend);
 		treasure_detail_headview_weixin=(TextView) view.findViewById(R.id.treasure_detail_headview_weixin);
 		treasure_detail_headview_yixin=(TextView) view.findViewById(R.id.treasure_detail_headview_yixin);
+		treasure_detail_headview_activity=(TextView) view.findViewById(R.id.treasure_detail_headview_activity);
 		treasure_detail_headview_use_layout=(LinearLayout) view.findViewById(R.id.treasure_detail_headview_use_layout);
 		treasure_detail_headview_get_layout=(LinearLayout) view.findViewById(R.id.treasure_detail_headview_get_layout);
 		treasure_detail_headview_use_total=(TextView) view.findViewById(R.id.treasure_detail_headview_use_total);
@@ -378,7 +380,10 @@ public class TreasureDetailActivity extends BaseActivity {
 							}
 							else if(map.get("exchange_type").toString().equals("6")) {
 								treasure_detail_headview_qq.setText(Util.convertNull(map.get("coins").toString()));
-							}							
+							}	
+							else if(map.get("exchange_type").toString().equals("7")) {
+								treasure_detail_headview_activity.setText(Util.convertNull(map.get("coins").toString()));
+							}
 						}
 						else if(type==2) {
 							if(map.get("exchange_type").toString().equals("0")) {

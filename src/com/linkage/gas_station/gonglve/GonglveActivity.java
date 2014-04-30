@@ -87,7 +87,7 @@ public class GonglveActivity extends BaseActivity {
 	//初始号码
 	long initPhoneNum=-1;
 	//当前版本支持的活动类型
-	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
 	//活动加载标志位
 	boolean isLoadActivity=false;
 	boolean isLoadBank=false;
@@ -325,8 +325,12 @@ public class GonglveActivity extends BaseActivity {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
+						else if(activity_type==17) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
 						TextView tuan_tip=(TextView) view.findViewById(R.id.tuan_tip);
-						if(activity_type==3 || activity_type==4 || activity_type==5 || activity_type==6|| activity_type==7|| activity_type==8|| activity_type==9|| activity_type==10|| activity_type==11|| activity_type==12|| activity_type==13|| activity_type==14|| activity_type==15|| activity_type==16) {
+						if(activity_type==3 || activity_type==4 || activity_type==5 || activity_type==6|| activity_type==7|| activity_type==8|| activity_type==9|| activity_type==10|| activity_type==11|| activity_type==12|| activity_type==13|| activity_type==14|| activity_type==15|| activity_type==16|| activity_type==17) {
 							tuan_tip.setText(temp2.get(i).getActivity_description());
 						}
 						final ImageView gonglve_title_2_pic=(ImageView) view.findViewById(R.id.gonglve_title_2_pic);
@@ -508,6 +512,10 @@ public class GonglveActivity extends BaseActivity {
 							activity_go.setVisibility(View.INVISIBLE);
 							tuan_go.setImageResource(R.drawable.luckdraw);
 						}
+						else if(activity_type==17) {
+							activity_go.setVisibility(View.INVISIBLE);
+							tuan_go.setImageResource(R.drawable.movie_question_button);
+						}
 						tuan_go.setOnClickListener(new ImageView.OnClickListener() {
 
 							@Override
@@ -574,6 +582,8 @@ public class GonglveActivity extends BaseActivity {
 								else if(activity_type==14) {
 									Intent intent=new Intent(GonglveActivity.this, LuckDrawActivity.class);
 									Bundle bundle=new Bundle();
+									bundle.putString("activityName", temp2.get(num).getActivity_name());
+									bundle.putLong("activityId", Long.parseLong(temp2.get(num).getActivity_id()));
 									bundle.putString("desp", temp2.get(num).getActivity_url());
 									intent.putExtras(bundle);
 									startActivity(intent);
@@ -585,7 +595,15 @@ public class GonglveActivity extends BaseActivity {
 								else if(activity_type==16) {
 									Intent intent=new Intent(GonglveActivity.this, LuckDrawActivity.class);
 									Bundle bundle=new Bundle();
+									bundle.putString("activityName", temp2.get(num).getActivity_name());
 									bundle.putLong("activityId", Long.parseLong(temp2.get(num).getActivity_id()));
+									bundle.putString("desp", temp2.get(num).getActivity_url());
+									intent.putExtras(bundle);
+									startActivity(intent);
+								}
+								else if(activity_type==17) {
+									Intent intent=new Intent(GonglveActivity.this, MovieQuestionActivity.class);
+									Bundle bundle=new Bundle();
 									bundle.putString("desp", temp2.get(num).getActivity_url());
 									intent.putExtras(bundle);
 									startActivity(intent);
@@ -2891,8 +2909,6 @@ public class GonglveActivity extends BaseActivity {
 							startActivity(intent_1);
 							break;
 						case 2:
-							Intent intent_3=new Intent(GonglveActivity.this, MovieQuestionActivity.class);
-							startActivity(intent_3);
 							break;
 						}
 					}});

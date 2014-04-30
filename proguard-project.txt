@@ -42,12 +42,6 @@
 -keep class * extends com.baidu.mobstat.**  
 -keep class com.baidu.kirin.** {*; }
 
--libraryjars libs/Bundle1.6.5.build.jar
--dontwarn org.apkplug.**
--keep class org.apkplug.** { *; }
--dontwarn org.osgi.**
--keep class org.osgi.** { *; }
-
 -libraryjars libs/open_sdk.jar
 -libraryjars libs/mta-sdk-1.0.0.jar
 -dontwarn com.tencent.**

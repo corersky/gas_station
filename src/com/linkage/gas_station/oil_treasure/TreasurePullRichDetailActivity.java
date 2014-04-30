@@ -44,7 +44,12 @@ public class TreasurePullRichDetailActivity extends BaseActivity {
 	private void init() {
 		
 		title_name=(TextView) findViewById(R.id.title_name);
-		title_name.setText("拉土豪派金币");
+		if(getIntent().getExtras().getString("title")!=null) {
+			title_name.setText(getIntent().getExtras().getString("title"));
+		}
+		else {
+			title_name.setText("拉土豪派金币");
+		}
 		title_back=(ImageView) findViewById(R.id.title_back);
 		title_back.setOnClickListener(new ImageView.OnClickListener() {
 

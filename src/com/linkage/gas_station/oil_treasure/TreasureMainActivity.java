@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
+import com.linkage.gas_station.gonglve.MovieQuestionActivity;
 import com.linkage.gas_station.myview.MyTextView;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
@@ -41,10 +42,12 @@ public class TreasureMainActivity extends BaseActivity {
 	TextView treasure_detail=null;
 	TextView whole_num=null;
 	TextView get_coin=null;
+	ImageView treasure_adv=null;
 	
 	boolean isLoadActivity=false;
 	
 	String url="";
+	String activity_url="";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +154,18 @@ public class TreasureMainActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				receiveFlowCoin();
 			}});
+		treasure_adv=(ImageView) findViewById(R.id.treasure_adv);
+		treasure_adv.setOnClickListener(new ImageView.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(TreasureMainActivity.this, MovieQuestionActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString("desp", activity_url);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}}) ;
 	}
 	
 	/**
@@ -171,6 +186,7 @@ public class TreasureMainActivity extends BaseActivity {
 					treasure_main_num.setMaxNum(Integer.parseInt(map.get("residue_coin").toString()));
 					treasure_main_num.setStart();
 					url=map.get("url").toString();
+					activity_url=map.get("activity_url").toString();
 				}
 				else if(msg.what==-1) {
 					showCustomToast("Á´Â·Á¬½ÓÊ§°Ü");

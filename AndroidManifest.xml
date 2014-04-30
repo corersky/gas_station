@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.linkage.gas_station"
-    android:versionCode="80"
-    android:versionName="7.9.10"
+    android:versionCode="83"
+    android:versionName="7.9.14"
     android:installLocation="internalOnly" >
 
     <uses-sdk
@@ -158,7 +158,7 @@
  	    <activity android:name=".gonglve.QXJYReceiverActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".gonglve.LuckDrawActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".gonglve.LuckDrawAddressActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
- 	   	<activity android:name=".gonglve.MovieQuestionActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".gonglve.MovieQuestionActivity" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".life.LifeMainActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
     	<activity android:name=".life.LifeAddActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>    	
     	<activity android:name=".life.AreaRegionActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
@@ -178,7 +178,7 @@
     	<activity android:name=".bbs.BBSDetailActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
     	<activity android:name=".bbs.BBSSendActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
   		<service android:name=".update.DownloadService"></service>
-  	    <activity android:name=".oil_treasure.TreasureMainActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation" ></activity>        
+  	    <activity android:name=".oil_treasure.TreasureMainActivity" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation" ></activity>        
   	    <activity android:name=".oil_treasure.TreasureAgainsBillActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation" ></activity>        
   	    <activity android:name=".oil_treasure.TreasurePullRichActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation" ></activity>        
   	    <activity android:name=".oil_treasure.TreasurePullRichDetailActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation" ></activity>        

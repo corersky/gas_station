@@ -9,9 +9,7 @@ import java.util.Map;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +32,7 @@ import com.linkage.gas_station.R;
 import com.linkage.gas_station.main.MainActivity;
 import com.linkage.gas_station.myview.Circleview;
 import com.linkage.gas_station.myview.Circleview.OnFinishListener;
+import com.linkage.gas_station.oil_treasure.TreasurePullRichDetailActivity;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
 import com.linkage.gas_station.util.hessian.LotteryManager;
@@ -57,6 +56,7 @@ public class LuckDrawActivity extends BaseActivity {
 	TextView luck_draw_last_num=null;
 	Circleview claert=null;
 	ImageView lottery_view=null;
+	TextView luckdraw_desp=null;
 	
 	TextView share_lottery_notice_my_address=null;
 	ListView share_lottery_notice_whole_list=null;
@@ -154,8 +154,13 @@ public class LuckDrawActivity extends BaseActivity {
 		bitmapUtils.display(share_lottery_notice_layout, "assets/share_lottery_detail_bg.jpg");
 		share_lottery_detail_layout=(LinearLayout) findViewById(R.id.share_lottery_detail_layout);
 		bitmapUtils.display(share_lottery_detail_layout, "assets/share_lottery_detail_bg.jpg");
-		share_lottery_first_bg=(LinearLayout) findViewById(R.id.share_lottery_first_bg);
-		bitmapUtils.display(share_lottery_first_bg, "assets/share_lottery_bg.jpg");
+		share_lottery_first_bg=(LinearLayout) findViewById(R.id.share_lottery_first_bg);		
+		if(Util.getUserArea(LuckDrawActivity.this).equals("0971")) {
+			bitmapUtils.display(share_lottery_first_bg, "assets/share_lottery_bg_qh.jpg");
+	    }
+	    else {
+	    	bitmapUtils.display(share_lottery_first_bg, "assets/share_lottery_bg_js.jpg");
+	    }
 		
 		FrameLayout layout=(FrameLayout) findViewById(R.id.Lottery);
 	    int screnWidth=getWindowManager().getDefaultDisplay().getWidth();
@@ -198,10 +203,18 @@ public class LuckDrawActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				((GasStationApplication) getApplicationContext()).jumpJiayouFrom=(int) getIntent().getExtras().getLong("activityId");
 				finish();
 				MainActivity.getInstance().jumpToJiayou(0, 4);
 			}});
-
+	    luckdraw_desp=(TextView) findViewById(R.id.luckdraw_desp);
+	    if(Util.getUserArea(LuckDrawActivity.this).equals("0971")) {
+	    	luckdraw_desp.setText("购买10元以上流量包可增加一次抽奖机会");
+	    }
+	    else {
+	    	luckdraw_desp.setText("购买20元以上流量包可增加三次抽奖机会");
+	    }
+	    
 	    share_lottery_arrow_left=(ImageView) findViewById(R.id.share_lottery_arrow_left);
 	    share_lottery_arrow_left.setOnClickListener(new ImageView.OnClickListener() {
 
@@ -508,12 +521,26 @@ public class LuckDrawActivity extends BaseActivity {
 			luck_draw_total_num.setText(map_result.get("lottery_totalcnt").toString());
 			luck_draw_last_num.setText(map_result.get("lottery_cnt").toString());
 			
-			new AlertDialog.Builder(LuckDrawActivity.this).setTitle("奖品信息").setMessage(map_result.get("comments").toString()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			final String result=map_result.get("comments").toString(); 
+			String title="确定";
+			if(Util.getUserArea(LuckDrawActivity.this).equals("0971")&&Integer.parseInt(map_result.get("level_id").toString())<=3) {
+				title="分享";
+			}
+			new AlertDialog.Builder(LuckDrawActivity.this).setTitle("奖品信息").setMessage(result).setPositiveButton(title, new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface arg0, int arg1) {
 					// TODO Auto-generated method stub
-					
+					if(Util.getUserArea(LuckDrawActivity.this).equals("0971")&&Integer.parseInt(map_result.get("level_id").toString())<=3) {
+						Intent intent=new Intent(LuckDrawActivity.this, TreasurePullRichDetailActivity.class);
+						Bundle bundle=new Bundle();
+						bundle.putString("title", getIntent().getExtras().getString("activityName"));
+						bundle.putString("pull_rich_title", getIntent().getExtras().getString("activityName"));
+						bundle.putString("pull_rich_message", result);
+						bundle.putString("url", "http://202.102.116.115:7001/lljyz/index.html");
+						intent.putExtras(bundle);
+						startActivity(intent);
+					}
 				}
 			}).show();
 			

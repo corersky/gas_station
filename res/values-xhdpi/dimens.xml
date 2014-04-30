@@ -1,4 +1,10 @@
 <resources>
 	<dimen name="treasure_pullrich_height">160dip</dimen>
-	<dimen name="draw_luck_whole_height">225dip</dimen>
+	<dimen name="draw_luck_whole_height">225dip</dimen>		
+	
+	<dimen name="movie_question_total_height">230dip</dimen>
+	<dimen name="movie_question_height">180dip</dimen>
+	<dimen name="movie_question_start_height">150dip</dimen>
+	<dimen name="movie_question_share_height">60dip</dimen>
+	<dimen name="movie_question_margin">20dip</dimen>
 </resources>

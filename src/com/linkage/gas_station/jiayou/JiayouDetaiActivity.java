@@ -78,6 +78,8 @@ public class JiayouDetaiActivity extends BaseActivity {
 		((GasStationApplication) getApplication()).tempActivity.add(JiayouDetaiActivity.this);
 		list=Util.getUserInfo(JiayouDetaiActivity.this);
 		
+		System.out.println(((GasStationApplication) getApplicationContext()).jumpJiayouFrom);
+		
 		init();
 	}
 	

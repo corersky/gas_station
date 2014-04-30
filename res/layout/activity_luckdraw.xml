@@ -155,6 +155,7 @@
 						android:layout_height="wrap_content" 
 	             		android:layout_width="match_parent">
 		             <TextView 
+		                android:id="@+id/luckdraw_desp"
 		             	android:text="购买10元以上流量包可增加一次抽奖机会"
 		             	android:textSize="14sp"
 		             	android:textColor="#510000"

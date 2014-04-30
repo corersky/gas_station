@@ -9,5 +9,17 @@
     <dimen name="footer_padding">10dp</dimen>
     
     <dimen name="treasure_pullrich_height">80dip</dimen>
-	<dimen name="draw_luck_whole_height">165dip</dimen>
+	<dimen name="draw_luck_whole_height">165dip</dimen>	
+	
+	<dimen name="movie_question_total_height">200dip</dimen>
+	<dimen name="movie_question_height">150dip</dimen>
+	<dimen name="movie_question_start_height">120dip</dimen>
+	<dimen name="movie_question_share_height">60dip</dimen>
+	<dimen name="movie_question_margin">10dip</dimen>
+	<dimen name="movie_question_award_margin1">55dip</dimen>
+	<dimen name="movie_question_award_margin2">90dip</dimen>
+	<dimen name="movie_question_award_margin3">120dip</dimen>
+	<dimen name="movie_question_award_margin4">150dip</dimen>
+	<dimen name="movie_question_award_text_big_size">20sp</dimen>
+	<dimen name="movie_question_award_text_size">16sp</dimen>
 </resources>
