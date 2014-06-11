@@ -25,16 +25,18 @@ public class YXEntryActivity extends BaseYXEntryActivity {
 			SendMessageToYX.Resp resp1 = (SendMessageToYX.Resp) resp;
 			switch (resp1.errCode) {
 			case BaseResp.ErrCode.ERR_OK:
-				Toast.makeText(YXEntryActivity.this, "分享成功", 3000);
+				Toast.makeText(YXEntryActivity.this, "分享成功", 3000).show();
+				com.linkage.gas_station.util.Util.shareInfo(YXEntryActivity.this);
+	        	System.out.println("OK");
 				break;
 			case BaseResp.ErrCode.ERR_COMM:
-				Toast.makeText(YXEntryActivity.this, "分享失败", 3000);
+				Toast.makeText(YXEntryActivity.this, "分享失败", 3000).show();
 				break;
 			case BaseResp.ErrCode.ERR_USER_CANCEL:
-				Toast.makeText(YXEntryActivity.this, "用户取消", 3000);
+				Toast.makeText(YXEntryActivity.this, "用户取消", 3000).show();
 				break;
 			case BaseResp.ErrCode.ERR_SENT_FAILED:
-				Toast.makeText(YXEntryActivity.this, "发送失败", 3000);
+				Toast.makeText(YXEntryActivity.this, "发送失败", 3000).show();
 				break;
 			}
 			finish();

@@ -56,7 +56,7 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 		selecttype_title=(TextView) findViewById(R.id.selecttype_title);
 		sure_button = (Button) findViewById(R.id.sure_button);
 		sure_button.setOnClickListener(this);
-		if(getIntent().getExtras().getInt("activity_type")==13) {
+		if(getIntent().getExtras().getInt("activity_type")==13||getIntent().getExtras().getInt("activity_type")==18) {
 			selecttype_title.setText("请选择流量包档次");
 			sure_button.setText("订购");
 		}
@@ -131,7 +131,17 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 				}
 				break;
 			default:
-				bundle.putString("offer_description", "");
+				if(getIntent().getExtras().getInt("activity_type")==18) {
+					if(selectObj.getTypeId()==84) {
+						bundle.putString("offer_description", "说明：省内漫游,有效期24小时");
+					}
+					else if(selectObj.getTypeId()==85) {
+						bundle.putString("offer_description", "说明：省内漫游,全天候,6月13日0时-7月15日0时");
+					}
+				}
+				else {
+					bundle.putString("offer_description", "");
+				}
 			}
 			data.putExtras(bundle);
 			startActivity(data);

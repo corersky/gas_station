@@ -10,6 +10,7 @@ import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.linkage.gas_station.util.Util;
 import com.tencent.open.HttpStatusException;
 import com.tencent.open.NetworkUnavailableException;
 import com.tencent.tauth.Constants;
@@ -28,25 +29,25 @@ import android.view.Window;
 import android.widget.Toast;
 
 public class QQActivity extends Activity {
-	
+
 	public Tencent mTencent;
 	public static String mAppid="101026419";
-	
+
 	private int shareType=Tencent.SHARE_TO_QQ_TYPE_DEFAULT;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
+
 		mTencent=Tencent.createInstance(mAppid, getApplicationContext());
 		if(!mTencent.isSupportSSOLogin(QQActivity.this)) {
-			Toast.makeText(QQActivity.this, "请您先安装手机版QQ再执行分享操作", 3000);
+			Toast.makeText(QQActivity.this, "请您先安装手机版QQ再执行分享操作", 3000).show();
 			finish();
 			return ;
 		}
-				
+
 		if(getIntent().getExtras().getString("type").equals("qqkj")) {
 			shareType=Tencent.SHARE_TO_QQ_NO_SHARE_TYPE;
 			sendTextKJ(getIntent().getExtras().getString("text"), getIntent().getExtras().getString("send_imageUrl"), getIntent().getExtras().getString("title"), getIntent().getExtras().getString("url"));
@@ -59,7 +60,7 @@ public class QQActivity extends Activity {
 			sendWeiboWithPic(getIntent().getExtras().getString("text"), getIntent().getExtras().getString("path"));
 		}
 	}
-	
+
 	private class BaseUiListener implements IUiListener {
 
 		@Override
@@ -75,15 +76,15 @@ public class QQActivity extends Activity {
 
 		@Override
 		public void onError(UiError e) {
-			Toast.makeText(QQActivity.this, "onError: "+e.errorDetail, 3000);
+			Toast.makeText(QQActivity.this, "onError: "+e.errorDetail, 3000).show();
 		}
 
 		@Override
 		public void onCancel() {
-			Toast.makeText(QQActivity.this, "onCancel: ", 3000);
+			Toast.makeText(QQActivity.this, "onCancel: ", 3000).show();
 		}
 	}
-	
+
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // must call mTencent.onActivityResult.
@@ -92,7 +93,7 @@ public class QQActivity extends Activity {
     		return;
     	}
     }
-	
+
 	public void sendText(String text, String imageUrl) {
 		final Bundle params=new Bundle();
 		params.putString(Tencent.SHARE_TO_QQ_TITLE, "易迪乐园优秀动画片推荐");
@@ -104,7 +105,7 @@ public class QQActivity extends Activity {
         params.putInt(Tencent.SHARE_TO_QQ_EXT_INT, 0x00);
         doShareToQQ(params);
 	}
-	
+
 	public void sendTextKJ(String text, String imageUrl, String title, String url) {
         ArrayList<String> imageUrls=new ArrayList<String>();
         imageUrls.add(imageUrl);
@@ -116,7 +117,7 @@ public class QQActivity extends Activity {
         params.putStringArrayList(Tencent.SHARE_TO_QQ_IMAGE_URL, imageUrls);
         doShareToQzone(params);
 	}
-	
+
 	/**
      * 用异步方式启动分享QQ
      * @param params
@@ -134,20 +135,20 @@ public class QQActivity extends Activity {
                     @Override
                     public void onComplete(JSONObject response) {
                         // TODO Auto-generated method stub
-                    	Toast.makeText(activity, "分享成功", 3000);
+                    	Toast.makeText(activity, "分享成功", 3000).show();
                         finish();
                     }
 
                     @Override
                     public void onError(UiError e) {
-                    	Toast.makeText(activity, "分享失败"+e.errorMessage, 3000);
+                    	Toast.makeText(activity, "分享失败"+e.errorMessage, 3000).show();
                         finish();
                     }
 
                     @Override
                     public void onCancel() {
                     	if(shareType!=Tencent.SHARE_TO_QQ_TYPE_IMAGE){
-                    		Toast.makeText(activity, "分享取消", 3000);
+                    		Toast.makeText(activity, "分享取消", 3000).show();
                     		finish();
                     	}
                     }
@@ -172,21 +173,23 @@ public class QQActivity extends Activity {
 
                     @Override
                     public void onCancel() {
-                    	Toast.makeText(activity, "分享取消", 3000);
+                    	Toast.makeText(activity, "分享取消", 3000).show();
                     	finish();
                     }
 
                     @Override
                     public void onComplete(JSONObject response) {
                         // TODO Auto-generated method stub
-                    	Toast.makeText(activity, "分享成功", 3000);
+                    	Toast.makeText(activity, "分享成功", 3000).show();
+                    	System.out.println("OK");
+                    	Util.shareInfo(QQActivity.this);
                     	finish();
                     }
 
                     @Override
                     public void onError(UiError e) {
                         // TODO Auto-generated method stub
-                    	Toast.makeText(activity, "分享失败"+e.errorMessage, 3000);
+                    	Toast.makeText(activity, "分享失败"+e.errorMessage, 3000).show();
                     	finish();
                     }
 
@@ -212,9 +215,9 @@ public class QQActivity extends Activity {
 			bmp.recycle();
 		}
 	}
-	
+
 	private class TQQApiListener extends BaseApiListener {
-		
+
 		private String mScope="all";
         private Boolean mNeedReAuth=false;
         private Activity mActivity;
@@ -252,60 +255,60 @@ public class QQActivity extends Activity {
 				finish();
 			}
 		}
-		
+
 	  	@Override
         public void onIOException(final IOException e, Object state) {
-	  		Toast.makeText(QQActivity.this, "分享失败，onIOException: "+e.getMessage(), 3000);
+	  		Toast.makeText(QQActivity.this, "分享失败，onIOException: "+e.getMessage(), 3000).show();
             finish();
         }
 
         @Override
         public void onMalformedURLException(final MalformedURLException e,
                 Object state) {
-        	Toast.makeText(QQActivity.this, "分享失败，onMalformedURLException: "+e.getMessage(), 3000);
+        	Toast.makeText(QQActivity.this, "分享失败，onMalformedURLException: "+e.getMessage(), 3000).show();
         	finish();
         }
 
         @Override
         public void onJSONException(final JSONException e, Object state) {
-        	Toast.makeText(QQActivity.this, "分享失败，onJSONException: "+e.getMessage(), 3000);
+        	Toast.makeText(QQActivity.this, "分享失败，onJSONException: "+e.getMessage(), 3000).show();
         	finish();
         }
 
         @Override
         public void onConnectTimeoutException(ConnectTimeoutException e,
                 Object arg1) {
-        	Toast.makeText(QQActivity.this, "分享失败，onConnectTimeoutException: "+e.getMessage(), 3000);
+        	Toast.makeText(QQActivity.this, "分享失败，onConnectTimeoutException: "+e.getMessage(), 3000).show();
         	finish();
         }
 
         @Override
         public void onSocketTimeoutException(SocketTimeoutException e,
                 Object arg1) {
-        	Toast.makeText(QQActivity.this, "分享失败，onSocketTimeoutException: "+e.getMessage(), 3000);
+        	Toast.makeText(QQActivity.this, "分享失败，onSocketTimeoutException: "+e.getMessage(), 3000).show();
         	finish();
         }
 
         @Override
         public void onUnknowException(Exception e, Object arg1) {
-        	Toast.makeText(QQActivity.this, "分享失败，onUnknowException: "+e.getMessage(), 3000);
+        	Toast.makeText(QQActivity.this, "分享失败，onUnknowException: "+e.getMessage(), 3000).show();
         	finish();
         }
 
         @Override
         public void onHttpStatusException(HttpStatusException e, Object arg1) {
-        	Toast.makeText(QQActivity.this, "分享失败，onHttpStatusException: "+e.getMessage(), 3000);
+        	Toast.makeText(QQActivity.this, "分享失败，onHttpStatusException: "+e.getMessage(), 3000).show();
         	finish();
         }
 
         @Override
         public void onNetworkUnavailableException(
                 NetworkUnavailableException e, Object arg1) {
-        	Toast.makeText(QQActivity.this, "分享失败，onNetworkUnavailableException: "+e.getMessage(), 3000);
+        	Toast.makeText(QQActivity.this, "分享失败，onNetworkUnavailableException: "+e.getMessage(), 3000).show();
         	finish();
         }
 	}
-	
+
 	/**
 	 * 异步显示结果
 	 */
@@ -316,7 +319,7 @@ public class QQActivity extends Activity {
 			if(response!=null) {
 				// 换行显示
 				response=response.replace(",", "\r\n");
-				Toast.makeText(QQActivity.this, "分享成功", 3000);
+				Toast.makeText(QQActivity.this, "分享成功", 3000).show();
 				System.out.println(response);
 				finish();
 			}

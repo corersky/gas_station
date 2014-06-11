@@ -11,6 +11,7 @@ import java.util.TimerTask;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -51,6 +52,8 @@ import com.linkage.gas_station.jiayou.JiayouCardDetailActivity;
 import com.linkage.gas_station.life.LifeMainActivity;
 import com.linkage.gas_station.main.MainActivity;
 import com.linkage.gas_station.market.DirectionalFlowActivity;
+import com.linkage.gas_station.memberday.BusinessesActivity;
+import com.linkage.gas_station.memberday.MemberActivity;
 import com.linkage.gas_station.model.GifTableListModel;
 import com.linkage.gas_station.model.GonglveTuanModel;
 import com.linkage.gas_station.model.ProductGroupModel;
@@ -58,11 +61,15 @@ import com.linkage.gas_station.myview.FixedSpeedScroller;
 import com.linkage.gas_station.myview.MyScrollLayout;
 import com.linkage.gas_station.myview.MyScrollLayout.PageListener;
 import com.linkage.gas_station.oil_treasure.TreasureMainActivity;
+import com.linkage.gas_station.qqapi.QQActivity;
 import com.linkage.gas_station.share.ShareActivity_New;
+import com.linkage.gas_station.sinaweiboapi.WBMainActivity;
 import com.linkage.gas_station.util.FlowBankParse;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
 import com.linkage.gas_station.util.hessian.StrategyManager;
+import com.linkage.gas_station.wxapi.SendWeixin;
+import com.linkage.gas_station.yxapi.SendYixin;
 
 public class GonglveActivity extends BaseActivity {
 	
@@ -87,7 +94,7 @@ public class GonglveActivity extends BaseActivity {
 	//初始号码
 	long initPhoneNum=-1;
 	//当前版本支持的活动类型
-	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
 	//活动加载标志位
 	boolean isLoadActivity=false;
 	boolean isLoadBank=false;
@@ -329,8 +336,16 @@ public class GonglveActivity extends BaseActivity {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
+						else if(activity_type==18) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
+						else if(activity_type==19) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
 						TextView tuan_tip=(TextView) view.findViewById(R.id.tuan_tip);
-						if(activity_type==3 || activity_type==4 || activity_type==5 || activity_type==6|| activity_type==7|| activity_type==8|| activity_type==9|| activity_type==10|| activity_type==11|| activity_type==12|| activity_type==13|| activity_type==14|| activity_type==15|| activity_type==16|| activity_type==17) {
+						if(activity_type==3 || activity_type==4 || activity_type==5 || activity_type==6|| activity_type==7|| activity_type==8|| activity_type==9|| activity_type==10|| activity_type==11|| activity_type==12|| activity_type==13|| activity_type==14|| activity_type==15|| activity_type==16|| activity_type==17|| activity_type==18|| activity_type==19) {
 							tuan_tip.setText(temp2.get(i).getActivity_description());
 						}
 						final ImageView gonglve_title_2_pic=(ImageView) view.findViewById(R.id.gonglve_title_2_pic);
@@ -516,6 +531,106 @@ public class GonglveActivity extends BaseActivity {
 							activity_go.setVisibility(View.INVISIBLE);
 							tuan_go.setImageResource(R.drawable.movie_question_button);
 						}
+						else if(activity_type==18) {
+							activity_go.setImageResource(R.drawable.sharebutton);
+							activity_go.setOnClickListener(new ImageView.OnClickListener() {
+
+								@Override
+								public void onClick(View arg0) {
+									// TODO Auto-generated method stub 
+									final Dialog dialog=new Dialog(GonglveActivity.this, R.style.shareDialog);
+									dialog.setCanceledOnTouchOutside(true);
+									View view=LayoutInflater.from(GonglveActivity.this).inflate(R.layout.view_sharelayout, null);
+									TextView gonglve_share_cancel=(TextView) view.findViewById(R.id.gonglve_share_cancel);
+									gonglve_share_cancel.setOnClickListener(new TextView.OnClickListener() {
+
+										@Override
+										public void onClick(View arg0) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+										}});
+									ImageView gonglve_qqkj_logo_share=(ImageView) view.findViewById(R.id.gonglve_qqkj_logo_share);
+									gonglve_qqkj_logo_share.setOnClickListener(new ImageView.OnClickListener() {
+
+										@Override
+										public void onClick(View v) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											((GasStationApplication) getApplicationContext()).shareType=6;
+											((GasStationApplication) getApplicationContext()).activityId=33;
+											((GasStationApplication) getApplicationContext()).content="江苏电信流量加油站火热开抢!";
+											Intent intent=new Intent(GonglveActivity.this, QQActivity.class);
+											Bundle bundle=new Bundle();
+											bundle.putString("title", "激情足球夜，流量狂欢惠");
+											bundle.putString("url", "http://www.lljyz.cn");
+											bundle.putString("text", "江苏电信流量加油站火热开抢!");
+											bundle.putString("send_imageUrl", "http://a2.mzstatic.com/us/r30/Purple6/v4/98/a8/48/98a84887-be7a-9402-24ce-59284e6bf0f8/mzl.rwwplqzr.175x175-75.jpg");
+											bundle.putString("type", "qqkj");
+											intent.putExtras(bundle);
+											startActivity(intent);
+										}});
+									ImageView gonglve_yixin_pengyou_share=(ImageView) view.findViewById(R.id.gonglve_yixin_pengyou_share);
+									gonglve_yixin_pengyou_share.setOnClickListener(new ImageView.OnClickListener() {
+
+										@Override
+										public void onClick(View v) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											((GasStationApplication) getApplicationContext()).shareType=5;
+											((GasStationApplication) getApplicationContext()).activityId=33;
+											((GasStationApplication) getApplicationContext()).content="江苏电信流量加油站火热开抢!";
+											SendYixin yixin=new SendYixin();
+											yixin.sendYixin(GonglveActivity.this, "江苏电信流量加油站火热开抢!", "http://www.lljyz.cn", "激情足球夜，流量狂欢惠", true);
+										}});
+									ImageView gonglve_weixin_pengyou_share=(ImageView) view.findViewById(R.id.gonglve_weixin_pengyou_share);
+									gonglve_weixin_pengyou_share.setOnClickListener(new ImageView.OnClickListener() {
+
+										@Override
+										public void onClick(View v) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											((GasStationApplication) getApplicationContext()).shareType=3;
+											((GasStationApplication) getApplicationContext()).activityId=33;
+											((GasStationApplication) getApplicationContext()).content="激情足球夜，流量狂欢惠 江苏电信流量加油站火热开抢!";
+											SendWeixin weixin=new SendWeixin();
+											weixin.sendWeixin(GonglveActivity.this, "激情足球夜，流量狂欢惠\n江苏电信流量加油站火热开抢!", "http://www.lljyz.cn", "激情足球夜，流量狂欢惠\n江苏电信流量加油站火热开抢!", true);
+										}});
+									ImageView gonglve_sinaweibo_logo_share=(ImageView) view.findViewById(R.id.gonglve_sinaweibo_logo_share);
+									gonglve_sinaweibo_logo_share.setOnClickListener(new ImageView.OnClickListener() {
+
+										@Override
+										public void onClick(View v) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											((GasStationApplication) getApplicationContext()).shareType=4;
+											((GasStationApplication) getApplicationContext()).activityId=33;
+											((GasStationApplication) getApplicationContext()).content="江苏电信流量加油站火热开抢!";
+											Intent intent=new Intent(GonglveActivity.this, WBMainActivity.class);
+											Bundle bundle=new Bundle();
+											bundle.putString("title", "激情足球夜，流量狂欢惠");
+											bundle.putString("url", "http://www.lljyz.cn");
+											bundle.putString("text", "江苏电信流量加油站火热开抢!");
+											bundle.putString("defaultText", "流量加油站");
+											intent.putExtras(bundle);
+											startActivity(intent);
+										}});
+									dialog.setContentView(view);
+									dialog.show();
+								}});
+							tuan_go.setImageResource(R.drawable.qianggou_button);						
+						}
+						else if(activity_type==19) {
+							activity_go.setImageResource(R.drawable.bussiness_button); 
+							activity_go.setOnClickListener(new ImageView.OnClickListener() {
+
+								@Override
+								public void onClick(View arg0) {
+									// TODO Auto-generated method stub
+									Intent intent=new Intent(GonglveActivity.this, BusinessesActivity.class);
+									startActivity(intent);
+								}});
+							tuan_go.setImageResource(R.drawable.member_button);	
+						}
 						tuan_go.setOnClickListener(new ImageView.OnClickListener() {
 
 							@Override
@@ -606,6 +721,24 @@ public class GonglveActivity extends BaseActivity {
 									Bundle bundle=new Bundle();
 									bundle.putString("desp", temp2.get(num).getActivity_url());
 									intent.putExtras(bundle);
+									startActivity(intent);
+								}
+								else if(activity_type==18) {
+									loadJumpActivity(temp2.get(num).getActivity_id(), Integer.parseInt(temp2.get(num).getActivity_type()));
+
+//									((GasStationApplication) getApplicationContext()).jumpJiayouFrom=4;
+//									Intent intent=new Intent();
+//									Bundle bundle=new Bundle();
+//									intent.setClass(GonglveActivity.this, JiayouDetaiActivity.class);
+//									bundle.putString("offerId", offer_id);
+//									bundle.putString("offer_name", temp2.get(num).getOffer_name());
+//									bundle.putString("offer_description", temp2.get(num).getActivity_url());
+//									bundle.putString("type", "simple_station");
+//									intent.putExtras(bundle);
+//									startActivity(intent);
+								}
+								else if(activity_type==19) {
+									Intent intent=new Intent(GonglveActivity.this, MemberActivity.class);
 									startActivity(intent);
 								}
 							}});
@@ -725,6 +858,7 @@ public class GonglveActivity extends BaseActivity {
 							model.setTotal_num(map[i].get("total_num")==null?0:Integer.parseInt(map[i].get("total_num").toString()));
 							model.setIs_sign(map[i].get("is_sign")==null?0:Integer.parseInt(map[i].get("is_sign").toString()));
 							model.setActivity_url(map[i].get("activity_url")==null?"":map[i].get("activity_url").toString());
+							model.setOffer_name(map[i].get("offer_name")==null?"":map[i].get("offer_name").toString());
 							temp2.add(model);
 						}
 						m.what=1;
@@ -847,6 +981,11 @@ public class GonglveActivity extends BaseActivity {
 							str1 = (String) map[i].get("offer_id");
 							str2 = (String) map[i].get("offer_name");
 							str3 = (String) map[i].get("offer_name2");
+						}
+						else if(activity_type==18) {
+							str1 = (String) map[i].get("offer_id");
+							str2 = (String) map[i].get("offer_name");
+							str3 = "";
 						}
 						else {
 							str1 = (String) map[i].get("id");
@@ -2909,6 +3048,7 @@ public class GonglveActivity extends BaseActivity {
 							startActivity(intent_1);
 							break;
 						case 2:
+							
 							break;
 						}
 					}});

@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.http.HttpResponse;
@@ -52,12 +53,14 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.AndroidHttpTransport;
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.jpush.JPushReceiver;
 import com.linkage.gas_station.model.ContactModel;
 import com.linkage.gas_station.model.OutputInfoModel;
 import com.linkage.gas_station.util.hessian.CommonManager;
 import com.linkage.gas_station.util.hessian.GetWebDate;
+import com.linkage.gas_station.util.hessian.StrategyManager;
 import com.linkage.gasstationjni.GasJni;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
@@ -78,6 +81,7 @@ import android.graphics.Bitmap;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telephony.TelephonyManager;
@@ -682,7 +686,6 @@ public class Util {
 						((GasStationApplication) context.getApplicationContext()).AreaUrl=currentUsedUrl;
 					} catch(Error e) {
 						flag=false;
-						m.what=-1;
 			        } catch(Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -762,7 +765,6 @@ public class Util {
 								flag=false;
 							}
 						}
-						m.what=0;
 					}
 				}			
 				
@@ -1128,4 +1130,142 @@ public class Util {
         final float scale = context.getResources().getDisplayMetrics().density;  
         return (int) (pxValue / scale + 0.5f);  
     }  
+    
+    /**
+	 * 上传用户信息
+	 */
+	public static void shareInfo(final Context context) {
+		final Handler handler=new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				super.handleMessage(msg);
+				if(msg.obj!=null) {
+					Map map=(Map) msg.obj;
+					System.out.println(map.get("result").toString());
+					if(Integer.parseInt(map.get("result").toString())==1) {
+						BaseActivity.showCustomToastWithContext(map.get("comments").toString(), context);
+					}
+				}
+			}
+		};
+		
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				
+				LinkedList<String> wholeUrl=Util.getWholeUrl(context);
+				int num=0;
+				boolean flag=true;
+				String currentUsedUrl="";
+				try {
+					currentUsedUrl=((GasStationApplication) context.getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(context).get(0):((GasStationApplication) context.getApplicationContext()).AreaUrl;
+				} catch(Exception e) {
+					currentUsedUrl=((GasStationApplication) context.getApplicationContext()).COMMONURL[0];
+				}
+				while(flag) {
+					try {
+						ArrayList<String> list=Util.getUserInfo(context);
+						StrategyManager strategyManager=GetWebDate.getHessionFactiory(context).create(StrategyManager.class, ((GasStationApplication) context.getApplicationContext()).AreaUrl+"/hessian/strategyManager", context.getClassLoader());
+						System.out.println(Long.parseLong(list.get(0))+" "+list.get(1)+" "+
+								((GasStationApplication) context.getApplicationContext()).shareType+" "+
+								((GasStationApplication) context.getApplicationContext()).activityId+" "+
+								((GasStationApplication) context.getApplicationContext()).content);
+						Map map=strategyManager.shareInfo(Long.parseLong(list.get(0)), list.get(1),
+								((GasStationApplication) context.getApplicationContext()).shareType,
+								((GasStationApplication) context.getApplicationContext()).activityId,
+								((GasStationApplication) context.getApplicationContext()).content);
+						flag=false;
+						Message m=new Message();
+						m.obj=map;
+						handler.sendMessage(m);
+						((GasStationApplication) context.getApplicationContext()).AreaUrl=currentUsedUrl;
+					} catch(Error e) {
+						flag=false;
+			        } catch(Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						if(e instanceof com.caucho.hessian.client.HessianRuntimeException) {
+							//手机自身网络连接异常
+							if(e.getMessage().indexOf("java.net.SocketException")!=-1) {
+								num++;
+								if(num>=10) {
+									flag=false;
+								}
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							//ip 端口等错误  java.net.SocketTimeoutException
+							else {
+								wholeUrl.remove(currentUsedUrl);
+								if(wholeUrl.size()>0) {
+									currentUsedUrl=wholeUrl.get(0);
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								else {
+									flag=false;
+								}
+							}							
+						}
+						else if(e instanceof com.caucho.hessian.client.HessianConnectionException) {
+							//手机自身网络连接异常
+							if(e.getMessage().indexOf("java.io.EOFException")!=-1) {
+								num++;
+								if(num>=10) {
+									flag=false;
+								}
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							else {
+								wholeUrl.remove(currentUsedUrl);
+								if(wholeUrl.size()>0) {
+									currentUsedUrl=wholeUrl.get(0);
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								else {
+									flag=false;
+								}
+							}
+						}
+						else {
+							wholeUrl.remove(currentUsedUrl);
+							if(wholeUrl.size()>0) {
+								currentUsedUrl=wholeUrl.get(0);
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							else {
+								flag=false;
+							}
+						}
+					}
+				}			
+				
+			}}).start();
+	}
 }

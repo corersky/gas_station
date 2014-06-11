@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ae000000"
+    android:gravity="center" >
+    <TextView 
+        android:text="抢购支付"
+	    android:padding="10dip"
+        android:textSize="20sp"
+	    android:background="@drawable/member_title_off"
+        android:textColor="@android:color/black"
+	    android:layout_marginLeft="20dip"
+	    android:layout_marginRight="20dip"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"/>
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:layout_marginLeft="20dip"
+	    android:layout_marginRight="20dip"
+	    android:padding="10dip"
+	    android:background="@drawable/member_title_off"
+	    android:gravity="center" >
+        <LinearLayout 
+	    	android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:gravity="center" >
+	        <EditText 
+		        android:id="@+id/member_yz"
+		        android:layout_width="match_parent"
+		   		android:layout_height="50dip"
+		   		android:layout_weight="1"
+		        android:maxLength="6"
+		   		android:hint="@string/jiayou_yz"
+		   		android:background="@drawable/textarea"
+		   		android:textSize="14sp"   
+		   		android:inputType="number"
+		   		android:layout_marginLeft="10dip"
+		   		android:paddingLeft="5dip"
+		   		android:textColor="@android:color/black"/>
+		    <RelativeLayout 
+		        android:layout_weight="1"
+		        android:layout_width="match_parent"
+		   		android:layout_height="wrap_content">
+		   	    <ImageView  
+		            android:id="@+id/member_getyz"
+		           	android:src="@drawable/zhifu_yz"
+		            android:layout_width="match_parent"
+		    		android:layout_height="wrap_content"/>
+		   	    <TextView 
+		            android:id="@+id/member_time"
+		            android:textSize="14sp"
+		            android:background="@drawable/zhifu_time"
+		            android:visibility="gone"
+		            android:gravity="center"
+		            android:layout_centerInParent="true"
+		            android:textColor="@android:color/darker_gray"
+		            android:layout_width="wrap_content"
+		    		android:layout_height="wrap_content"/>
+		   	</RelativeLayout>
+	    </LinearLayout>
+	    <Button 
+		    android:id="@+id/member_submit"
+		    android:layout_marginLeft="10dip"
+		    android:layout_marginRight="10dip"
+		    android:layout_marginTop="20dip"
+		    android:background="@drawable/fft_add_buton_bg"
+		    android:textColor="@android:color/white"
+		    android:text="提  交"
+		    android:textSize="18sp"
+		    android:layout_width="fill_parent"
+	   		android:layout_height="wrap_content"/>
+    </LinearLayout>
+    
+
+</LinearLayout>

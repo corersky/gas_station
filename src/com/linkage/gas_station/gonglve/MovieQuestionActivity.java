@@ -45,8 +45,8 @@ import com.linkage.gas_station.sinaweiboapi.WBMainActivity;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
 import com.linkage.gas_station.util.hessian.StrategyManager;
-import com.linkage.gas_station.wxapi.WXEntryActivity;
-import com.linkage.gas_station.yxapi.YX_SendActivity;
+import com.linkage.gas_station.wxapi.SendWeixin;
+import com.linkage.gas_station.yxapi.SendYixin;
 
 public class MovieQuestionActivity extends BaseActivity implements OnBufferingUpdateListener, OnCompletionListener, OnPreparedListener, OnVideoSizeChangedListener, SurfaceHolder.Callback {
 
@@ -261,14 +261,11 @@ public class MovieQuestionActivity extends BaseActivity implements OnBufferingUp
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent(MovieQuestionActivity.this, YX_SendActivity.class);
-				Bundle bundle=new Bundle();
-				bundle.putString("title", "一猜到底(无锡电信用户专享)");
-				bundle.putString("url", "http://202.102.116.115:7001/lljyz/index.html");
-				bundle.putString("text", movie_question_award_right_num.getText()+","+movie_question_award_coin.getText());
-				bundle.putBoolean("isFriend", true);
-				intent.putExtras(bundle);
-				startActivity(intent);
+				((GasStationApplication) getApplicationContext()).shareType=5;
+				((GasStationApplication) getApplicationContext()).activityId=31;
+				((GasStationApplication) getApplicationContext()).content=movie_question_award_right_num.getText()+","+movie_question_award_coin.getText();
+				SendYixin yixin=new SendYixin();
+				yixin.sendYixin(MovieQuestionActivity.this, movie_question_award_right_num.getText()+","+movie_question_award_coin.getText(), "http://www.lljyz.cn", "一猜到底(无锡电信用户专享)", true);
 			}});
 		weixin_pengyou_share=(ImageView) findViewById(R.id.weixin_pengyou_share);
 		weixin_pengyou_share.setOnClickListener(new ImageView.OnClickListener() {
@@ -276,14 +273,13 @@ public class MovieQuestionActivity extends BaseActivity implements OnBufferingUp
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent(MovieQuestionActivity.this, WXEntryActivity.class);
-				Bundle bundle=new Bundle();
-				bundle.putString("title", "一猜到底(无锡电信用户专享)"+"\n"+movie_question_award_right_num.getText()+","+movie_question_award_coin.getText());
-				bundle.putString("url", "http://202.102.116.115:7001/lljyz/index.html");
-				bundle.putString("text", movie_question_award_right_num.getText()+","+movie_question_award_coin.getText());
-				bundle.putBoolean("isFriend", true);
-				intent.putExtras(bundle);
-				startActivity(intent);
+				((GasStationApplication) getApplicationContext()).shareType=3;
+				((GasStationApplication) getApplicationContext()).activityId=31;
+				((GasStationApplication) getApplicationContext()).content=movie_question_award_right_num.getText()+","+movie_question_award_coin.getText();
+				SendWeixin weixin=new SendWeixin();
+				weixin.sendWeixin(MovieQuestionActivity.this, movie_question_award_right_num.getText()+","+movie_question_award_coin.getText(),
+						"http://www.lljyz.cn", 
+						"一猜到底(无锡电信用户专享)"+"\n"+movie_question_award_right_num.getText()+","+movie_question_award_coin.getText(), true);
 			}});
 		qqkj_logo_share=(ImageView) findViewById(R.id.qqkj_logo_share);
 		qqkj_logo_share.setOnClickListener(new ImageView.OnClickListener() {
@@ -291,10 +287,13 @@ public class MovieQuestionActivity extends BaseActivity implements OnBufferingUp
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				((GasStationApplication) getApplicationContext()).shareType=6;
+				((GasStationApplication) getApplicationContext()).activityId=31;
+				((GasStationApplication) getApplicationContext()).content=movie_question_award_right_num.getText()+","+movie_question_award_coin.getText();
 				Intent intent=new Intent(MovieQuestionActivity.this, QQActivity.class);
 				Bundle bundle=new Bundle();
 				bundle.putString("title", "一猜到底(无锡电信用户专享)");
-				bundle.putString("url", "http://202.102.116.115:7001/lljyz/index.html");
+				bundle.putString("url", "http://www.lljyz.cn");
 				bundle.putString("text", movie_question_award_right_num.getText()+","+movie_question_award_coin.getText());
 				bundle.putString("send_imageUrl", "http://a2.mzstatic.com/us/r30/Purple6/v4/98/a8/48/98a84887-be7a-9402-24ce-59284e6bf0f8/mzl.rwwplqzr.175x175-75.jpg");
 				bundle.putString("type", "qqkj");
@@ -307,10 +306,13 @@ public class MovieQuestionActivity extends BaseActivity implements OnBufferingUp
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				((GasStationApplication) getApplicationContext()).shareType=4;
+				((GasStationApplication) getApplicationContext()).activityId=31;
+				((GasStationApplication) getApplicationContext()).content=movie_question_award_right_num.getText()+","+movie_question_award_coin.getText();
 				Intent intent=new Intent(MovieQuestionActivity.this, WBMainActivity.class);
 				Bundle bundle=new Bundle();
 				bundle.putString("title", "一猜到底(无锡电信用户专享)");
-				bundle.putString("url", "http://202.102.116.115:7001/lljyz/index.html");
+				bundle.putString("url", "http://www.lljyz.cn");
 				bundle.putString("text", movie_question_award_right_num.getText()+","+movie_question_award_coin.getText());
 				bundle.putString("defaultText", "流量加油站");
 				intent.putExtras(bundle);

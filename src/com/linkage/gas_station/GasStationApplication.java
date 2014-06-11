@@ -53,6 +53,10 @@ public class GasStationApplication extends Application {
 	public boolean isNewGonglve=false;
 	//是否要刷新流量监控
 	public boolean isRefreshMonitor=false;
+	//分享留痕迹
+	public int shareType=0;
+	public long activityId=0;
+	public String content="";
 	
 	@Override
 	public void onCreate() {
@@ -91,7 +95,7 @@ public class GasStationApplication extends Application {
 		if(!file.exists()) {
 			file.mkdir();
 		}		
-		tempActivity=new ArrayList<Activity>();		
+		tempActivity=new ArrayList<Activity>();	
 	}
 	
 	public ArrayList<ContactModel> getModel_list() {

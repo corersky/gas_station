@@ -35,6 +35,10 @@
         <item name="android:backgroundDimEnabled">false</item><!--模糊-->
     </style>
     
+    <style name="shareDialog" parent="android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:backgroundDimEnabled">false</item><!--模糊-->
+    </style>
+    
     <style name="myProgress" parent="@android:style/Widget.ProgressBar.Horizontal">
 	    <item name="android:maxHeight">50dip</item>
 	    <item name="android:minHeight">8dip</item>

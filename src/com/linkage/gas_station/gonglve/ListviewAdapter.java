@@ -77,7 +77,13 @@ class ListviewAdapter extends BaseAdapter
 			holder.typename2.setVisibility(View.GONE);
 			holder.name.setText(typelist.get(arg0).getTypeName());
 		}
-		holder.desText.setText(typelist.get(arg0).getTypeDes());
+		if(typelist.get(arg0).getTypeDes().trim().equals("")) {
+			holder.desText.setVisibility(View.GONE);
+		}
+		else {
+			holder.desText.setText(typelist.get(arg0).getTypeDes());
+			holder.desText.setVisibility(View.VISIBLE);
+		}
 		if(arg0 == select_type)
 		{
 			holder.icon.setImageResource(R.drawable.pop_select);

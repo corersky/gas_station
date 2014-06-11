@@ -24,6 +24,9 @@
 -dontwarn com.caucho.**
 -keep class com.caucho.** { *; }
 
+-dontwarn com.zbar.**
+-keep class com.zbar.** { *; }
+
 -libraryjars libs/ksoap2.jar
 -dontwarn org.kobjects.**
 -keep class org.kobjects.** { *; }
@@ -51,6 +54,10 @@
 -libraryjars libs/weibosdkcore.jar
 -dontwarn com.sina.**
 -keep class com.sina.** { *; }
+
+-libraryjars libs/core-2.2.jar
+-dontwarn com.google.**
+-keep class com.google.** { *; }
 
 -libraryjars libs/jpush-sdk-release1.5.2.jar
 -dontwarn cn.jpush.**

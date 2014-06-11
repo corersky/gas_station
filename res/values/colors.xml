@@ -18,4 +18,6 @@
     <color name="transparent">#00000000</color>
     <color name="background">#F7F4F0</color>
     <color name="title_color">#333333</color>
+    <color name="member_title_choice_color">#949596</color>
+    <color name="member_title_normal_color">#000000</color>
 </resources>

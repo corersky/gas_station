@@ -1,6 +1,7 @@
 package com.linkage.gas_station.sinaweiboapi;
 
 import com.linkage.gas_station.R;
+import com.linkage.gas_station.util.Util;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WebpageObject;
@@ -323,6 +324,8 @@ public class WBMainActivity extends Activity implements IWeiboHandler.Response {
         switch (baseResp.errCode) {
         case WBConstants.ErrorCode.ERR_OK:
         	Toast.makeText(WBMainActivity.this, "分享成功", 3000).show();
+        	System.out.println("OK");
+        	Util.shareInfo(WBMainActivity.this);
             break;
         case WBConstants.ErrorCode.ERR_CANCEL:
         	Toast.makeText(WBMainActivity.this, "取消分享", 3000).show();

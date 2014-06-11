@@ -260,4 +260,32 @@ public interface StrategyManager {
 	
 	//用户答题
 	public Map guessQuestion(Long phoneNum,String areaCode,Long questionId,String userAnswer);
+	
+	//分享留痕
+	//shareType 3:微信朋友圈 4:新浪微薄 5:易信 6:QQ空间
+	public Map shareInfo(Long phoneNum,String areaCode,int shareType,Long activityId,String content);
+	
+	//会员日
+	//获取奖品列表
+	//result.put("memberDay", minDay); 下期会员日时间，为空就显示敬请期待。
+	//result.put("memberPrizes", prizes); 奖品列表数组
+	public Map memberPrizes(Long phoneNum,String areaCode);
+	
+	//抢兑奖品
+	public Map receivePrizes(String seqId, Long phoneNum,String areaCode,String verCode,Long prizeId);
+	
+	//获取用户兑换列表
+	public Map[] userPrizes(Long phoneNum,String areaCode);
+	
+	//商家扫码
+	public Map supplyerScan(Long phoneNum,String areaCode,String code);
+	
+	//商家记录
+	public Map[] supplyerScanList(Long phoneNum,String areaCode,String month,int start,int pageSize);
+	
+	//是否商家
+	public Map validSupplyer(Long phoneNum,String areaCode);
+	
+	//是否会员
+	public Map validMember(Long phoneNum,String areaCode,Long prizeId);
 }

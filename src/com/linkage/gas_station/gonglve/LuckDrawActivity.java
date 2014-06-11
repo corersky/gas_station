@@ -537,7 +537,7 @@ public class LuckDrawActivity extends BaseActivity {
 						bundle.putString("title", getIntent().getExtras().getString("activityName"));
 						bundle.putString("pull_rich_title", getIntent().getExtras().getString("activityName"));
 						bundle.putString("pull_rich_message", result);
-						bundle.putString("url", "http://202.102.116.115:7001/lljyz/index.html");
+						bundle.putString("url", "http://www.lljyz.cn");
 						intent.putExtras(bundle);
 						startActivity(intent);
 					}
