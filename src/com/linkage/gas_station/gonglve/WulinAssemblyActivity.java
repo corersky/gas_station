@@ -75,6 +75,8 @@ public class WulinAssemblyActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_wulinassembly);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(WulinAssemblyActivity.this);
+		
 		sheik_model_begin_map=new HashMap<String, Sheik_MonthBegin_Model>();
 		sheik_model_usual_map=new HashMap<String, Sheik_MonthUsual_Model>();
 		leader_model_begin_map=new HashMap<String, Leader_MonthBegin_Model>();
@@ -1578,5 +1580,12 @@ public class WulinAssemblyActivity extends BaseActivity {
 			imageId="05";
 		}
 		cylinder.setImageResource(getResources().getIdentifier(getPackageName()+":drawable/cylinder_small_"+imageId, null,null));
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(WulinAssemblyActivity.this);
 	}
 }

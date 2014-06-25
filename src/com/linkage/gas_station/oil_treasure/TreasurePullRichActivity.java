@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.linkage.gas_station.BaseActivity;
+import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 
 public class TreasurePullRichActivity extends BaseActivity {
@@ -26,6 +27,8 @@ public class TreasurePullRichActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_treasure_pullrich);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(TreasurePullRichActivity.this);
 		
 		init();
 	}
@@ -64,5 +67,12 @@ public class TreasurePullRichActivity extends BaseActivity {
 				intent.putExtras(bundle);
 				startActivity(intent);
 			}});
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(TreasurePullRichActivity.this);
 	}
 }

@@ -67,6 +67,7 @@ public class LuckDrawActivity extends BaseActivity {
 	ArrayList<HashMap<String, Object>> strArrays_my=null;
 	LinearLayout share_lottery_notice_my_list_no=null;
 	LinearLayout share_lottery_first_bg=null;
+	TextView share_lottery_notice_my_address_show=null;
 	
 	TextView share_lottery_desp=null;
 	
@@ -85,6 +86,8 @@ public class LuckDrawActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_luckdraw);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(LuckDrawActivity.this);
 		
 		strArrays_whole=new ArrayList<String>();
 		strArrays_my=new ArrayList<HashMap<String, Object>>();
@@ -310,7 +313,12 @@ public class LuckDrawActivity extends BaseActivity {
 	    share_lottery_desp=(TextView) findViewById(R.id.share_lottery_desp);
 	    share_lottery_desp.setText(getIntent().getExtras().getString("desp"));
 	    
+	    share_lottery_notice_my_address_show=(TextView) findViewById(R.id.share_lottery_notice_my_address_show);
+	    
 	    getLotteryCondition();
+	    if(Util.getUserArea(LuckDrawActivity.this).equals("0971")) {
+		    getAddress();
+	    }
 	}
 	
 	private int getCurrentMonth() {
@@ -1027,10 +1035,153 @@ public class LuckDrawActivity extends BaseActivity {
 			}}).start();
 	}
 	
+	/**
+	 * 获取用户的地址信息
+	 */
+	public void getAddress() {
+		final Handler handler=new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				if(msg.what==1) {
+					Map map=(Map) msg.obj;
+					String str=map.get("mail_address")==null?"":map.get("mail_address").toString();
+					share_lottery_notice_my_address_show.setVisibility(View.VISIBLE);
+					if(!str.equals("")) {
+						share_lottery_notice_my_address_show.setText("中奖地址："+map.get("mail_address")==null?"":map.get("mail_address").toString());
+					}
+					else {
+						share_lottery_notice_my_address_show.setText("中奖地址：");
+					}
+				}
+				else if(msg.what==-1) {
+					showCustomToast("链路连接失败");
+				}
+				else {
+					showCustomToast(getResources().getString(R.string.timeout_exp));
+				}
+			}
+		};
+		
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				LinkedList<String> wholeUrl=Util.getWholeUrl(LuckDrawActivity.this);
+				Message m=new Message();
+				int num=0;
+				boolean flag=true;
+				String currentUsedUrl="";
+				try {
+					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(LuckDrawActivity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
+				} catch(Exception e) {
+					currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
+				}
+				while(flag) {
+					try {
+						ArrayList<String> list=Util.getUserInfo(LuckDrawActivity.this);					
+						LotteryManager strategyManager=GetWebDate.getHessionFactiory(LuckDrawActivity.this).create(LotteryManager.class, currentUsedUrl+"/hessian/lotteryManager", getClassLoader());
+						Map map=strategyManager.getAddress(Long.parseLong(list.get(0)), Util.getDeviceId(LuckDrawActivity.this)+Util.getMacAddress(LuckDrawActivity.this));
+						m.obj=map;
+						m.what=1;
+						flag=false;
+						((GasStationApplication) getApplicationContext()).AreaUrl=currentUsedUrl;
+					} catch(Error e) {
+						flag=false;
+						m.what=-1;
+			        } catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						if(e instanceof com.caucho.hessian.client.HessianRuntimeException) {
+							//手机自身网络连接异常
+							if(e.getMessage().indexOf("java.net.SocketException")!=-1) {
+								num++;
+								if(num>=10) {
+									flag=false;
+								}
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							//ip 端口等错误  java.net.SocketTimeoutException
+							else {
+								wholeUrl.remove(currentUsedUrl);
+								if(wholeUrl.size()>0) {
+									currentUsedUrl=wholeUrl.get(0);
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								else {
+									flag=false;
+								}
+							}
+							
+						}
+						else if(e instanceof com.caucho.hessian.client.HessianConnectionException) {
+							//手机自身网络连接异常
+							if(e.getMessage().indexOf("java.io.EOFException")!=-1) {
+								num++;
+								if(num>=10) {
+									flag=false;
+								}
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							else {
+								wholeUrl.remove(currentUsedUrl);
+								if(wholeUrl.size()>0) {
+									currentUsedUrl=wholeUrl.get(0);
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								else {
+									flag=false;
+								}
+							}
+						}
+						else {
+							wholeUrl.remove(currentUsedUrl);
+							if(wholeUrl.size()>0) {
+								currentUsedUrl=wholeUrl.get(0);
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							else {
+								flag=false;
+							}
+						}
+						m.what=0;
+					}
+				}				
+				handler.sendMessage(m);
+			}}).start();
+	}
+	
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		claert.setFlagStop();
+		((GasStationApplication) getApplication()).tempActivity.remove(LuckDrawActivity.this);
 	}
 }

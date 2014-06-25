@@ -52,6 +52,8 @@ public class LifeAddActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_lifeadd);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(LifeAddActivity.this);
+		
 		init();
 	}
 	
@@ -525,6 +527,13 @@ public class LifeAddActivity extends BaseActivity {
 				}				
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(LifeAddActivity.this);
 	}
 	
 }

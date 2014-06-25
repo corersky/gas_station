@@ -243,6 +243,12 @@ public class MainActivity extends TabActivity {
 		// TODO Auto-generated method stub		
 		super.onResume();
 		
+		if(((GasStationApplication) getApplication()).webTab!=0) {
+			host.setCurrentTab(((GasStationApplication) getApplication()).webTab);
+			((RadioButton) main_group.getChildAt(2)).toggle();
+			setRadioButton("spec3", R.drawable.sign_blue, 2);
+		}
+		
 		Util.setLoginOut(MainActivity.this, false);
 		
 		//判断是否有新信息

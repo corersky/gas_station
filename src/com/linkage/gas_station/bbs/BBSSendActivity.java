@@ -47,6 +47,8 @@ public class BBSSendActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_bbssend);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(BBSSendActivity.this);
+		
 		init();
 	}
 	
@@ -429,5 +431,12 @@ public class BBSSendActivity extends BaseActivity {
 				}
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(BBSSendActivity.this);
 	}
 }

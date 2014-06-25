@@ -14,6 +14,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.linkage.gas_station.BaseActivity;
+import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.model.ContactModel;
 import com.linkage.gas_station.util.Util;
@@ -38,6 +39,8 @@ public class TreasureBuyContactsActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_treasure_buy_contacts);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(TreasureBuyContactsActivity.this);
 		
 		model_list=Util.getContactData(TreasureBuyContactsActivity.this);
 		temp_list=new ArrayList<HashMap<String, Object>>();
@@ -97,4 +100,10 @@ public class TreasureBuyContactsActivity extends BaseActivity {
 		});
 	}
 
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(TreasureBuyContactsActivity.this);
+	}
 }

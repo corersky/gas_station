@@ -22,7 +22,6 @@ import android.widget.TextView;
 import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
-import com.linkage.gas_station.gonglve.QXJYReceiverActivity;
 import com.linkage.gas_station.model.BindInfoModel;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.FftManager;
@@ -50,6 +49,8 @@ public class LifeManageActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_life_manager);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(LifeManageActivity.this);
 		
 		currentItem=getIntent().getExtras().getInt("currentItem");
 		uilist=new ArrayList<HashMap<String, Object>>();
@@ -512,6 +513,14 @@ public class LifeManageActivity extends BaseActivity {
 				}				
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(LifeManageActivity.this);
 	}
 
 }

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.hb.views.PinnedSectionListView;
 import com.hb.views.PinnedSectionListView.PinnedSectionListAdapter;
 import com.linkage.gas_station.BaseActivity;
+import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.model.AreaModel;
 import com.linkage.gas_station.util.AreaParse;
@@ -39,6 +40,8 @@ public class AreaRegionActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_arearegion);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(AreaRegionActivity.this);
 		
 		init();
 	}
@@ -161,6 +164,13 @@ public class AreaRegionActivity extends BaseActivity {
 		@Override public boolean isItemViewTypePinned(int viewType) {
 			return viewType == Item.SECTION;
 		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(AreaRegionActivity.this);
 	}
 
 }

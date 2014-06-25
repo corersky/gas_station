@@ -10,7 +10,6 @@ import java.util.Map.Entry;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -40,6 +39,8 @@ public class QXJYReceiverActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_qxjyreceiver);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(QXJYReceiverActivity.this);
 		
 		init();
 		queryTicket();
@@ -230,6 +231,14 @@ public class QXJYReceiverActivity extends BaseActivity {
 				queryTicket_handler.sendMessage(m);				
 			}
 		}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(QXJYReceiverActivity.this);
 	}
 
 }

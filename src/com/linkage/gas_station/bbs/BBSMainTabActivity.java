@@ -1,5 +1,6 @@
 package com.linkage.gas_station.bbs;
 
+import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 
 import android.app.TabActivity;
@@ -27,6 +28,8 @@ public class BBSMainTabActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_luntan_tabmain);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(BBSMainTabActivity.this);
 		
 		init();
 	}
@@ -100,5 +103,11 @@ public class BBSMainTabActivity extends TabActivity {
 			host.setCurrentTabByTag("spec2");
 			break;
 		}
+	}
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(BBSMainTabActivity.this);
 	}
 }

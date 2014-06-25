@@ -62,6 +62,8 @@ public class BBSDetailActivity extends BaseActivity implements XListView.IXListV
 		model_list=new ArrayList<BbsForumIdModel>();
 		model_list.add(null);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(BBSDetailActivity.this);
+		
 		init();
 	}
 	
@@ -345,5 +347,12 @@ public class BBSDetailActivity extends BaseActivity implements XListView.IXListV
 			bbs_list_view.setStart();
 			getBbsForumList();
 		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(BBSDetailActivity.this);
 	}
 }

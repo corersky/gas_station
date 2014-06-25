@@ -49,6 +49,8 @@ public class DirectionalFlowActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_directionalflow);
 		
+		((GasStationApplication) getApplication()).tempActivity.remove(DirectionalFlowActivity.this);
+		
 		model_list=new ArrayList<OilListModel>();
 		
 		init();
@@ -277,6 +279,14 @@ public class DirectionalFlowActivity extends BaseActivity {
 				
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(DirectionalFlowActivity.this);
 	}
 
 }

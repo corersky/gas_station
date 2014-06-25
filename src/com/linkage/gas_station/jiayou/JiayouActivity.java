@@ -363,29 +363,44 @@ public class JiayouActivity extends BaseActivity {
 					break;
 				case 3:
 					if(model_list.containsKey(province_array[3])) {
-						new AlertDialog.Builder(JiayouActivity.this).setTitle("提示").setMessage(model_list.get(province_array[3]).get(currentItem1).getOffer_content()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-							
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								// TODO Auto-generated method stub
-								Intent intent=new Intent();
-								Bundle bundle=new Bundle();
-								intent.setClass(JiayouActivity.this, JiayouDetaiActivity.class);
-								bundle.putString("offerId", model_list.get(province_array[3]).get(currentItem1).getOffer_id());
-								bundle.putString("offer_name", model_list.get(province_array[3]).get(currentItem1).getOffer_name());
-								bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp5));
-								bundle.putString("type", "dingxiang_station");
-								intent.putExtras(bundle);
-								startActivity(intent);
-							}
-						}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-							
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								// TODO Auto-generated method stub
+						if(Util.getUserArea(JiayouActivity.this).equals("0971")) {
+							Intent intent=new Intent();
+							Bundle bundle=new Bundle();
+							intent.setClass(JiayouActivity.this, JiayouDetaiActivity.class);
+							bundle.putString("offerId", model_list.get(province_array[3]).get(currentItem1).getOffer_id());
+							bundle.putString("offer_name", model_list.get(province_array[3]).get(currentItem1).getOffer_name());						
+							bundle.putString("type", "night_station");
+							bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp3));
+							intent.putExtras(bundle);
+							startActivity(intent);
+						}
+						else {
+							new AlertDialog.Builder(JiayouActivity.this).setTitle("提示").setMessage(model_list.get(province_array[3]).get(currentItem1).getOffer_content()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
 								
-							}
-						}).show();
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									Intent intent=new Intent();
+									Bundle bundle=new Bundle();
+									intent.setClass(JiayouActivity.this, JiayouDetaiActivity.class);
+									bundle.putString("offerId", model_list.get(province_array[3]).get(currentItem1).getOffer_id());
+									bundle.putString("offer_name", model_list.get(province_array[3]).get(currentItem1).getOffer_name());
+									bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp5));
+									bundle.putString("type", "dingxiang_station");
+									intent.putExtras(bundle);
+									startActivity(intent);
+								}
+							}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									
+								}
+							}).show();
+						}
+						
+						
 					}
 					else {
 						showCustomToast("数据正在加载中...");
@@ -774,21 +789,25 @@ public class JiayouActivity extends BaseActivity {
 		name.clear();
 		//青海定制
 		if(Util.getUserArea(JiayouActivity.this).equals("0971")) {
-			can_jiayou_num=3;
+			can_jiayou_num=4;
 			province_array[0]=1;
 			province_array[1]=7;
 			province_array[2]=6;
+			province_array[3]=2;
 			name.add("jiayou_1_0971");
 			name.add("jiayou_2_0971");
-			name.add("jiayou_3_0971");			
+			name.add("jiayou_3_0971");		
+			name.add("jiayou_3");	
 
 			desp_title_province_array[0]=getResources().getString(R.string.jiayou_desp_1);
 			desp_title_province_array[1]=".全国漫游（不含港澳台）.全天候.3个月有效";
 			desp_title_province_array[2]="省内漫游、全天候、当月有效";
+			desp_title_province_array[3]=getResources().getString(R.string.jiayou_desp_3);
 			
 			desp_bottom_province_array[0]="0.06-0.17元/MB不等，加的越多越便宜（限当月有效）";
 			desp_bottom_province_array[1]="0.10-0.17元/MB不等，加得越多越便宜(3个月有效)";
-			desp_bottom_province_array[2]="0.06-0.10元/MB不等，加得越多越便宜(限当月有效)";			
+			desp_bottom_province_array[2]="0.06-0.10元/MB不等，加得越多越便宜(限当月有效)";	
+			desp_bottom_province_array[3]=getResources().getString(R.string.jiayou_desp_1_3);		
 		}
 		//江苏定制
 		else if(Util.getUserArea(JiayouActivity.this).equals("2500")) {

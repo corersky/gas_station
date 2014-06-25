@@ -48,6 +48,8 @@ public class WulinAssemblySheikUpdateActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_wulinassemblysheikupdate);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(WulinAssemblySheikUpdateActivity.this);
+		
 		try {
 			position=getIntent().getExtras().getInt("position");
 			trideId=getIntent().getExtras().getLong("trideId");
@@ -417,5 +419,13 @@ public class WulinAssemblySheikUpdateActivity extends BaseActivity {
 				}
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(WulinAssemblySheikUpdateActivity.this);
 	}
 }

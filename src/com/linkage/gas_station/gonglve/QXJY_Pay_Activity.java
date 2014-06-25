@@ -67,6 +67,8 @@ public class QXJY_Pay_Activity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_qxjypay);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(QXJY_Pay_Activity.this);
+		
 		viewList=new LinkedList<View>();
 		
 		init();
@@ -674,5 +676,13 @@ public class QXJY_Pay_Activity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onPause();
 		timer.cancel();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(QXJY_Pay_Activity.this);
 	}
 }

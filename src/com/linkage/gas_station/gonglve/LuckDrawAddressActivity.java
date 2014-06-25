@@ -36,6 +36,8 @@ public class LuckDrawAddressActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_luckdrawaddress);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(LuckDrawAddressActivity.this);
+		
 		init();
 	}
 	
@@ -342,5 +344,12 @@ public class LuckDrawAddressActivity extends BaseActivity {
 				}				
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(LuckDrawAddressActivity.this);
 	}
 }

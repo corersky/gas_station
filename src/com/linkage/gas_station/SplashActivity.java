@@ -24,6 +24,16 @@ public class SplashActivity extends Activity {
 		DisplayMetrics dm=new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		Util.setDisplay(SplashActivity.this, dm.density);
+		
+		if(getIntent().getDataString()!=null&&!getIntent().getDataString().equals("")) {
+			if(((GasStationApplication) getApplication()).tempActivity!=null&&((GasStationApplication) getApplication()).tempActivity.size()>0) {
+				for(int i=0;i<((GasStationApplication) getApplication()).tempActivity.size();i++) {
+					((GasStationApplication) getApplication()).tempActivity.get(i).finish();
+				}
+			}
+			String romateStr=getIntent().getDataString().substring(getIntent().getDataString().lastIndexOf("/")+1, getIntent().getDataString().length());
+			((GasStationApplication) getApplication()).webTab=Integer.parseInt(romateStr);
+		}
 								
 		if(((GasStationApplication) SplashActivity.this.getApplication()).isAppOpen) {
 			System.out.println("已经有了实例了");

@@ -66,6 +66,8 @@ public class LifeMainActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_lifemain);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(LifeMainActivity.this);
+		
 		water_lifeModel_list=new ArrayList<LifePhoneModel>();
 		ele_lifeModel_list=new ArrayList<LifePhoneModel>();
 		fire_lifeModel_list=new ArrayList<LifePhoneModel>();
@@ -1403,6 +1405,13 @@ public class LifeMainActivity extends BaseActivity {
 				life_with_data_submit_temp.setClickable(true);
 			}
 		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(LifeMainActivity.this);
 	}
 	
 }

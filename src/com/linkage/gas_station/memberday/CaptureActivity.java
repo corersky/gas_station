@@ -22,6 +22,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.zbar.lib.camera.CameraManager;
 import com.zbar.lib.decode.CaptureActivityHandler;
@@ -89,6 +90,8 @@ public class CaptureActivity extends Activity implements Callback {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(CaptureActivity.this);
 
 		setContentView(R.layout.activity_qr_scan);
 		// ≥ı ºªØ CameraManager
@@ -160,6 +163,8 @@ public class CaptureActivity extends Activity implements Callback {
 	protected void onDestroy() {
 		inactivityTimer.shutdown();
 		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(CaptureActivity.this);
 	}
 
 	public void handleDecode(String result) {

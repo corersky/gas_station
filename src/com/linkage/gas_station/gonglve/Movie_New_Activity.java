@@ -69,6 +69,8 @@ public class Movie_New_Activity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_movie_new);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(Movie_New_Activity.this);
+		
 		market_map=new HashMap<String, ArrayList<MarketModel>>();
 		ticket_map=new LinkedHashMap<String, LinkedList<MarketModel>>();
 		ticket_order_list=new ArrayList<MarketModel>();
@@ -778,5 +780,12 @@ public class Movie_New_Activity extends BaseActivity {
 				}
 				handler.sendMessage(m);
 			}}).start();	
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(Movie_New_Activity.this);
 	}
 }

@@ -23,6 +23,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.lidroid.xutils.BitmapUtils;
 import com.linkage.gas_station.BaseActivity;
+import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 
 public class MemberShowCodeActivity extends BaseActivity {
@@ -42,6 +43,8 @@ public class MemberShowCodeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_showcode);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(MemberShowCodeActivity.this);
 		
 		bitmapUtils=new BitmapUtils(MemberShowCodeActivity.this);
 		bitmapUtils.configDefaultLoadingImage(R.drawable.ic_launcher);
@@ -133,6 +136,14 @@ public class MemberShowCodeActivity extends BaseActivity {
 			e.printStackTrace();
 		} 
 		return bitmap_;
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(MemberShowCodeActivity.this);
 	}
 
 }

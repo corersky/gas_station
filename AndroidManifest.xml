@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.linkage.gas_station"
-    android:versionCode="89"
-    android:versionName="7.9.20"
+    android:versionCode="91"
+    android:versionName="7.9.22"
     android:installLocation="internalOnly" >
 
     <uses-sdk
@@ -118,8 +118,8 @@
 		  		<category android:name="android.intent.category.DEFAULT" />  
 		        <category android:name="android.intent.category.BROWSABLE" />  
 	  			<data  
-		            android:host="data"  
-		            android:scheme="sharetest" />  
+		            android:host="activity"  
+		            android:scheme="lljyzapp" />  
 		    </intent-filter>
         </activity>
         <activity 

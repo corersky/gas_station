@@ -43,6 +43,8 @@ public class GasStationApplication extends Application {
 	public boolean isAppOpen=false;
 	//附属activity，当用户被强制退出的时候使用
 	public ArrayList<Activity> tempActivity=null;
+	//跳转到某一个tab
+	public int webTab=0;
 	//判断是否为切换sim卡
 	public boolean isChangeSim=false;
 	//是否由后台打开退出登录界面

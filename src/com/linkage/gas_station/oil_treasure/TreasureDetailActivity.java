@@ -66,6 +66,8 @@ public class TreasureDetailActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_treasuredetail);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(TreasureDetailActivity.this);
+		
 		init();
 		
 		queryCoinSummary(1);
@@ -530,5 +532,12 @@ public class TreasureDetailActivity extends BaseActivity {
 				}				
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(TreasureDetailActivity.this);
 	}
 }

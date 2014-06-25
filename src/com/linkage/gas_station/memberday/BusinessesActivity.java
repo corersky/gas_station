@@ -66,6 +66,8 @@ public class BusinessesActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_businesses);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(BusinessesActivity.this);
+		
 		str=new ArrayList<MemberBuyModel>();
 		
 		init();
@@ -774,4 +776,10 @@ public class BusinessesActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(BusinessesActivity.this);
+	}
 }

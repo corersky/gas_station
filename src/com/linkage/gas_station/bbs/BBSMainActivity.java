@@ -59,6 +59,8 @@ public class BBSMainActivity extends BaseActivity implements XListView.IXListVie
 		IntentFilter filter=new IntentFilter();
 		filter.addAction("refresh");
 		registerReceiver(receiver, filter);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(BBSMainActivity.this);
 	}
 	
 	public void init() {
@@ -327,5 +329,7 @@ public class BBSMainActivity extends BaseActivity implements XListView.IXListVie
 	protected void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(receiver);
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(BBSMainActivity.this);
 	};	
 }

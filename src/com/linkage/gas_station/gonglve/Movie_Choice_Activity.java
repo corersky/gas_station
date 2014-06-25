@@ -45,6 +45,8 @@ public class Movie_Choice_Activity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_movie_choice);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(Movie_Choice_Activity.this);
+		
 		movie_list=new ArrayList<MarketModel>();
 		
 		init();
@@ -274,6 +276,13 @@ public class Movie_Choice_Activity extends BaseActivity {
 				}
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(Movie_Choice_Activity.this);
 	}
 
 }

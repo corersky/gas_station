@@ -111,6 +111,8 @@ public class MovieQuestionActivity extends BaseActivity implements OnBufferingUp
 			return;
 		setContentView(R.layout.activity_moviequestion);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(MovieQuestionActivity.this);
+		
 		title_back=(ImageView) findViewById(R.id.title_back);
 		title_back.setVisibility(View.VISIBLE);
 		title_back.setOnClickListener(new ImageView.OnClickListener() {
@@ -428,6 +430,8 @@ public class MovieQuestionActivity extends BaseActivity implements OnBufferingUp
 		super.onDestroy();
 		releaseMediaPlayer();
 		doCleanUp();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(MovieQuestionActivity.this);
 	}
 
 	private void releaseMediaPlayer() {

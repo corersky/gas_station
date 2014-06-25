@@ -15,6 +15,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.linkage.gas_station.BaseActivity;
+import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.myview.HVScrollView;
 import com.linkage.gas_station.myview.HVScrollView.OnScrollYListener;
@@ -38,6 +39,8 @@ public class MovieActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_movie);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(MovieActivity.this);
 		
 		textViews=new ArrayList<TextView>();
 		
@@ -145,6 +148,12 @@ public class MovieActivity extends BaseActivity {
 			params.height=(int) (50 * f);
 			textViews.get(i).setLayoutParams(params);
 		}
-
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(MovieActivity.this);
 	}
 }

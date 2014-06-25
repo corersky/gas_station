@@ -67,6 +67,8 @@ public class TreasureAgainsBillActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_treasure_againstbill);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(TreasureAgainsBillActivity.this);
+		
 		init();
 	}
 	
@@ -659,5 +661,13 @@ public class TreasureAgainsBillActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onPause();
 		timer.cancel();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(TreasureAgainsBillActivity.this);
 	}
 }

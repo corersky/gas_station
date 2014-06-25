@@ -56,6 +56,8 @@ public class TreasureMainActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_treasuremain);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(TreasureMainActivity.this);
+		
 		init();
 		
 		queryFlowCoin();
@@ -752,5 +754,13 @@ public class TreasureMainActivity extends BaseActivity {
 			}			
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(TreasureMainActivity.this);
 	}
 }

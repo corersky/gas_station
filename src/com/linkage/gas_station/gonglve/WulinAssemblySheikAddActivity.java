@@ -42,6 +42,8 @@ public class WulinAssemblySheikAddActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_wulinassemblysheikadd);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(WulinAssemblySheikAddActivity.this);
+		
 		try {
 			unionId=getIntent().getExtras().getLong("unionId");
 			init();
@@ -236,6 +238,13 @@ public class WulinAssemblySheikAddActivity extends BaseActivity {
 				}
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(WulinAssemblySheikAddActivity.this);
 	}
 
 }

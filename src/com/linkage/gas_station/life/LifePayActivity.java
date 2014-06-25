@@ -55,6 +55,8 @@ public class LifePayActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_lifepay);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(LifePayActivity.this);
+		
 		init();
 	}
 	
@@ -469,4 +471,10 @@ public class LifePayActivity extends BaseActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(LifePayActivity.this);
+	}
 }

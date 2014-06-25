@@ -43,6 +43,8 @@ public class CarActivity extends BaseActivity {
 		total_flow=getIntent().getExtras().getString("total_flow");
 		residue_flow=getIntent().getExtras().getString("residue_flow");
 		
+		((GasStationApplication) getApplication()).tempActivity.add(CarActivity.this);
+		
 		init();
 	}
 	
@@ -252,5 +254,12 @@ public class CarActivity extends BaseActivity {
 				}
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(CarActivity.this);
 	}
 }

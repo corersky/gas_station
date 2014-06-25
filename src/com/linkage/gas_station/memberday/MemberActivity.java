@@ -72,6 +72,8 @@ public class MemberActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_member);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(MemberActivity.this);
+		
 		strs_right=new ArrayList<MemberBuyModel>();
 		strs_left=new ArrayList<MemberModel>();
 		strs_left_before=new ArrayList<MemberModel>();
@@ -225,6 +227,8 @@ public class MemberActivity extends BaseActivity {
 		super.onDestroy();
 		isStopThread=true;
 		handler.removeCallbacks(runnable);
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(MemberActivity.this);
 	};
 	
 	private void memberPrizes() {

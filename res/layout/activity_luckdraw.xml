@@ -245,38 +245,53 @@
 					android:layout_height="wrap_content" 
 	        		android:layout_width="wrap_content"/>
 	        </RelativeLayout>
-	        <RelativeLayout 	            
+	        <LinearLayout 
+	            android:orientation="vertical"
 				android:layout_height="match_parent" 
         		android:layout_width="match_parent">
-	            <LinearLayout 
-                    android:id="@+id/share_lottery_notice_my_list_no"
-	                android:orientation="vertical"
-					android:layout_height="match_parent" 
-        			android:layout_width="match_parent"
-        			android:gravity="center">
-	                <ImageView 
-	                    android:src="@drawable/share_lottery_myno"
-						android:layout_height="wrap_content" 
-        				android:layout_width="wrap_content"/>
-	                <TextView 
-	                    android:text="没有抽奖记录，还要努力哦"
-	                    android:layout_marginTop="10dip"
-	                    android:textColor="@android:color/black"
-						android:layout_height="wrap_content" 
-        				android:layout_width="wrap_content"/>
-	            </LinearLayout>
-		        <ListView 
-		            android:id="@+id/share_lottery_notice_my_list"
-		            android:visibility="gone"
-		    		android:cacheColorHint="#00000000"
-			    	android:divider="@android:color/transparent"
-			    	android:fadingEdge="none"
-			    	android:listSelector="@android:color/transparent"
+	            <RelativeLayout 	            
+	                android:layout_weight="1"
 					android:layout_height="match_parent" 
 	        		android:layout_width="match_parent">
-		            
-		        </ListView>
-	        </RelativeLayout>
+		            <LinearLayout 
+	                    android:id="@+id/share_lottery_notice_my_list_no"
+		                android:orientation="vertical"
+						android:layout_height="match_parent" 
+	        			android:layout_width="match_parent"
+	        			android:gravity="center">
+		                <ImageView 
+		                    android:src="@drawable/share_lottery_myno"
+							android:layout_height="wrap_content" 
+	        				android:layout_width="wrap_content"/>
+		                <TextView 
+		                    android:text="没有抽奖记录，还要努力哦"
+		                    android:layout_marginTop="10dip"
+		                    android:textColor="@android:color/black"
+							android:layout_height="wrap_content" 
+	        				android:layout_width="wrap_content"/>
+		            </LinearLayout>
+			        <ListView 
+			            android:id="@+id/share_lottery_notice_my_list"
+			            android:visibility="gone"
+			    		android:cacheColorHint="#00000000"
+				    	android:divider="@android:color/transparent"
+				    	android:fadingEdge="none"
+				    	android:listSelector="@android:color/transparent"
+						android:layout_height="match_parent" 
+		        		android:layout_width="match_parent">
+			            
+			        </ListView>
+		        </RelativeLayout>
+		        <TextView 
+		            android:id="@+id/share_lottery_notice_my_address_show"
+		            android:layout_margin="10dip"
+					android:visibility="gone"
+		            android:textColor="#be0f07"
+		            android:textSize="18sp"
+					android:layout_height="wrap_content" 
+	        		android:layout_width="wrap_content"/>
+	        </LinearLayout>
+	        
 	    </LinearLayout>
 	    <LinearLayout
 	        android:visibility="gone"
@@ -284,13 +299,21 @@
 	        android:id="@+id/share_lottery_detail_layout"
 			android:layout_height="match_parent" 
        		android:layout_width="match_parent">
-	        <TextView 
-	            android:id="@+id/share_lottery_desp"
-	            android:textSize="18sp"
-	            android:textColor="@android:color/black"
-	            android:layout_margin="20dip"
+	        <ScrollView 
 				android:layout_height="match_parent" 
-       			android:layout_width="match_parent"/>
+       			android:layout_width="match_parent">
+	            <LinearLayout 
+					android:layout_height="match_parent" 
+       				android:layout_width="match_parent">
+	                <TextView 
+			            android:id="@+id/share_lottery_desp"
+			            android:textSize="18sp"
+			            android:textColor="@android:color/black"
+			            android:layout_margin="20dip"
+						android:layout_height="match_parent" 
+		       			android:layout_width="match_parent"/>
+	            </LinearLayout>
+	        </ScrollView>
 	    </LinearLayout>
     </RelativeLayout>
     

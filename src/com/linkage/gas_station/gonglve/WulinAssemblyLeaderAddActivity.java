@@ -42,6 +42,8 @@ public class WulinAssemblyLeaderAddActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_wulinassemblyleaderadd);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(WulinAssemblyLeaderAddActivity.this);
+		
 		try {
 			tribeId=getIntent().getExtras().getLong("tribeId");
 			init();
@@ -237,6 +239,13 @@ public class WulinAssemblyLeaderAddActivity extends BaseActivity {
 				}
 				handler.sendMessage(m);
 			}}).start();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(WulinAssemblyLeaderAddActivity.this);
 	}
 
 }

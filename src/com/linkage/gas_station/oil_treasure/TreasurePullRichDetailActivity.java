@@ -37,6 +37,8 @@ public class TreasurePullRichDetailActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_treasure_detail_pullrich);
 		
+		((GasStationApplication) getApplication()).tempActivity.add(TreasurePullRichDetailActivity.this);
+		
 		url=getIntent().getExtras().getString("url");
 		
 		init();
@@ -148,4 +150,10 @@ public class TreasurePullRichDetailActivity extends BaseActivity {
 			}});
 	}
 
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(TreasurePullRichDetailActivity.this);
+	}
 }

@@ -70,6 +70,8 @@ public class TreasureBuyActivity extends BaseActivity {
 		
 		oilListModel=new ArrayList<OilListModel>();
 		
+		((GasStationApplication) getApplication()).tempActivity.add(TreasureBuyActivity.this);
+		
 		init();
 		getJybOilList();
 	}
@@ -697,4 +699,12 @@ public class TreasureBuyActivity extends BaseActivity {
 		}
 		return super.onKeyDown(keyCode, event);		
 	};
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		((GasStationApplication) getApplication()).tempActivity.remove(TreasureBuyActivity.this);
+	}
 }
