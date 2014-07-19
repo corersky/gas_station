@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -55,6 +56,7 @@ public class MemberActivity extends BaseActivity {
 	TextView member_day=null;
 	TextView member_hour=null;
 	TextView member_min=null;
+	TextView member_level_desp=null;
 	
 	//是否已经关闭刷新时间线程
 	boolean isStopThread=false;
@@ -95,6 +97,7 @@ public class MemberActivity extends BaseActivity {
 				finish();
 			}});
 		
+		member_level_desp=(TextView) findViewById(R.id.member_level_desp);
 		member_left_tab=(TextView) findViewById(R.id.member_left_tab);
 		member_left_tab.setOnClickListener(new TextView.OnClickListener() {
 
@@ -246,6 +249,12 @@ public class MemberActivity extends BaseActivity {
 						member_day_notstart_layout.setVisibility(View.GONE);
 					}
 					else if(!map.get("memberDay").toString().equals("")) {
+						if(Integer.parseInt(map.get("memberLevel").toString())==0) {
+							member_level_desp.setText("亲，您还不是会员！点击所选商品一键成为会员吧！");
+						}
+						else {
+							member_level_desp.setText(Html.fromHtml("亲，您已是<font color='red'>流量"+map.get("memberLevel").toString()+"级会员</font>！可抢"+map.get("memberLevel").toString()+"级及以下商品！"));
+						}
 						member_day_no_layout.setVisibility(View.GONE);
 						Calendar cal=Calendar.getInstance();
 						String year=""+cal.get(Calendar.YEAR);
@@ -270,7 +279,7 @@ public class MemberActivity extends BaseActivity {
 							model.setSupplyer_phone(memberPrizes_map.get("supplyer_phone")!=null?memberPrizes_map.get("supplyer_phone").toString():"");
 							model.setValid_date(memberPrizes_map.get("valid_date")!=null?memberPrizes_map.get("valid_date").toString():"");
 							model.setPrize_resude_cnt(memberPrizes_map.get("prize_resude_cnt")!=null?memberPrizes_map.get("prize_resude_cnt").toString():"");
-
+							model.setLevel_description(memberPrizes_map.get("level_description")!=null?memberPrizes_map.get("level_description").toString():"");
 							strs_left_before.add(model);
 							strs_left.add(model);
 						}
@@ -577,11 +586,14 @@ public class MemberActivity extends BaseActivity {
 	}
 	
 	private void validMember(final long prize_id) {
+		showProgressDialog(R.string.tishi_loading);
+		showCustomToastWithContext("正在提交", MemberActivity.this);
 		isRightLoading=true;
 		final Handler handler=new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				// TODO Auto-generated method stub
+				dismissProgressDialog();
 				super.handleMessage(msg);
 				if(msg.what==1) {
 					final ValidMemberModel model=new ValidMemberModel();

@@ -39,6 +39,9 @@ public interface StrategyManager {
 	//签到摇一摇 1:签到成功，您已领取5M流量 2：您今日已签到，请明天再来 4:领取失败
 	public Map sign_activity(Long phoneNum,Long activityId,String areaCode);
 	
+	//摇一摇点击广告
+	public Map sign_adver(Long phoneNum,Long adverId,String areaCode);
+	
 	//参与流量倍增活动 result 1:参与成功，您已获赠XXXM流量 2：您已参与该活动 4:参与失败  comments：失败原因  gift_flow:获赠流量
 	//payType 1:账户余额 2：银联 3：翼支付
 	public Map double_flow_partake(String seqId,Long phoneNum,int payType,String verCode,Long activityId,String areaCode);
@@ -288,4 +291,7 @@ public interface StrategyManager {
 	
 	//是否会员
 	public Map validMember(Long phoneNum,String areaCode,Long prizeId);
+	
+	//领金币
+	public Map receiveCoin(Long phoneNum,String areaCode,Long activityId);
 }

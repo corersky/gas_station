@@ -111,6 +111,29 @@
 			        	android:layout_centerVertical="true"/>
 			    </RelativeLayout>
 			    
+			    <RelativeLayout 
+			        android:id="@+id/activity_2_layout"
+			        android:visibility="gone"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content">
+			        <ImageView 
+		                android:id="@+id/activity_2_go_1"
+		                android:layout_marginTop="3dip"
+		                android:layout_width="wrap_content"
+			        	android:layout_height="wrap_content"
+			        	android:layout_alignParentRight="true"
+		                android:src="@drawable/tangou_button"                
+			        	android:layout_centerVertical="true"/>
+			        <ImageView 
+		                android:id="@+id/activity_2_go_2"
+		                android:layout_marginTop="3dip"
+		                android:layout_marginRight="10dip"
+		                android:layout_width="wrap_content"
+			        	android:layout_height="wrap_content"
+			        	android:layout_toLeftOf="@id/activity_2_go_1"
+		                android:src="@drawable/tangou_button"                
+			        	android:layout_centerVertical="true"/>
+			    </RelativeLayout>
 	        </RelativeLayout>
 	        <TextView 
 	            android:background="@android:color/darker_gray"

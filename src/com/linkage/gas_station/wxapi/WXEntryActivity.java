@@ -1,22 +1,14 @@
 package com.linkage.gas_station.wxapi;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.Window;
 import android.widget.Toast;
 
-import com.linkage.gas_station.R;
 import com.tencent.mm.sdk.openapi.BaseReq;
 import com.tencent.mm.sdk.openapi.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
-import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.tencent.mm.sdk.openapi.WXMediaMessage;
-import com.tencent.mm.sdk.openapi.WXWebpageObject;
-import com.tencent.mm.sdk.platformtools.Util;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 	 private IWXAPI api;  

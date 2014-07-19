@@ -53,6 +53,14 @@
 		        android:background="@drawable/member_line"
 		        android:layout_width="match_parent"
 		        android:layout_height="2dip"/>
+		    
+	    	<TextView 
+	            android:id="@+id/member_level_desp"
+	    	    android:padding="5dip"
+	    	    android:gravity="center"
+		        android:background="#f1f1f1"
+	    		android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"/>
 		    <RelativeLayout         
 		        android:layout_width="match_parent"
 		        android:layout_height="match_parent"

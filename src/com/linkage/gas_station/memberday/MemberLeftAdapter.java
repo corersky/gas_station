@@ -76,7 +76,7 @@ public class MemberLeftAdapter extends BaseAdapter {
 		holder.adapter_left_name.setText(members.get(arg0).getPrize_name());
 		holder.adapter_left_shop.setText("商家："+members.get(arg0).getSupplyer_name());
 		holder.adapter_left_address.setText("描述："+members.get(arg0).getSupplyer_address());
-		holder.adapter_left_phone.setText("电话："+members.get(arg0).getSupplyer_phone());
+		holder.adapter_left_phone.setText("商品等级："+members.get(arg0).getLevel_description());
 		if(isStart) {
 			holder.adapter_left_order.setVisibility(View.VISIBLE);
 		}

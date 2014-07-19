@@ -46,7 +46,6 @@
 			<TextView 
 			    android:id="@+id/adapter_left_phone"
 			    android:textColor="#a5adb9"
-			    android:text="电话"
 			    android:layout_marginTop="3dip"
 			    android:textSize="14sp"
 		    	android:layout_width="match_parent"

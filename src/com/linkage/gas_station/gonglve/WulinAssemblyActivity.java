@@ -582,7 +582,10 @@ public class WulinAssemblyActivity extends BaseActivity {
 				title_refresh_progress.setVisibility(View.INVISIBLE);
 				if(msg.what==1) {
 					Map map=(Map)msg.obj;
-					if(map.get("result").toString().equals("0")) {
+					if(map.get("result")==null) {
+						showCustomToast("首领月初初始化数据获取失败");
+					}
+					else if(map.get("result").toString().equals("0")) {
 						showCustomToast(map.get("comments").toString());
 					}
 					else {

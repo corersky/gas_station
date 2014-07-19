@@ -4,25 +4,28 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
 
-import com.linkage.gas_station.GasStationApplication;
-import com.linkage.gas_station.R;
-import com.linkage.gas_station.util.Util;
-import com.linkage.gas_station.util.hessian.GetWebDate;
-import com.linkage.gas_station.util.hessian.StrategyManager;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import com.linkage.gas_station.BaseActivity;
+import com.linkage.gas_station.GasStationApplication;
+import com.linkage.gas_station.R;
+import com.linkage.gas_station.util.Util;
+import com.linkage.gas_station.util.hessian.GetWebDate;
+import com.linkage.gas_station.util.hessian.StrategyManager;
 
 public class ShakeListener implements SensorEventListener {
 	
@@ -157,50 +160,87 @@ public class ShakeListener implements SensorEventListener {
 			}}).start();
 	}
 	
+	String tip="";
+	String adver_hit="";
+	String adver_note="";
+	String total_num="";
+	String adver_url="";
+	String adver_id="";
+	
 	public void yao() {
+		
 		final Handler handler=new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				// TODO Auto-generated method stub
 				stop();
-				String tip="";
 				if(msg.what==1) {
 					Map map=(Map) msg.obj;
-					tip=map.get("comments").toString();
-					switch(Integer.parseInt(map.get("result").toString())) {
-					case 1:
-						((GasStationApplication) context.getApplicationContext()).isRefreshTuan=true;
-						break;
-					case 2:
-						break;
-					case 4:
-						isYao=true;
-						break;
+					tip=map.get("comments").toString();		
+					if(!Util.getUserArea(context).equals("0971")) {
+						adver_hit=map.get("adver_hit").toString();
+						adver_note=map.get("adver_note").toString();
+						total_num=map.get("total_num").toString();
+						adver_url=map.get("adver_url").toString();
+						adver_id=map.get("adver_id").toString();		
+						if(Integer.parseInt(map.get("result").toString())==1) {
+							((GasStationApplication) context.getApplicationContext()).isRefreshTuan=true;
+						}
+						try {
+							new AlertDialog.Builder(context).setTitle("每日签到").setMessage(tip+adver_note+"（已经点击"+adver_hit+"次）").setPositiveButton("确认", new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									start();
+								}
+							}).setNegativeButton("查看详情", new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									// TODO Auto-generated method stub
+									start();
+									
+									sign_adver(adver_id);
+									
+									Uri uri = Uri.parse(adver_url);  
+									Intent it = new Intent(Intent.ACTION_VIEW, uri);  
+									context.startActivity(it);
+								}}).show();
+						} catch(Exception e) {
+							
+						}
+					}
+					else if(Util.getUserArea(context).equals("2500")) {
+						if(Integer.parseInt(map.get("result").toString())==1) {
+							((GasStationApplication) context.getApplicationContext()).isRefreshTuan=true;
+						}
+						try {
+							new AlertDialog.Builder(context).setTitle("每日签到").setMessage(tip).setPositiveButton("确认", new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									start();
+								}
+							}).show();
+						} catch(Exception e) {
+							
+						}
 					}
 				}
 				else if(msg.what==-1) {
-					tip="链路连接失败";
-					isYao=true;
+					BaseActivity.showCustomToastWithContext("链路连接失败", context);
+					start();
 				}
 				else {
-					tip=context.getResources().getString(R.string.timeout_exp);
-					isYao=true;
+					BaseActivity.showCustomToastWithContext(context.getResources().getString(R.string.timeout_exp), context);
+					start();
 				}
 				shake_image.setImageResource(R.drawable.y6);
 				shake_image.setVisibility(View.VISIBLE);
 				shake_bar.setVisibility(View.GONE);
-				try {
-					new AlertDialog.Builder(context).setTitle("每日签到").setMessage(tip).setPositiveButton("确认", new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							start();
-						}
-					}).show();
-				} catch(Exception e) {
-					
-				}
+				isYao=true;
 			}
 		};
 		
@@ -226,9 +266,7 @@ public class ShakeListener implements SensorEventListener {
 					currentUsedUrl=((GasStationApplication) context.getApplicationContext()).COMMONURL[0];
 				}
 				while(flag) {
-					
 					try {
-						
 						ArrayList<String> list=Util.getUserInfo(context);
 						StrategyManager strategyManager=GetWebDate.getYaoHessionFactiory(context).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", context.getClassLoader());
 						Map map=strategyManager.sign_activity(Long.parseLong(list.get(0)), activityId, list.get(1));
@@ -325,4 +363,123 @@ public class ShakeListener implements SensorEventListener {
 			}}).start();
 	}
 	
+	public void sign_adver(final String adver_id) {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				LinkedList<String> wholeUrl=Util.getWholeUrl(context);
+				Message m=new Message();
+				int num=0;
+				boolean flag=true;
+				String currentUsedUrl="";
+				try {
+					currentUsedUrl=((GasStationApplication) context.getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(context).get(0):((GasStationApplication) context.getApplicationContext()).AreaUrl;
+				} catch(Exception e) {
+					currentUsedUrl=((GasStationApplication) context.getApplicationContext()).COMMONURL[0];
+				}
+				while(flag) {
+					try {
+						ArrayList<String> list=Util.getUserInfo(context);
+						
+						StrategyManager strategyManager=GetWebDate.getHessionFactiory(context).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", context.getClassLoader());
+						Map map=strategyManager.sign_adver(Long.parseLong(list.get(0)), Long.parseLong(adver_id), list.get(1));
+						if(map==null) {
+							m.what=0;
+						}
+						else {
+							m.what=1;
+							m.obj=map;
+						}
+						flag=false;
+						((GasStationApplication) context.getApplicationContext()).AreaUrl=currentUsedUrl;
+					} catch(Error e) {
+						flag=false;
+						m.what=-1;
+			        } catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						if(e instanceof com.caucho.hessian.client.HessianRuntimeException) {
+							//手机自身网络连接异常
+							if(e.getMessage().indexOf("java.net.SocketException")!=-1) {
+								num++;
+								if(num>=10) {
+									flag=false;
+								}
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							} 
+							//ip 端口等错误  java.net.SocketTimeoutException
+							else {
+								wholeUrl.remove(currentUsedUrl);
+								if(wholeUrl.size()>0) {
+									currentUsedUrl=wholeUrl.get(0);
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								else {
+									flag=false;
+								}
+							}
+							
+						}
+						else if(e instanceof com.caucho.hessian.client.HessianConnectionException) {
+							//手机自身网络连接异常
+							if(e.getMessage().indexOf("java.io.EOFException")!=-1) {
+								num++;
+								if(num>=10) {
+									flag=false;
+								}
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							else {
+								wholeUrl.remove(currentUsedUrl);
+								if(wholeUrl.size()>0) {
+									currentUsedUrl=wholeUrl.get(0);
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								else {
+									flag=false;
+								}
+							}
+						}
+						else {
+							wholeUrl.remove(currentUsedUrl);
+							if(wholeUrl.size()>0) {
+								currentUsedUrl=wholeUrl.get(0);
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							else {
+								flag=false;
+							}
+						}
+						m.what=0;
+					}
+				}
+			}}).start();
+	}
 }

@@ -16,6 +16,14 @@ public class MemberModel implements Serializable {
 	String supplyer_phone="";
 	String prize_resude_cnt="";
 	String prize_id="";
+	String level_description="";
+	
+	public String getLevel_description() {
+		return level_description;
+	}
+	public void setLevel_description(String level_description) {
+		this.level_description = level_description;
+	}
 	public String getPrize_id() {
 		return prize_id;
 	}
