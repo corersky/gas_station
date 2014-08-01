@@ -1,0 +1,31 @@
+<resources>
+	
+	<dimen name="province_width">760px</dimen>
+	<dimen name="province_height">708px</dimen>
+	<dimen name="xuzhou_x">120px</dimen>
+	<dimen name="xuzhou_y">150px</dimen>
+	<dimen name="lianyungang_x">330px</dimen>
+	<dimen name="lianyungang_y">90px</dimen>
+	<dimen name="suqian_x">256px</dimen>
+	<dimen name="suqian_y">202px</dimen>
+	<dimen name="huaian_x">346px</dimen>
+	<dimen name="huaian_y">262px</dimen>
+	<dimen name="yancheng_x">472px</dimen>
+	<dimen name="yancheng_y">232px</dimen>
+	<dimen name="yangzhou_x">400px</dimen>
+	<dimen name="yangzhou_y">400px</dimen>
+	<dimen name="taizhou_x">472px</dimen>
+	<dimen name="taizhou_y">442px</dimen>
+	<dimen name="nanjing_x">292px</dimen>
+	<dimen name="nanjing_y">502px</dimen>
+	<dimen name="zhenjiang_x">390px</dimen>
+	<dimen name="zhenjiang_y">510px</dimen>
+	<dimen name="changzhou_x">400px</dimen>
+	<dimen name="changzhou_y">578px</dimen>
+	<dimen name="wuxi_x">518px</dimen>
+	<dimen name="wuxi_y">570px</dimen>
+	<dimen name="suzhou_x">586px</dimen>
+	<dimen name="suzhou_y">600px</dimen>
+	<dimen name="nantong_x">586px</dimen>
+	<dimen name="nantong_y">466px</dimen>
+</resources>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.linkage.gas_station"
-    android:versionCode="95"
-    android:versionName="7.9.26"
+    android:versionCode="96"
+    android:versionName="7.9.28"
     android:installLocation="internalOnly" >
 
     <uses-sdk
@@ -172,6 +172,12 @@
  	   	<activity android:name=".gonglve.LuckDrawActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".gonglve.LuckDrawAddressActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".gonglve.MovieQuestionActivity" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+	   	<activity android:name=".gonglve.SendPacketsActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+	   	<activity android:name=".gonglve.CommonMessageDialogActivity" android:theme="@android:style/Theme.Translucent" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+	   	<activity android:name=".gonglve.RedenvelopeSearchActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+	   	<activity android:name=".gonglve.SendFlow_Pay_Activity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+  		<activity android:name=".gonglve.SendRedenvelopeDetail" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>	   	
+	   	<activity android:name=".gonglve.RecordListActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>	   	
 	   	<activity android:name=".memberday.CaptureActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.MemberActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.MemberReceiveActivity" android:theme="@android:style/Theme.Translucent" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>

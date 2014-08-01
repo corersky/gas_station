@@ -426,7 +426,7 @@ public class MoreActivity extends BaseActivity {
 //						startActivity(intent);
 //					}
 //				}).show();
-//				
+				
 				break;
 			case R.id.more_value:
 				Intent intent_threshold=new Intent(MoreActivity.this, ThresholdActivity.class);

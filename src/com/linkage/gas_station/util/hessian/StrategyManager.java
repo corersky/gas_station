@@ -294,4 +294,26 @@ public interface StrategyManager {
 	
 	//领金币
 	public Map receiveCoin(Long phoneNum,String areaCode,Long activityId);
+	
+	//获取购买红包记录
+	public Map[] buyRedPackets(Long phoneNum,String areaCode,Long activityId);
+	
+	//红包排行
+	//type 0:全部 1:最短时间;2:最广;3:最土豪;
+	public Map redPacketsRank(Long phoneNum,String areaCode,Long activityId,int type);
+	
+	//土豪查询
+	public Map redPacketsPerson(Long phoneNum,String areaCode,Long activityId);
+	
+	//抢红包列表
+	public Map[] redPacketById(Long phoneNum,String areaCode,String seqId);
+	
+	//订购流量套餐(1:成功;2:失败;3:验证码错误;)
+	//inType 1:流量监控 2：流量加油 3：流量攻略 4：特色流量包 5:聚油宝(内) 6:聚油宝(外)[areaCode传0000] 活动ID
+	//payType 1:账户余额 2：银联 3：翼支付
+	//客户端传过来的金额单位为分，流量为KB
+	//返回信息 deal_result： -1：验证码错误或失效 0：提交失败 1：提交成功 2：CRM接口订购达到最大次数 3:加油成功 4：青海活动
+	//cost=-1 amount=-1 就是长期有效的
+	//orderType 1:为自己 2：为他人
+	public Map holidayOrder(String seqId,Long phoneNum,Long offerId,String verCode,String areaCode,int inType,int payType,int cost,int amount,int orderType,Long rePhoneNum);
 }

@@ -20,4 +20,6 @@
     <color name="title_color">#333333</color>
     <color name="member_title_choice_color">#949596</color>
     <color name="member_title_normal_color">#000000</color>
+    <color name="redenvelope_tab_choice_color">#124faa</color>
+    <color name="redenvelope_tab_normal_color">#777777</color>
 </resources>

@@ -22,4 +22,33 @@
 	<dimen name="movie_question_award_margin4">150dip</dimen>
 	<dimen name="movie_question_award_text_big_size">20sp</dimen>
 	<dimen name="movie_question_award_text_size">16sp</dimen>
+	
+	<dimen name="province_width">380px</dimen>
+	<dimen name="province_height">354px</dimen>
+	<dimen name="xuzhou_x">60px</dimen>
+	<dimen name="xuzhou_y">75px</dimen>
+	<dimen name="lianyungang_x">165px</dimen>
+	<dimen name="lianyungang_y">45px</dimen>
+	<dimen name="suqian_x">128px</dimen>
+	<dimen name="suqian_y">101px</dimen>
+	<dimen name="huaian_x">173px</dimen>
+	<dimen name="huaian_y">131px</dimen>
+	<dimen name="yancheng_x">236px</dimen>
+	<dimen name="yancheng_y">116px</dimen>
+	<dimen name="yangzhou_x">199px</dimen>
+	<dimen name="yangzhou_y">199px</dimen>
+	<dimen name="taizhou_x">236px</dimen>
+	<dimen name="taizhou_y">221px</dimen>
+	<dimen name="nanjing_x">146px</dimen>
+	<dimen name="nanjing_y">251px</dimen>
+	<dimen name="zhenjiang_x">195px</dimen>
+	<dimen name="zhenjiang_y">255px</dimen>
+	<dimen name="changzhou_x">199px</dimen>
+	<dimen name="changzhou_y">289px</dimen>
+	<dimen name="wuxi_x">259px</dimen>
+	<dimen name="wuxi_y">285px</dimen>
+	<dimen name="suzhou_x">293px</dimen>
+	<dimen name="suzhou_y">300px</dimen>
+	<dimen name="nantong_x">293px</dimen>
+	<dimen name="nantong_y">233px</dimen>
 </resources>

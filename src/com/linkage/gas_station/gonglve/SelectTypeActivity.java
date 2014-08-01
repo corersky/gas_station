@@ -99,6 +99,9 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 				bundle.putInt("cost", selectObj.cost);
 				bundle.putInt("offer_type_id", selectObj.offer_type_id);
 			}
+			else if(getIntent().getExtras().getInt("activity_type")==23) {
+				data=new Intent(this , SendFlow_Pay_Activity.class);
+			}
 			else {
 				data=new Intent(this , JiayouDetaiActivity.class);
 			}
@@ -137,6 +140,20 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 					}
 					else if(selectObj.getTypeId()==85) {
 						bundle.putString("offer_description", "说明：省内漫游,全天候,6月13日0时-7月15日0时");
+					}
+				}
+				else if(getIntent().getExtras().getInt("activity_type")==23) {
+					if(selectObj.getTypeId()==84) {
+						bundle.putString("offer_description", "说明：省内漫游,有效期24小时");
+					}
+					else if(selectObj.getTypeId()==92) {
+						bundle.putString("offer_description", "说明：省内漫游，有效期：8月16日0时-28日24时");
+					}
+					else if(selectObj.getTypeId()==93) {
+						bundle.putString("offer_description", "说明：省内漫游，有效期：9月6日0时-8日24时");
+					}
+					else if(selectObj.getTypeId()==94) {
+						bundle.putString("offer_description", "说明：省内漫游，有效期：10月1日0时-7日24时");
 					}
 				}
 				else {

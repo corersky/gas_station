@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white" >
+    <LinearLayout 
+        android:id="@+id/adapter_niubilityitem_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="30dip"
+	    android:layout_marginLeft="13dip"
+	    android:layout_marginRight="13dip"
+	    android:gravity="center_vertical"
+	    android:orientation="horizontal"
+	    android:background="@android:color/white" >
+	    <RelativeLayout 
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	        android:layout_weight="4">
+	        <TextView 
+		        android:id="@+id/adapter_niubilityitem_number"
+		        android:layout_centerInParent="true"
+		        android:gravity="center"
+		        android:textSize="17sp"
+		        android:textColor="#333333"
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"/>
+	        <ImageView 
+	            android:id="@+id/adapter_niubilityitem_number_image"
+		        android:layout_centerInParent="true"
+		        android:gravity="center"
+		    	android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"/>
+	    </RelativeLayout>
+        
+	    <TextView 
+	        android:id="@+id/adapter_niubilityitem_phonenum"
+		    android:textSize="17sp"
+	        android:gravity="center"
+	        android:layout_weight="3"
+	        android:textColor="#333333"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"/>
+	    <TextView 
+	        android:id="@+id/adapter_niubilityitem_detailinfo"
+	        android:gravity="center"
+		    android:textSize="17sp"
+	        android:layout_weight="3"
+	        android:textColor="#333333"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"/>
+    </LinearLayout>
+	<View 
+	    android:id="@+id/adapter_niubilityitem_line"
+	    android:layout_width="match_parent"            
+	    android:layout_marginTop="5dip"          
+	    android:layout_marginBottom="5dip"
+	    android:layout_height="1dip"
+	    android:background="#dfdfdf"/>
+</LinearLayout>
