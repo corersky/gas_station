@@ -60,10 +60,10 @@ public class RecordListActivity extends BaseActivity {
 		send_redenvelope_detaillist=(ListView) findViewById(R.id.send_redenvelope_detaillist);
 		adapter=new SimpleAdapter(RecordListActivity.this, lists, R.layout.adapter_recordlist, new String[]{"phone", "record", "time"}, new int[]{R.id.adapter_gift_num, R.id.adapter_gift_package, R.id.adapter_gift_time});
 		send_redenvelope_detaillist.setAdapter(adapter);
-		redPacketById();
+		sendPackageList();
 	}
 	
-	private void redPacketById() {
+	private void sendPackageList() {
 		final Handler handler=new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -77,7 +77,7 @@ public class RecordListActivity extends BaseActivity {
 						HashMap<String, Object> map_temp=new HashMap<String, Object>();
 						map_temp.put("phone", map.get("phone_num").toString());
 						map_temp.put("time", map.get("generate_time").toString());
-						map_temp.put("record", map.get("area_name").toString());
+						map_temp.put("record", map.get("offer_content").toString());
 						lists.add(map_temp);
 					}
 					adapter.notifyDataSetChanged();
@@ -110,7 +110,7 @@ public class RecordListActivity extends BaseActivity {
 						ArrayList<String> list=Util.getUserInfo(RecordListActivity.this);
 						
 						StrategyManager strategyManager=GetWebDate.getHessionFactiory(RecordListActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
-						Map[] result=strategyManager.redPacketById(Long.parseLong(list.get(0)), list.get(1), "0");
+						Map[] result=strategyManager.sendPackageList(Long.parseLong(list.get(0)), list.get(1), getIntent().getExtras().getLong("activityId"));
 						if(result==null) {
 							result=new Map[0];
 						}

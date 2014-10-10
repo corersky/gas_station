@@ -20,6 +20,35 @@ public class MemberBuyModel implements Serializable {
 	String supplyer_phone="";
 	String scan_time="";
 	int rn=0;
+	int prize_type=0;
+	String residue_times="";
+	String total_times="";
+	String seqId="-1";
+	
+	public String getSeqId() {
+		return seqId;
+	}
+	public void setSeqId(String seqId) {
+		this.seqId = seqId;
+	}
+	public int getPrize_type() {
+		return prize_type;
+	}
+	public void setPrize_type(int prize_type) {
+		this.prize_type = prize_type;
+	}
+	public String getResidue_times() {
+		return residue_times;
+	}
+	public void setResidue_times(String residue_times) {
+		this.residue_times = residue_times;
+	}
+	public String getTotal_times() {
+		return total_times;
+	}
+	public void setTotal_times(String total_times) {
+		this.total_times = total_times;
+	}
 	public String getScan_time() {
 		return scan_time;
 	}

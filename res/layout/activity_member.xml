@@ -56,6 +56,7 @@
 		    
 	    	<TextView 
 	            android:id="@+id/member_level_desp"
+	            android:visibility="gone"
 	    	    android:padding="5dip"
 	    	    android:gravity="center"
 		        android:background="#f1f1f1"
@@ -75,13 +76,13 @@
 				        android:visibility="gone"
 			        	android:layout_width="match_parent"
 			        	android:layout_height="wrap_content"
-			       		android:background="@drawable/member_bg"
-			            android:layout_margin="10dip">            
+			       		android:background="@drawable/member_bg">            
 				        <ListView
 					        android:id="@+id/member_left_listview"
 					        android:layout_width="match_parent"
 					        android:layout_height="match_parent"
-					        android:divider="@null"
+					        android:divider="@android:color/darker_gray"
+					        android:dividerHeight="0.5dip"
 					        android:fadingEdge="none"
 					        android:cacheColorHint="#00000000"/>
 			        </LinearLayout>
@@ -207,38 +208,38 @@
 			                    android:id="@+id/member_next_listview"
 			        			android:layout_width="match_parent"
 			        			android:layout_height="match_parent"
-			        			android:divider="@null"
-			            		android:layout_margin="10dip"
+			        			android:divider="@android:color/darker_gray"
+					        	android:dividerHeight="0.5dip"
 				        		android:fadingEdge="none"
 				        		android:cacheColorHint="#00000000">
 			                    
 			                </ListView>
 			            </LinearLayout>
 			        </LinearLayout>
+				    <LinearLayout 
+				        android:id="@+id/member_day_no_layout"
+				        android:orientation="vertical"
+				        android:gravity="center"
+				        android:background="@android:color/white"
+				    	android:layout_width="match_parent"
+				    	android:layout_height="match_parent">
+				        <ImageView  
+				   			android:src="@drawable/member_no_pic"
+				     		android:layout_width="wrap_content"
+				     		android:layout_height="wrap_content"/>
+				    </LinearLayout>
 			    </RelativeLayout>	    
 		        <ListView
 			        android:id="@+id/member_right_listview"
 			        android:layout_width="match_parent"
 			        android:layout_height="match_parent"
-		            android:layout_margin="10dip"
-			        android:divider="@null"
+		            android:layout_marginTop="10dip"
+			        android:divider="@android:color/darker_gray"
+			        android:dividerHeight="0.5dip"
 			        android:fadingEdge="none"
 				    android:visibility="gone"
 			        android:cacheColorHint="#00000000"/>
 		    </RelativeLayout>
-	    </LinearLayout>
-	    
-	    <LinearLayout 
-	        android:id="@+id/member_day_no_layout"
-	        android:orientation="vertical"
-	        android:gravity="center"
-	        android:background="@android:color/white"
-	    	android:layout_width="match_parent"
-	    	android:layout_height="match_parent">
-	        <ImageView  
-	   			android:src="@drawable/member_no_pic"
-	     		android:layout_width="wrap_content"
-	     		android:layout_height="wrap_content"/>
 	    </LinearLayout>
     </RelativeLayout>
     

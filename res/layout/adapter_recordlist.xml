@@ -34,8 +34,13 @@
 			    	android:layout_height="wrap_content"
 			    	android:lines="1"
 			    	android:textSize="14sp"
+			    	android:textColor="#04479e"
 			    	android:singleLine="true"/> 
 	    	</LinearLayout>
+	    	<View 
+	            android:background="@drawable/list_blockbg_divider" 
+	            android:layout_width="fill_parent" 
+	            android:layout_height="1.0dip" />
 	        <LinearLayout 
 	        	android:orientation="horizontal"
 		        android:layout_width="match_parent"
@@ -55,8 +60,12 @@
 			    	android:layout_height="wrap_content"
 			    	android:padding="3dip"
 			    	android:textSize="14sp"
-			    	android:textColor="@android:color/darker_gray"/>
+			    	android:textColor="#04479e"/>
 	    	</LinearLayout>
+	    	<View 
+	            android:background="@drawable/list_blockbg_divider" 
+	            android:layout_width="fill_parent" 
+	            android:layout_height="1.0dip" />
 	        <LinearLayout 
 	        	android:orientation="horizontal"
 		        android:layout_width="match_parent"
@@ -76,7 +85,7 @@
 			    	android:layout_height="wrap_content"
 			    	android:padding="3dip"
 			    	android:textSize="14sp"
-			    	android:textColor="@android:color/darker_gray"/>
+			    	android:textColor="#04479e"/>
 	    	</LinearLayout>
 	    </LinearLayout>
     </LinearLayout>

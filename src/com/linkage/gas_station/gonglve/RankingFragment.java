@@ -52,6 +52,8 @@ public class RankingFragment extends Fragment {
 	TextView suzhou=null;
 	TextView nantong=null;
 	TextView ranking_whole=null;
+	
+	boolean isLoading=false;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,7 +101,7 @@ public class RankingFragment extends Fragment {
 			suzhou=(TextView) view.findViewById(R.id.suzhou);
 			nantong=(TextView) view.findViewById(R.id.nantong);
 			
-			redPacketsPerson();
+			
 		}
 		ViewGroup parent=(ViewGroup) view.getParent();
 		if(parent!=null) {
@@ -108,7 +110,18 @@ public class RankingFragment extends Fragment {
 		return view;
 	}
 	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(!isLoading) {
+			redPacketsPerson();
+		}
+	}
+	
 	private void redPacketsPerson() {
+		
+		isLoading=true;
 		
 		final Handler handler=new Handler() {
 			@Override
@@ -116,6 +129,25 @@ public class RankingFragment extends Fragment {
 				// TODO Auto-generated method stub
 				super.handleMessage(msg);
 				if(msg.what==100) {
+					ranking_love_num.setText("");
+					ranking_love_desp.setText("");
+					ranking_fast_num.setText("");
+					ranking_fast_desp.setText("");
+					ranking_whole.setText("");
+					xuzhou.setText("");
+					lianyungang.setText("");
+					suqian.setText("");
+					huaian.setText("");
+					yancheng.setText("");
+					yangzhou.setText("");
+					taizhou.setText("");
+					nanjing.setText("");
+					zhenjiang.setText("");
+					changzhou.setText("");
+					wuxi.setText("");
+					suzhou.setText("");
+					nantong.setText("");
+					
 					Map map=(Map) msg.obj;
 					if(map.get("quicker")!=null) {
 						if(((Map)map.get("quicker")).get("phone_num")!=null) {
@@ -259,6 +291,7 @@ public class RankingFragment extends Fragment {
 				else {
 					BaseActivity.showCustomToastWithContext(getResources().getString(R.string.timeout_exp), getActivity());
 				}
+				isLoading=false;
 			}
 		};
 		

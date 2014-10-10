@@ -285,8 +285,16 @@ public class MemberReceiveActivity extends BaseActivity {
 				if(msg.what==1) {
 					Map map=(Map) msg.obj;
 					showCustomToast(map.get("comments").toString());
-					Intent intent=getIntent();
-					setResult(RESULT_OK, intent);
+					if(Integer.parseInt(map.get("result").toString())==1) {
+						Intent intent=getIntent();
+						Bundle bundle=new Bundle();
+						bundle.putInt("prize_type", getIntent().getExtras().getInt("prize_type"));
+						if(getIntent().getExtras().getInt("prize_type")==3||getIntent().getExtras().getInt("prize_type")==4) {
+							bundle.putString("seqId", map.get("seqId").toString());
+						}
+						intent.putExtras(bundle);
+						setResult(RESULT_OK, intent);
+					}
 					finish();
 				}
 				else if(msg.what==-1) {
@@ -321,7 +329,7 @@ public class MemberReceiveActivity extends BaseActivity {
 						StrategyManager strategyManager=GetWebDate.getHessionFactiory(MemberReceiveActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
 						long temp_time=(currentPayTime==0?System.currentTimeMillis():currentPayTime);	
 						currentPayTime=temp_time;
-						Map map=strategyManager.receivePrizes(String.valueOf(temp_time), Long.parseLong(list.get(0)), list.get(1), member_yz.getText().toString(), getIntent().getExtras().getLong("prize_id"));
+						Map map=strategyManager.receivePrizes2(String.valueOf(temp_time), Long.parseLong(list.get(0)), list.get(1), member_yz.getText().toString(), getIntent().getExtras().getLong("prize_id"));
 						m.obj=map;
 						m.what=1;
 						flag=false;

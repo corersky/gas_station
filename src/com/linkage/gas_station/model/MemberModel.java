@@ -17,7 +17,14 @@ public class MemberModel implements Serializable {
 	String prize_resude_cnt="";
 	String prize_id="";
 	String level_description="";
+	int prize_type=0;
 	
+	public int getPrize_type() {
+		return prize_type;
+	}
+	public void setPrize_type(int prize_type) {
+		this.prize_type = prize_type;
+	}
 	public String getLevel_description() {
 		return level_description;
 	}

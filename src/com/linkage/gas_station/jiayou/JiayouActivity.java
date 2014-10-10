@@ -369,7 +369,7 @@ public class JiayouActivity extends BaseActivity {
 							intent.setClass(JiayouActivity.this, JiayouDetaiActivity.class);
 							bundle.putString("offerId", model_list.get(province_array[3]).get(currentItem1).getOffer_id());
 							bundle.putString("offer_name", model_list.get(province_array[3]).get(currentItem1).getOffer_name());						
-							bundle.putString("type", "night_station");
+							bundle.putString("type", "simple_station");
 							bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp3));
 							intent.putExtras(bundle);
 							startActivity(intent);

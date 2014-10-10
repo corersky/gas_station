@@ -147,13 +147,13 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 						bundle.putString("offer_description", "说明：省内漫游,有效期24小时");
 					}
 					else if(selectObj.getTypeId()==92) {
-						bundle.putString("offer_description", "说明：省内漫游，有效期：8月16日0时-28日24时");
+						bundle.putString("offer_description", "说明:省内漫游,有效期:8月16日0时 - 28日24时");
 					}
 					else if(selectObj.getTypeId()==93) {
-						bundle.putString("offer_description", "说明：省内漫游，有效期：9月6日0时-8日24时");
+						bundle.putString("offer_description", "说明:省内漫游,有效期:9月6日0时 - 8日24时");
 					}
 					else if(selectObj.getTypeId()==94) {
-						bundle.putString("offer_description", "说明：省内漫游，有效期：10月1日0时-7日24时");
+						bundle.putString("offer_description", "说明:省内漫游,有效期:10月1日0时 - 7日24时");
 					}
 				}
 				else {
@@ -183,5 +183,18 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		((GasStationApplication) getApplication()).tempActivity.remove(SelectTypeActivity.this);
+	}
+	
+	public static String ToDBC(String input) {
+		char[] c = input.toCharArray();
+		for (int i = 0; i< c.length; i++) {
+			if (c[i] == 12288) {
+				c[i] = (char) 32;
+				continue;
+			}
+			if (c[i]> 65280&& c[i]< 65375)
+				c[i] = (char) (c[i] - 65248);
+		}
+		return new String(c);
 	}
 }

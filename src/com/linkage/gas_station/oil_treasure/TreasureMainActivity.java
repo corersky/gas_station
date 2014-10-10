@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
-import com.linkage.gas_station.gonglve.MovieQuestionActivity;
+import com.linkage.gas_station.gonglve.Receiver24IconActivity;
 import com.linkage.gas_station.myview.MyTextView;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
@@ -162,9 +162,9 @@ public class TreasureMainActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent(TreasureMainActivity.this, MovieQuestionActivity.class);
+				Intent intent=new Intent(TreasureMainActivity.this, Receiver24IconActivity.class);
 				Bundle bundle=new Bundle();
-				bundle.putString("desp", activity_url);
+				bundle.putLong("Receiver24IconActivity", Long.parseLong("45"));
 				intent.putExtras(bundle);
 				startActivity(intent);
 			}}) ;

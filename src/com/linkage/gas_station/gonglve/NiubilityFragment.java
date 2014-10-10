@@ -178,9 +178,63 @@ public class NiubilityFragment extends Fragment {
 				}
 				else if(msg.what==-2) {
 					BaseActivity.showCustomToastWithContext("链路连接失败", getActivity());
+					
+					NiubilityModel model1=new NiubilityModel();
+					model1.setType(1);
+					model1.setPosition(0);
+					SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");//设置日期格式
+					model1.setEndTime("截止"+df.format(new Date()));
+					model1.setEndtime_desp("最短抢光时间");
+					model1.setSection_desp("人缘最好");
+					models.add(model1);
+					
+					NiubilityModel model2=new NiubilityModel();
+					model2.setType(1);
+					model2.setPosition(1);
+					model2.setEndTime("");
+					model2.setEndtime_desp("参与抢红包的朋友");
+					model2.setSection_desp("圈子最广");
+					models.add(model2);
+					
+					NiubilityModel model3=new NiubilityModel();
+					model3.setType(1);
+					model3.setPosition(2);
+					model3.setEndTime("");
+					model3.setEndtime_desp("派发红包金额");
+					model3.setSection_desp("最土豪");
+					models.add(model3);
+					
+					adapter.notifyDataSetChanged();
 				}
 				else {
 					BaseActivity.showCustomToastWithContext(getResources().getString(R.string.timeout_exp), getActivity());
+				
+					NiubilityModel model1=new NiubilityModel();
+					model1.setType(1);
+					model1.setPosition(0);
+					SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");//设置日期格式
+					model1.setEndTime("截止"+df.format(new Date()));
+					model1.setEndtime_desp("最短抢光时间");
+					model1.setSection_desp("人缘最好");
+					models.add(model1);
+					
+					NiubilityModel model2=new NiubilityModel();
+					model2.setType(1);
+					model2.setPosition(1);
+					model2.setEndTime("");
+					model2.setEndtime_desp("参与抢红包的朋友");
+					model2.setSection_desp("圈子最广");
+					models.add(model2);
+					
+					NiubilityModel model3=new NiubilityModel();
+					model3.setType(1);
+					model3.setPosition(2);
+					model3.setEndTime("");
+					model3.setEndtime_desp("派发红包金额");
+					model3.setSection_desp("最土豪");
+					models.add(model3);
+					
+					adapter.notifyDataSetChanged();
 				}
 			}
 		};

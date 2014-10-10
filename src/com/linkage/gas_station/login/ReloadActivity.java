@@ -82,7 +82,7 @@ public class ReloadActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String ct = "^((133)|(153)|(18[0,1,9]))\\d{8}$";
+				String ct = "^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
 				if(login_phone_num.getText().toString().matches(ct)) {
 					verCode();
 				}
@@ -96,7 +96,7 @@ public class ReloadActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				String ct = "^((133)|(153)|(18[0,1,9]))\\d{8}$";
+				String ct = "^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
 				if(login_phone_num.getText().toString().matches(ct)) {
 					userActive();
 				}

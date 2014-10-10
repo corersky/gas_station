@@ -211,7 +211,7 @@ public class ShakeListener implements SensorEventListener {
 							
 						}
 					}
-					else if(Util.getUserArea(context).equals("2500")) {
+					else {
 						if(Integer.parseInt(map.get("result").toString())==1) {
 							((GasStationApplication) context.getApplicationContext()).isRefreshTuan=true;
 						}

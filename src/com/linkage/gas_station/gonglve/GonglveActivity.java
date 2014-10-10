@@ -58,7 +58,6 @@ import com.linkage.gas_station.memberday.MemberActivity;
 import com.linkage.gas_station.model.GifTableListModel;
 import com.linkage.gas_station.model.GonglveTuanModel;
 import com.linkage.gas_station.model.ProductGroupModel;
-import com.linkage.gas_station.more.MoreActivity;
 import com.linkage.gas_station.myview.FixedSpeedScroller;
 import com.linkage.gas_station.myview.MyScrollLayout;
 import com.linkage.gas_station.myview.MyScrollLayout.PageListener;
@@ -96,7 +95,7 @@ public class GonglveActivity extends BaseActivity {
 	//初始号码
 	long initPhoneNum=-1;
 	//当前版本支持的活动类型
-	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23};
+	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
 	//活动加载标志位
 	boolean isLoadActivity=false;
 	boolean isLoadBank=false;
@@ -367,9 +366,24 @@ public class GonglveActivity extends BaseActivity {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
+						else if(activity_type==24) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
 						TextView tuan_tip=(TextView) view.findViewById(R.id.tuan_tip);
-						if(activity_type==3 || activity_type==4 || activity_type==5 || activity_type==6|| activity_type==7|| activity_type==8|| activity_type==9|| activity_type==10|| activity_type==11|| activity_type==12|| activity_type==13|| activity_type==14|| activity_type==15|| activity_type==16|| activity_type==17|| activity_type==18|| activity_type==19|| activity_type==20|| activity_type==21 ||activity_type==22 ||activity_type==23) {
-							tuan_tip.setText(temp2.get(i).getActivity_description());
+						if (activity_type == 3 || activity_type == 4
+								|| activity_type == 5 || activity_type == 6
+								|| activity_type == 7 || activity_type == 8
+								|| activity_type == 9 || activity_type == 10
+								|| activity_type == 11 || activity_type == 12
+								|| activity_type == 13 || activity_type == 14
+								|| activity_type == 15 || activity_type == 16
+								|| activity_type == 17 || activity_type == 18
+								|| activity_type == 19 || activity_type == 20
+								|| activity_type == 21 || activity_type == 22
+								|| activity_type == 23 || activity_type == 24) {
+							tuan_tip.setText(temp2.get(i)
+									.getActivity_description());
 						}
 						final ImageView gonglve_title_2_pic=(ImageView) view.findViewById(R.id.gonglve_title_2_pic);
 //						Bitmap bmp=AsyncSingleImageLoad.getInstance(GonglveActivity.this).loadImageBmp(temp2.get(i).getActivity_image_name(), new SingleImageCallBack() {
@@ -450,7 +464,7 @@ public class GonglveActivity extends BaseActivity {
 														showCustomToast("推荐人手机号不能为本人手机号");
 													}
 													else {
-														String ct = "^((133)|(153)|(18[0,1,9]))\\d{8}$";
+														String ct = "^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
 														if(editsystext.getText().toString().matches(ct)) {
 															showCustomToast("正在提交，请您耐心等待");
 															joinActivity(editsystext.getText().toString(), activity_go, temp2.get(num), activity_text);
@@ -541,7 +555,6 @@ public class GonglveActivity extends BaseActivity {
 									else {
 										receiveTickets(temp2.get(num));
 									}
-									
 							}});
 						}
 						else if(activity_type==14) {
@@ -593,9 +606,11 @@ public class GonglveActivity extends BaseActivity {
 											((GasStationApplication) getApplicationContext()).shareType=6;
 											if(activity_type==22) {
 												((GasStationApplication) getApplicationContext()).activityId=Integer.parseInt(activityId+"0");
+												((GasStationApplication) getApplicationContext()).content="求各路土豪派红包";
 											}
 											else {
 												((GasStationApplication) getApplicationContext()).activityId=Integer.parseInt(activityId);
+												((GasStationApplication) getApplicationContext()).content=activity_rule;
 											}
 											String currentUsedUrl="";
 											try {
@@ -603,13 +618,12 @@ public class GonglveActivity extends BaseActivity {
 											} catch(Exception e) {
 												currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
 											}
-											((GasStationApplication) getApplicationContext()).content=activity_rule;
 											Intent intent=new Intent(GonglveActivity.this, QQActivity.class);
 											Bundle bundle=new Bundle();
 											bundle.putString("title", activity_name);
 											if(activity_type==22) {
 												bundle.putString("url", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"));
-												bundle.putString("text", "免费流量红包来了！抢！");
+												bundle.putString("text", "求各路土豪派红包");
 											}
 											else {
 												bundle.putString("url", currentUsedUrl+activity_url+"?activityId="+activityId);
@@ -641,7 +655,7 @@ public class GonglveActivity extends BaseActivity {
 												currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
 											}
 											if(activity_type==22) {
-												((GasStationApplication) getApplicationContext()).content="免费流量红包来了！抢！";
+												((GasStationApplication) getApplicationContext()).content="求各路土豪派红包";
 											}
 											else {
 												((GasStationApplication) getApplicationContext()).content=activity_rule;
@@ -651,7 +665,7 @@ public class GonglveActivity extends BaseActivity {
 												yixin.sendYixin(GonglveActivity.this,activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name, true);
 											}
 											else {
-												yixin.sendYixin(GonglveActivity.this,"免费流量红包来了！抢！", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"), activity_name, true);
+												yixin.sendYixin(GonglveActivity.this,"求各路土豪派红包", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"), activity_name, true);
 											}
 										}});
 									ImageView gonglve_weixin_pengyou_share=(ImageView) view.findViewById(R.id.gonglve_weixin_pengyou_share);
@@ -675,7 +689,7 @@ public class GonglveActivity extends BaseActivity {
 												currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
 											}
 											if(activity_type==22) {
-												((GasStationApplication) getApplicationContext()).content="免费流量红包来了！抢！";
+												((GasStationApplication) getApplicationContext()).content="求各路土豪派红包";
 											}
 											else {
 												((GasStationApplication) getApplicationContext()).content=activity_rule;
@@ -686,7 +700,7 @@ public class GonglveActivity extends BaseActivity {
 												weixin.sendWeixin(GonglveActivity.this, activity_name+"\n"+activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name+"\n"+activity_rule, true);
 											}
 											else {
-												weixin.sendWeixin(GonglveActivity.this, activity_name+"\n"+"免费流量红包来了！抢！", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"), activity_name+"\n"+"免费流量红包来了！抢！", true);
+												weixin.sendWeixin(GonglveActivity.this, activity_name+"\n"+"求各路土豪派红包", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"), activity_name+"\n"+"求各路土豪派红包", true);
 											}
 										}});
 									ImageView gonglve_sinaweibo_logo_share=(ImageView) view.findViewById(R.id.gonglve_sinaweibo_logo_share);
@@ -710,7 +724,7 @@ public class GonglveActivity extends BaseActivity {
 												currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
 											}
 											if(activity_type==22) {
-												((GasStationApplication) getApplicationContext()).content="免费流量红包来了！抢！";
+												((GasStationApplication) getApplicationContext()).content="求各路土豪派红包";
 											}
 											else {
 												((GasStationApplication) getApplicationContext()).content=activity_rule;
@@ -720,7 +734,7 @@ public class GonglveActivity extends BaseActivity {
 											bundle.putString("title", activity_name);
 											if(activity_type==22) {
 												bundle.putString("url", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"));
-												bundle.putString("text", "免费流量红包来了！抢！");
+												bundle.putString("text", "求各路土豪派红包");
 											}
 											else {
 												bundle.putString("url", currentUsedUrl+activity_url+"?activityId="+activityId);
@@ -876,16 +890,23 @@ public class GonglveActivity extends BaseActivity {
 							tuan_go.setImageResource(R.drawable.wap_button);
 						}
 						else if(activity_type==23) {
-							activity_go.setImageResource(R.drawable.qianggou_button);
+							activity_go.setImageResource(R.drawable.record_list);
 							activity_go.setOnClickListener(new ImageView.OnClickListener() {
 
 								@Override
 								public void onClick(View arg0) {
 									// TODO Auto-generated method stub
 									Intent intent=new Intent(GonglveActivity.this, RecordListActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putLong("activityId", Long.parseLong(activityId));
+									intent.putExtras(bundle);
 									startActivity(intent);
 								}});
 							tuan_go.setImageResource(R.drawable.qianggou_button);
+						}
+						else if(activity_type==24) {
+							activity_go.setVisibility(View.INVISIBLE);
+							tuan_go.setImageResource(R.drawable.xuanshang);
 						}
 						tuan_go.setOnClickListener(new ImageView.OnClickListener() {
 
@@ -984,6 +1005,12 @@ public class GonglveActivity extends BaseActivity {
 								}
 								else if(activity_type==19) {
 									Intent intent=new Intent(GonglveActivity.this, MemberActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putString("activity_name", temp2.get(num).getActivity_name());
+									bundle.putString("activity_url", "/activity/hongbao.html");
+									bundle.putString("activityId", temp2.get(num).getActivity_id());
+									bundle.putString("activity_rule", "发流量红包咯！份数有限，快来抢！");
+									intent.putExtras(bundle);
 									startActivity(intent);
 								}
 								else if(activity_type==20||activity_type==21) {
@@ -1009,6 +1036,13 @@ public class GonglveActivity extends BaseActivity {
 								}
 								else if(activity_type==23) {
 									loadJumpActivity(temp2.get(num).getActivity_id(), Integer.parseInt(temp2.get(num).getActivity_type()));
+								}
+								else if(activity_type==24) {
+									Intent intent=new Intent(GonglveActivity.this, Receiver24IconActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putLong("Receiver24IconActivity", Long.parseLong(activityId));
+									intent.putExtras(bundle);
+									startActivity(intent);
 								}
 							}});
 						LinearLayout tangou_point=(LinearLayout) view.findViewById(R.id.tangou_point);
@@ -3678,7 +3712,7 @@ public class GonglveActivity extends BaseActivity {
 										return;
 									}
 									else {
-										String ct = "^((133)|(153)|(18[0,1,9]))\\d{8}$";
+										String ct = "^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
 										if(!bank_phonenum.getText().toString().matches(ct)) {
 											showCustomToast("请输入天翼手机号码");
 											return;
@@ -4149,7 +4183,7 @@ public class GonglveActivity extends BaseActivity {
 					showCustomToast("推荐人手机号不能为本人手机号");
 				}
 				else {
-					String ct = "^((133)|(153)|(18[0,1,9]))\\d{8}$";
+					String ct = "^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
 					if(!s.toString().matches(ct)) {
 						showCustomToast("请输入天翼手机号码");
 					}

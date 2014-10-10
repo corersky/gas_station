@@ -266,9 +266,9 @@
 		    	android:layout_height="fill_parent">
 				<ImageView 
 				    android:id="@+id/treasure_adv"
-				    android:background="@drawable/yicaidaodi"
-			       	android:layout_width="wrap_content"
-			    	android:layout_height="wrap_content" />	
+				    android:background="@drawable/songliuliang"
+			       	android:layout_width="match_parent"
+			    	android:layout_height="match_parent" />	
 	    	</LinearLayout>
 		</LinearLayout>
     </LinearLayout>

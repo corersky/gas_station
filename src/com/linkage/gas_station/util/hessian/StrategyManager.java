@@ -275,7 +275,7 @@ public interface StrategyManager {
 	public Map memberPrizes(Long phoneNum,String areaCode);
 	
 	//抢兑奖品
-	public Map receivePrizes(String seqId, Long phoneNum,String areaCode,String verCode,Long prizeId);
+	public Map receivePrizes2(String seqId, Long phoneNum,String areaCode,String verCode,Long prizeId);
 	
 	//获取用户兑换列表
 	public Map[] userPrizes(Long phoneNum,String areaCode);
@@ -316,4 +316,17 @@ public interface StrategyManager {
 	//cost=-1 amount=-1 就是长期有效的
 	//orderType 1:为自己 2：为他人
 	public Map holidayOrder(String seqId,Long phoneNum,Long offerId,String verCode,String areaCode,int inType,int payType,int cost,int amount,int orderType,Long rePhoneNum);
+
+	//赠送记录
+	public Map[] sendPackageList(Long phoneNum,String areaCode,Long activityId);
+
+	//获取免费流量活动列表
+	public Map[] getFreeFlowList(Long phoneNum,String areaCode,Long activityId);
+	
+	//领流量币
+	public Map receiveFreeCoin(Long phoneNum,String areaCode,Long freeId);
+	
+	//免费流量活动点击查看
+	public void freeFlowHit(Long phoneNum,String areaCode,Long activityId,Long freeFlowId);
+	
 }

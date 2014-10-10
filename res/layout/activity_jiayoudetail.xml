@@ -124,7 +124,8 @@
 			        android:id="@+id/jiayou_detail_desp"
 		            android:layout_width="match_parent"
 			   		android:layout_height="wrap_content"
-			   		android:textSize="13sp"		   		
+			   		android:textSize="13sp"		 
+			   		android:gravity="left"  		
 			   		android:textColor="#506281"/>
 			</LinearLayout>
 	    </RelativeLayout>

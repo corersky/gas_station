@@ -34,7 +34,7 @@ import android.widget.TextView;
 
 public class LoginActivity extends BaseActivity {
 	
-	EditText login_phone_num=null;//18951765220  18951765198  Õı√Ù(ŒﬁŒ˝) 15306186279  222222  ΩØÀ’¿Ÿ     15301588045  666666
+	EditText login_phone_num=null;//18951765220  18951765198  Õı√Ù(ŒﬁŒ˝) 15306186279  222222  ΩØÀ’¿Ÿ     15301588045  666666 15365227794
 	EditText login_hqyz_num=null;//222222
 	TextView login_hqyz=null;
 	TextView login=null;
@@ -75,7 +75,7 @@ public class LoginActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String ct = "^((133)|(153)|(18[0,1,9]))\\d{8}$";
+				String ct = "^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
 				if(login_phone_num.getText().toString().matches(ct)) {
 					verCode();
 				}
@@ -90,7 +90,7 @@ public class LoginActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				String ct = "^((133)|(153)|(18[0,1,9]))\\d{8}$";
+				String ct = "^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
 				if(login_phone_num.getText().toString().matches(ct)) {
 					userActive();
 				}
