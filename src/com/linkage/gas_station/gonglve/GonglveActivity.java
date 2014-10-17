@@ -95,7 +95,7 @@ public class GonglveActivity extends BaseActivity {
 	//初始号码
 	long initPhoneNum=-1;
 	//当前版本支持的活动类型
-	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
+	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
 	//活动加载标志位
 	boolean isLoadActivity=false;
 	boolean isLoadBank=false;
@@ -370,6 +370,10 @@ public class GonglveActivity extends BaseActivity {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
+						else if(activity_type==25) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
 						TextView tuan_tip=(TextView) view.findViewById(R.id.tuan_tip);
 						if (activity_type == 3 || activity_type == 4
 								|| activity_type == 5 || activity_type == 6
@@ -381,7 +385,8 @@ public class GonglveActivity extends BaseActivity {
 								|| activity_type == 17 || activity_type == 18
 								|| activity_type == 19 || activity_type == 20
 								|| activity_type == 21 || activity_type == 22
-								|| activity_type == 23 || activity_type == 24) {
+								|| activity_type == 23 || activity_type == 24
+								|| activity_type == 25) {
 							tuan_tip.setText(temp2.get(i)
 									.getActivity_description());
 						}
@@ -908,6 +913,10 @@ public class GonglveActivity extends BaseActivity {
 							activity_go.setVisibility(View.INVISIBLE);
 							tuan_go.setImageResource(R.drawable.xuanshang);
 						}
+						else if(activity_type==25) {
+							activity_go.setVisibility(View.INVISIBLE);
+							tuan_go.setImageResource(R.drawable.wap_button);
+						}
 						tuan_go.setOnClickListener(new ImageView.OnClickListener() {
 
 							@Override
@@ -1041,6 +1050,16 @@ public class GonglveActivity extends BaseActivity {
 									Intent intent=new Intent(GonglveActivity.this, Receiver24IconActivity.class);
 									Bundle bundle=new Bundle();
 									bundle.putLong("Receiver24IconActivity", Long.parseLong(activityId));
+									intent.putExtras(bundle);
+									startActivity(intent);
+								}
+								else if(activity_type==25) {
+									Intent intent=new Intent(GonglveActivity.this, Gift4GActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putLong("activityId", Long.parseLong(activityId));
+									bundle.putString("activity_name", activity_name);
+									bundle.putString("activity_url", activity_url);
+									bundle.putString("activity_rule", activity_rule);
 									intent.putExtras(bundle);
 									startActivity(intent);
 								}

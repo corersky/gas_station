@@ -329,4 +329,9 @@ public interface StrategyManager {
 	//免费流量活动点击查看
 	public void freeFlowHit(Long phoneNum,String areaCode,Long activityId,Long freeFlowId);
 	
+	//4G活动查询相关信息
+	public Map get4GInfo(Long phoneNum,String areaCode,Long activityId);
+	
+	//4G用户流量领取 
+	public Map get4GFlow(Long phoneNum,double amount,Long activityId,String areaCode);
 }
