@@ -223,7 +223,7 @@ public class WBMainActivity extends Activity implements IWeiboHandler.Response {
         // 1. 初始化微博的分享消息
         WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
         weiboMessage.textObject=getTextObj(getIntent().getExtras().getString("title")+" "+getIntent().getExtras().getString("text"));
-        weiboMessage.imageObject=getImageObj();
+        weiboMessage.imageObject=getImageObj(getIntent().getExtras().getString("send_imageUrl")!=null?getIntent().getExtras().getString("send_imageUrl"):"");
         weiboMessage.mediaObject=getWebpageObj();
         
         // 2. 初始化从第三方到微博的消息请求
@@ -274,10 +274,15 @@ public class WBMainActivity extends Activity implements IWeiboHandler.Response {
      * 
      * @return 图片消息对象。
      */
-    private ImageObject getImageObj() {
+    private ImageObject getImageObj(String image) {
         ImageObject imageObject=new ImageObject();
         // 设置 Bitmap 类型的图片到视频对象里
-        bmp=BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+        if(image.equals("share_logo_4g")) {
+        	bmp=BitmapFactory.decodeResource(getResources(), R.drawable.share_logo_4g);
+        }
+        else {
+        	bmp=BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+        }
         imageObject.setImageObject(bmp);
         return imageObject;
     }

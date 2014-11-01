@@ -41,7 +41,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 import com.baidu.mobstat.StatService;
@@ -54,6 +53,7 @@ import com.linkage.gas_station.life.LifeMainActivity;
 import com.linkage.gas_station.main.MainActivity;
 import com.linkage.gas_station.market.DirectionalFlowActivity;
 import com.linkage.gas_station.memberday.BusinessesActivity;
+import com.linkage.gas_station.memberday.FlowDayActivity;
 import com.linkage.gas_station.memberday.MemberActivity;
 import com.linkage.gas_station.model.GifTableListModel;
 import com.linkage.gas_station.model.GonglveTuanModel;
@@ -95,7 +95,7 @@ public class GonglveActivity extends BaseActivity {
 	//初始号码
 	long initPhoneNum=-1;
 	//当前版本支持的活动类型
-	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
+	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
 	//活动加载标志位
 	boolean isLoadActivity=false;
 	boolean isLoadBank=false;
@@ -374,6 +374,14 @@ public class GonglveActivity extends BaseActivity {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
+						else if(activity_type==26) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
+						else if(activity_type==27) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
 						TextView tuan_tip=(TextView) view.findViewById(R.id.tuan_tip);
 						if (activity_type == 3 || activity_type == 4
 								|| activity_type == 5 || activity_type == 6
@@ -386,7 +394,8 @@ public class GonglveActivity extends BaseActivity {
 								|| activity_type == 19 || activity_type == 20
 								|| activity_type == 21 || activity_type == 22
 								|| activity_type == 23 || activity_type == 24
-								|| activity_type == 25) {
+								|| activity_type == 25 || activity_type == 26
+								|| activity_type == 27 ) {
 							tuan_tip.setText(temp2.get(i)
 									.getActivity_description());
 						}
@@ -667,10 +676,10 @@ public class GonglveActivity extends BaseActivity {
 											}
 											SendYixin yixin=new SendYixin();
 											if(activity_type!=22) {
-												yixin.sendYixin(GonglveActivity.this,activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name, true);
+												yixin.sendYixin(GonglveActivity.this,activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name, R.drawable.ic_launcher, true);
 											}
 											else {
-												yixin.sendYixin(GonglveActivity.this,"求各路土豪派红包", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"), activity_name, true);
+												yixin.sendYixin(GonglveActivity.this,"求各路土豪派红包", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"), activity_name, R.drawable.ic_launcher, true);
 											}
 										}});
 									ImageView gonglve_weixin_pengyou_share=(ImageView) view.findViewById(R.id.gonglve_weixin_pengyou_share);
@@ -702,10 +711,10 @@ public class GonglveActivity extends BaseActivity {
 											
 											SendWeixin weixin=new SendWeixin();
 											if(activity_type!=22) {
-												weixin.sendWeixin(GonglveActivity.this, activity_name+"\n"+activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name+"\n"+activity_rule, true);
+												weixin.sendWeixin(GonglveActivity.this, activity_name+"\n"+activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name+"\n"+activity_rule, R.drawable.ic_launcher, true);
 											}
 											else {
-												weixin.sendWeixin(GonglveActivity.this, activity_name+"\n"+"求各路土豪派红包", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"), activity_name+"\n"+"求各路土豪派红包", true);
+												weixin.sendWeixin(GonglveActivity.this, activity_name+"\n"+"求各路土豪派红包", currentUsedUrl+activity_url+"?activityId="+(activityId+"0"), activity_name+"\n"+"求各路土豪派红包", R.drawable.ic_launcher, true);
 											}
 										}});
 									ImageView gonglve_sinaweibo_logo_share=(ImageView) view.findViewById(R.id.gonglve_sinaweibo_logo_share);
@@ -843,7 +852,7 @@ public class GonglveActivity extends BaseActivity {
 											}
 											((GasStationApplication) getApplicationContext()).content=activity_rule;
 											SendYixin yixin=new SendYixin();
-											yixin.sendYixin(GonglveActivity.this,activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name, true);
+											yixin.sendYixin(GonglveActivity.this,activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name, R.drawable.ic_launcher, true);
 										}});
 									ImageView gonglve_weixin_pengyou_share=(ImageView) view.findViewById(R.id.gonglve_weixin_pengyou_share);
 									gonglve_weixin_pengyou_share.setOnClickListener(new ImageView.OnClickListener() {
@@ -862,7 +871,7 @@ public class GonglveActivity extends BaseActivity {
 											}
 											((GasStationApplication) getApplicationContext()).content=activity_rule;
 											SendWeixin weixin=new SendWeixin();
-											weixin.sendWeixin(GonglveActivity.this, activity_name+"\n"+activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name+"\n"+activity_rule, true);
+											weixin.sendWeixin(GonglveActivity.this, activity_name+"\n"+activity_rule, currentUsedUrl+activity_url+"?activityId="+activityId, activity_name+"\n"+activity_rule, R.drawable.ic_launcher, true);
 										}});
 									ImageView gonglve_sinaweibo_logo_share=(ImageView) view.findViewById(R.id.gonglve_sinaweibo_logo_share);
 									gonglve_sinaweibo_logo_share.setOnClickListener(new ImageView.OnClickListener() {
@@ -916,6 +925,26 @@ public class GonglveActivity extends BaseActivity {
 						else if(activity_type==25) {
 							activity_go.setVisibility(View.INVISIBLE);
 							tuan_go.setImageResource(R.drawable.wap_button);
+						}
+						else if(activity_type==26) {
+							activity_go.setVisibility(View.INVISIBLE);
+							tuan_go.setImageResource(R.drawable.th);	
+						}
+						else if(activity_type==27) {
+							tuan_go.setImageResource(R.drawable.qxjy_buy);
+							activity_go.setImageResource(R.drawable.qxjy_receiver);
+							activity_go.setOnClickListener(new ImageView.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									if(temp2.get(num).getIs_jion()==1) {
+										openXJInfo();
+									}
+									else {
+										receiveXjTickets(temp2.get(num));
+									}
+							}});
 						}
 						tuan_go.setOnClickListener(new ImageView.OnClickListener() {
 
@@ -1062,6 +1091,19 @@ public class GonglveActivity extends BaseActivity {
 									bundle.putString("activity_rule", activity_rule);
 									intent.putExtras(bundle);
 									startActivity(intent);
+								}
+								else if(activity_type==26) {
+									Intent intent=new Intent(GonglveActivity.this, FlowDayActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putString("activity_name", temp2.get(num).getActivity_name());
+									bundle.putString("activity_url", "/activity/hongbao.html");
+									bundle.putString("activityId", temp2.get(num).getActivity_id());
+									bundle.putString("activity_rule", "发流量红包咯！份数有限，快来抢！");
+									intent.putExtras(bundle);
+									startActivity(intent);
+								}
+								else if(activity_type==27) {			
+									loadQXJY(temp2.get(num).getActivity_id(), Integer.parseInt(temp2.get(num).getActivity_type()));
 								}
 							}});
 						LinearLayout tangou_point=(LinearLayout) view.findViewById(R.id.tangou_point);
@@ -1628,6 +1670,164 @@ public class GonglveActivity extends BaseActivity {
 	}
 	
 	/**
+	 * 现金券领取
+	 * @param model
+	 */
+	private void receiveXjTickets(final GonglveTuanModel model) {
+		showProgressDialog(R.string.tishi_loading);
+		final Handler receiveTickets_handler=new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				super.handleMessage(msg);
+				dismissProgressDialog();
+				switch (msg.what) {
+				case -1:
+					showCustomToast(getResources().getString(R.string.timeout_exp));
+					break;
+				case -2:
+					showCustomToast("链路连接失败");
+					break;
+				case 100:
+					Map map = (Map) msg.obj;
+					if(Integer.parseInt(map.get("result").toString())==1) {
+						model.setIs_jion(1);  
+						openQXJYInfo();
+					}
+					showCustomToast(map.get("comments").toString());
+					break;
+				default:
+					break;
+				}
+			}
+		};
+		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				LinkedList<String> wholeUrl=Util.getWholeUrl(GonglveActivity.this);
+				Message m=new Message();
+				int num=0;
+				boolean flag=true;
+				String currentUsedUrl="";
+				try {
+					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(GonglveActivity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
+				} catch(Exception e) {
+					currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
+				}
+				while(flag) {
+					try {
+						ArrayList<String> list=Util.getUserInfo(GonglveActivity.this);
+						
+						StrategyManager strategyManager=GetWebDate.getHessionFactiory(GonglveActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
+						Map result=strategyManager.receiveXjTickets(Long.parseLong(list.get(0)), list.get(1));
+						m.what=100;
+						m.obj=result;
+						flag=false;
+						((GasStationApplication) getApplicationContext()).AreaUrl=currentUsedUrl;
+					} catch(Error e) {
+						flag=false;
+						m.what=-2;
+			        } catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						if(e instanceof com.caucho.hessian.client.HessianRuntimeException) {
+							//手机自身网络连接异常
+							if(e.getMessage().indexOf("java.net.SocketException")!=-1) {
+								num++;
+								if(num>=10) {
+									flag=false;
+								}
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							} 
+							//ip 端口等错误  java.net.SocketTimeoutException
+							else {
+								wholeUrl.remove(currentUsedUrl);
+								if(wholeUrl.size()>0) {
+									currentUsedUrl=wholeUrl.get(0);
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								else {
+									flag=false;
+								}
+							}
+							
+						}
+						else if(e instanceof com.caucho.hessian.client.HessianConnectionException) {
+							//手机自身网络连接异常
+							if(e.getMessage().indexOf("java.io.EOFException")!=-1) {
+								num++;
+								if(num>=10) {
+									flag=false;
+								}
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							else {
+								wholeUrl.remove(currentUsedUrl);
+								if(wholeUrl.size()>0) {
+									currentUsedUrl=wholeUrl.get(0);
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								else {
+									flag=false;
+								}
+							}
+						}
+						else {
+							wholeUrl.remove(currentUsedUrl);
+							if(wholeUrl.size()>0) {
+								currentUsedUrl=wholeUrl.get(0);
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							else {
+								flag=false;
+							}
+						}
+						m.what=-1;
+					}
+				}
+				
+				receiveTickets_handler.sendMessage(m);				
+			}
+		}).start();
+	}
+	
+	/**
+	 * 现金券信息
+	 */
+	private void openXJInfo() {
+		Intent intent=new Intent(GonglveActivity.this, CashReceiverActivity.class);
+		startActivity(intent);
+	}
+	
+	/**
 	 * 全心券意领取
 	 * @param model
 	 */
@@ -1645,6 +1845,7 @@ public class GonglveActivity extends BaseActivity {
 					break;
 				case -2:
 					showCustomToast("链路连接失败");
+					break;
 				case 100:
 					Map map = (Map) msg.obj;
 					if(Integer.parseInt(map.get("result").toString())==1) {
@@ -1784,7 +1985,11 @@ public class GonglveActivity extends BaseActivity {
 		startActivity(intent);
 	}
 	
-	//弹出框选择全心券意活动
+	/**
+	 * 弹出框选择全心券意活动
+	 * @param activity_id
+	 * @param activity_type
+	 */
 	private void loadQXJY(final String activity_id, final int activity_type) {
 		showProgressDialog(R.string.tishi_loading);
 		

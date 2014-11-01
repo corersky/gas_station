@@ -267,7 +267,7 @@ public class MovieQuestionActivity extends BaseActivity implements OnBufferingUp
 				((GasStationApplication) getApplicationContext()).activityId=31;
 				((GasStationApplication) getApplicationContext()).content=movie_question_award_right_num.getText()+","+movie_question_award_coin.getText();
 				SendYixin yixin=new SendYixin();
-				yixin.sendYixin(MovieQuestionActivity.this, movie_question_award_right_num.getText()+","+movie_question_award_coin.getText(), "http://www.lljyz.cn", "一猜到底(无锡电信用户专享)", true);
+				yixin.sendYixin(MovieQuestionActivity.this, movie_question_award_right_num.getText()+","+movie_question_award_coin.getText(), "http://www.lljyz.cn", "一猜到底(无锡电信用户专享)", R.drawable.ic_launcher, true);
 			}});
 		weixin_pengyou_share=(ImageView) findViewById(R.id.weixin_pengyou_share);
 		weixin_pengyou_share.setOnClickListener(new ImageView.OnClickListener() {
@@ -281,7 +281,7 @@ public class MovieQuestionActivity extends BaseActivity implements OnBufferingUp
 				SendWeixin weixin=new SendWeixin();
 				weixin.sendWeixin(MovieQuestionActivity.this, movie_question_award_right_num.getText()+","+movie_question_award_coin.getText(),
 						"http://www.lljyz.cn", 
-						"一猜到底(无锡电信用户专享)"+"\n"+movie_question_award_right_num.getText()+","+movie_question_award_coin.getText(), true);
+						"一猜到底(无锡电信用户专享)"+"\n"+movie_question_award_right_num.getText()+","+movie_question_award_coin.getText(), R.drawable.ic_launcher, true);
 			}});
 		qqkj_logo_share=(ImageView) findViewById(R.id.qqkj_logo_share);
 		qqkj_logo_share.setOnClickListener(new ImageView.OnClickListener() {

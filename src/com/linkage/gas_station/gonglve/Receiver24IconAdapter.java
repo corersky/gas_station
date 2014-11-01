@@ -3,6 +3,8 @@ package com.linkage.gas_station.gonglve;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +80,15 @@ public class Receiver24IconAdapter extends BaseAdapter {
 				if(models.get(pos).getFree_state()==1) {
 					((Receiver24IconActivity) context).receiveFreeCoin(models.get(pos).getFree_flow_id());
 				}
-				
+				else {
+					if(models.get(pos).getFree_url().equals("")) {
+						return;
+					}
+					((Receiver24IconActivity) context).freeFlowHit(models.get(pos).getFree_flow_id());
+					Uri url=Uri.parse(models.get(pos).getFree_url()); 
+					Intent it = new Intent(Intent.ACTION_VIEW, url);   
+					context.startActivity(it);
+				}
 			}});
 		return arg1;
 	}

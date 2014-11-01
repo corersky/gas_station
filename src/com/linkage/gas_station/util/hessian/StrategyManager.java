@@ -334,4 +334,30 @@ public interface StrategyManager {
 	
 	//4G用户流量领取 
 	public Map get4GFlow(Long phoneNum,double amount,Long activityId,String areaCode);
+	
+	//流量日
+	//获取奖品列表
+	//result.put("flowDay", minDay); 下期流量日时间，为空就显示敬请期待。
+	//result.put("flowPrizes", prizes); 奖品列表数组
+	public Map flowPrizes(Long phoneNum,String areaCode);
+	
+	//抢兑奖品
+	public Map receiveFlowPrizes(String seqId,Long phoneNum,String areaCode,String verCode,Long prizeId,Long flowOfferId);
+	
+	//获取用户兑换列表
+	public Map[] userFlowPrizes(Long phoneNum,String areaCode);
+	
+	//获取流量列表
+	public Map[] getflowByCost(Long phoneNum,String areaCode,int prizeType );
+
+	//领现金券
+	public Map receiveXjTickets(Long phoneNum,String areaCode);
+	
+	//查询可用券
+	public HashMap queryXjTicket(Long phoneNum,String areaCode,int cost);
+	
+	//订购流量套餐(1:成功;2:失败;3:验证码错误;)
+	//返回信息 deal_result： -1：验证码错误或失效 0：提交失败 1：提交成功 2：CRM接口订购达到最大次数 3:加油成功 
+	public Map saveXjqOrder(String seqId,Long phoneNum,Long offerId,String verCode,String areaCode,int inType,int payType,Long quanOfferId);
+
 }

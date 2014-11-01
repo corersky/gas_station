@@ -81,7 +81,7 @@ public class TreasurePullRichDetailActivity extends BaseActivity {
 				((GasStationApplication) getApplicationContext()).activityId=28;
 				((GasStationApplication) getApplicationContext()).content=treasure_send_message.getText().toString();
 				SendYixin yixin=new SendYixin();
-				yixin.sendYixin(TreasurePullRichDetailActivity.this, treasure_send_message.getText().toString(), url+"5&shopname="+Uri.encode(treasure_send_title.getText().toString())+"&shopTitle="+Uri.encode(treasure_send_message.getText().toString()), treasure_send_title.getText().toString(), true);
+				yixin.sendYixin(TreasurePullRichDetailActivity.this, treasure_send_message.getText().toString(), url+"5&shopname="+Uri.encode(treasure_send_title.getText().toString())+"&shopTitle="+Uri.encode(treasure_send_message.getText().toString()), treasure_send_title.getText().toString(), R.drawable.ic_launcher, true);
 			}});
 		weixin_pengyou_share=(ImageView) findViewById(R.id.weixin_pengyou_share);
 		weixin_pengyou_share.setOnClickListener(new ImageView.OnClickListener() {
@@ -99,7 +99,7 @@ public class TreasurePullRichDetailActivity extends BaseActivity {
 				SendWeixin weixin=new SendWeixin();
 				weixin.sendWeixin(TreasurePullRichDetailActivity.this, treasure_send_message.getText().toString(), 
 						url+"3&shopname="+Uri.encode(treasure_send_title.getText().toString())+"&shopTitle="+Uri.encode(treasure_send_message.getText().toString()),
-						treasure_send_title.getText().toString()+"\n"+treasure_send_message.getText().toString(), true);
+						treasure_send_title.getText().toString()+"\n"+treasure_send_message.getText().toString(), R.drawable.ic_launcher, true);
 			}});
 		qqkj_logo_share=(ImageView) findViewById(R.id.qqkj_logo_share);
 		qqkj_logo_share.setOnClickListener(new ImageView.OnClickListener() {

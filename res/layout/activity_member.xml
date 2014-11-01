@@ -162,7 +162,6 @@
 			        			android:layout_width="match_parent"
 			        			android:layout_height="wrap_content">
 			                    <TextView 
-			                        android:id="@+id/member_hour"
 			                        android:layout_weight="1"
 			                        android:textSize="14sp"
 			                        android:text="天"
@@ -171,7 +170,6 @@
 			        				android:layout_width="match_parent"
 			        				android:layout_height="wrap_content"/>
 			                    <TextView 
-			                        android:id="@+id/member_min"
 			                        android:layout_weight="1"
 			                        android:textSize="14sp"
 			                        android:text="小时"
@@ -241,6 +239,12 @@
 			        android:cacheColorHint="#00000000"/>
 		    </RelativeLayout>
 	    </LinearLayout>
+	    <include 
+	        android:id="@+id/member_selecttype"
+	        android:visibility="gone"
+	        layout="@layout/activity_selecttype">
+	        
+	    </include>"
     </RelativeLayout>
     
 </LinearLayout>

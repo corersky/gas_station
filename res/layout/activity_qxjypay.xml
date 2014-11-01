@@ -108,6 +108,7 @@
 						    
 						</LinearLayout>
 						<TextView
+						    android:id="@+id/jiayou_qxjy_type"
 					        android:layout_height="wrap_content"
 					        android:layout_width="fill_parent"
 					    	android:padding="10sp"

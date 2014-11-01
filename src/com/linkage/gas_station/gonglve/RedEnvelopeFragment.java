@@ -162,7 +162,7 @@ public class RedEnvelopeFragment extends Fragment {
 				}
 				((GasStationApplication) getActivity().getApplicationContext()).content=getActivity().getIntent().getExtras().getString("activity_rule");
 				SendYixin yixin=new SendYixin();
-				yixin.sendYixin(getActivity() , getActivity().getIntent().getExtras().getString("activity_rule"), currentUsedUrl+getActivity().getIntent().getExtras().getString("activity_url")+"?activityId="+getActivity().getIntent().getExtras().getString("activityId")+"&seqId="+seqId, getActivity().getIntent().getExtras().getString("activity_name"), true);
+				yixin.sendYixin(getActivity() , getActivity().getIntent().getExtras().getString("activity_rule"), currentUsedUrl+getActivity().getIntent().getExtras().getString("activity_url")+"?activityId="+getActivity().getIntent().getExtras().getString("activityId")+"&seqId="+seqId, getActivity().getIntent().getExtras().getString("activity_name"), R.drawable.ic_launcher, true);
 				
 			}});
 		ImageView gonglve_weixin_pengyou_share=(ImageView) view.findViewById(R.id.gonglve_weixin_pengyou_share);
@@ -183,7 +183,7 @@ public class RedEnvelopeFragment extends Fragment {
 				}
 				((GasStationApplication) getActivity().getApplicationContext()).content=getActivity().getIntent().getExtras().getString("activity_rule");
 				SendWeixin weixin=new SendWeixin();
-				weixin.sendWeixin(getActivity(), getActivity().getIntent().getExtras().getString("activity_name")+"\n"+getActivity().getIntent().getExtras().getString("activity_rule"), currentUsedUrl+getActivity().getIntent().getExtras().getString("activity_url")+"?activityId="+getActivity().getIntent().getExtras().getString("activityId")+"&seqId="+seqId, getActivity().getIntent().getExtras().getString("activity_name")+"\n"+getActivity().getIntent().getExtras().getString("activity_rule"), true);
+				weixin.sendWeixin(getActivity(), getActivity().getIntent().getExtras().getString("activity_name")+"\n"+getActivity().getIntent().getExtras().getString("activity_rule"), currentUsedUrl+getActivity().getIntent().getExtras().getString("activity_url")+"?activityId="+getActivity().getIntent().getExtras().getString("activityId")+"&seqId="+seqId, getActivity().getIntent().getExtras().getString("activity_name")+"\n"+getActivity().getIntent().getExtras().getString("activity_rule"), R.drawable.ic_launcher, true);
 			}});
 		ImageView gonglve_sinaweibo_logo_share=(ImageView) view.findViewById(R.id.gonglve_sinaweibo_logo_share);
 		gonglve_sinaweibo_logo_share.setOnClickListener(new ImageView.OnClickListener() {

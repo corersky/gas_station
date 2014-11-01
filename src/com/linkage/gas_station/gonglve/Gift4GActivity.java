@@ -314,7 +314,7 @@ public class Gift4GActivity extends BaseActivity {
 				bundle.putString("title", getIntent().getExtras().getString("activity_name"));
 				bundle.putString("url", currentUsedUrl+getIntent().getExtras().getString("activity_url")+"?activityId="+getIntent().getExtras().getLong("activityId")+"&rePhoneNum="+rePhoneNum);
 				bundle.putString("text", getIntent().getExtras().getString("activity_rule"));
-				bundle.putString("send_imageUrl", "http://a2.mzstatic.com/us/r30/Purple6/v4/98/a8/48/98a84887-be7a-9402-24ce-59284e6bf0f8/mzl.rwwplqzr.175x175-75.jpg");
+				bundle.putString("send_imageUrl", "http://morningtel.qiniudn.com/share_logo_4g.png");
 				bundle.putString("type", "qqkj");
 				intent.putExtras(bundle);
 				startActivity(intent);
@@ -338,7 +338,7 @@ public class Gift4GActivity extends BaseActivity {
 				}
 				((GasStationApplication) getApplicationContext()).content=getIntent().getExtras().getString("activity_rule");
 				SendYixin yixin=new SendYixin();
-				yixin.sendYixin(Gift4GActivity.this , getIntent().getExtras().getString("activity_rule"), currentUsedUrl+getIntent().getExtras().getString("activity_url")+"?activityId="+getIntent().getExtras().getLong("activityId")+"&rePhoneNum="+rePhoneNum, getIntent().getExtras().getString("activity_name"), true);
+				yixin.sendYixin(Gift4GActivity.this , getIntent().getExtras().getString("activity_rule"), currentUsedUrl+getIntent().getExtras().getString("activity_url")+"?activityId="+getIntent().getExtras().getLong("activityId")+"&rePhoneNum="+rePhoneNum, getIntent().getExtras().getString("activity_name"), R.drawable.share_logo_4g, true);
 				
 			}});
 		ImageView gonglve_weixin_pengyou_share=(ImageView) view.findViewById(R.id.gonglve_weixin_pengyou_share);
@@ -359,7 +359,7 @@ public class Gift4GActivity extends BaseActivity {
 				}
 				((GasStationApplication) getApplicationContext()).content=getIntent().getExtras().getString("activity_rule");
 				SendWeixin weixin=new SendWeixin();
-				weixin.sendWeixin(Gift4GActivity.this, getIntent().getExtras().getString("activity_name")+"\n"+getIntent().getExtras().getString("activity_rule"), currentUsedUrl+getIntent().getExtras().getString("activity_url")+"?activityId="+getIntent().getExtras().getLong("activityId")+"&rePhoneNum="+rePhoneNum, getIntent().getExtras().getString("activity_name")+"\n"+getIntent().getExtras().getString("activity_rule"), true);
+				weixin.sendWeixin(Gift4GActivity.this, getIntent().getExtras().getString("activity_name")+"\n"+getIntent().getExtras().getString("activity_rule"), currentUsedUrl+getIntent().getExtras().getString("activity_url")+"?activityId="+getIntent().getExtras().getLong("activityId")+"&rePhoneNum="+rePhoneNum, getIntent().getExtras().getString("activity_name")+"\n"+getIntent().getExtras().getString("activity_rule"), R.drawable.share_logo_4g, true);
 			}});
 		ImageView gonglve_sinaweibo_logo_share=(ImageView) view.findViewById(R.id.gonglve_sinaweibo_logo_share);
 		gonglve_sinaweibo_logo_share.setOnClickListener(new ImageView.OnClickListener() {
@@ -384,6 +384,7 @@ public class Gift4GActivity extends BaseActivity {
 				bundle.putString("url", currentUsedUrl+getIntent().getExtras().getString("activity_url")+"?activityId="+getIntent().getExtras().getLong("activityId")+"&rePhoneNum="+rePhoneNum);
 				bundle.putString("text", getIntent().getExtras().getString("activity_rule"));
 				bundle.putString("defaultText", "¡˜¡øº””Õ’æ");
+				bundle.putString("send_imageUrl", "share_logo_4g");
 				intent.putExtras(bundle);
 				startActivity(intent);
 			}});

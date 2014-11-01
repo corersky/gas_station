@@ -98,6 +98,13 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 				data=new Intent(this , QXJY_Pay_Activity.class);
 				bundle.putInt("cost", selectObj.cost);
 				bundle.putInt("offer_type_id", selectObj.offer_type_id);
+				bundle.putInt("activity_type", getIntent().getExtras().getInt("activity_type"));
+			}
+			else if(getIntent().getExtras().getInt("activity_type")==27) {
+				data=new Intent(this , Cash_Pay_Activity.class);
+				bundle.putInt("cost", selectObj.cost);
+				bundle.putInt("offer_type_id", selectObj.offer_type_id);
+				bundle.putInt("activity_type", getIntent().getExtras().getInt("activity_type"));
 			}
 			else if(getIntent().getExtras().getInt("activity_type")==23) {
 				data=new Intent(this , SendFlow_Pay_Activity.class);
@@ -108,8 +115,12 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 			switch(selectObj.offer_type_id) {
 			case 1:
 				if(getIntent().getExtras().getInt("activity_type")==13) {
-					bundle.putString("offer_description", "全国漫游，全天候，本款流量包仅当月有效\n" +
+					bundle.putString("offer_description", "全国漫游,全天候,本款流量包仅当月有效；\n" +
 							"电子券赠送流量立即到帐，当月有效");
+				}
+				else if(getIntent().getExtras().getInt("activity_type")==27) {
+					bundle.putString("offer_description", "全国漫游，全天候，本款流量包仅当月有效\n" +
+							"现金券自动抵扣当月流量包费用。");
 				}
 				else {
 					bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp_1));
@@ -120,6 +131,10 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 					bundle.putString("offer_description", "省内漫游，23：00-7：00，当月有效，本款流量包为自动续订\n" +
 							"电子券赠送流量次月到帐，连送3个月，取消订购则券作废、赠送终止");
 				}
+				else if(getIntent().getExtras().getInt("activity_type")==27) {
+					bundle.putString("offer_description", "省内漫游,23:00-7:00,当月有效,本款流量包为自动续订;\n" +
+							"现金券次月自动抵扣上月流量包费用，连送3个月，取消订购则券作废、赠送终止。");
+				}
 				else {
 					bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp_3));
 				}
@@ -128,6 +143,10 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 				if(getIntent().getExtras().getInt("activity_type")==13) {
 					bundle.putString("offer_description", "省内漫游，全天候，当月有效，本款流量包为自动续订\n" +
 							"电子券赠送流量次月到帐，连送3个月，取消订购则券作废、赠送终止");
+				}
+				else if(getIntent().getExtras().getInt("activity_type")==27) {
+					bundle.putString("offer_description", "省内漫游,全天候,当月有效,本款流量包为自动续订;\n" +
+							"现金券次月自动抵扣上月流量包费用，连送3个月，取消订购则券作废、赠送终止。");
 				}
 				else {
 					bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp_1));

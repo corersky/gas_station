@@ -181,11 +181,15 @@
 	   	<activity android:name=".gonglve.Receiver24IconActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>	   	
 	   	<activity android:name=".gonglve.Gift4GActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>	   	
 	   	<activity android:name=".gonglve.Gift4GGetActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>	   	
-	   	<activity android:name=".memberday.CaptureActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+	   	<activity android:name=".gonglve.Cash_Pay_Activity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	    <activity android:name=".gonglve.CashReceiverActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".memberday.CaptureActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.MemberActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.MemberReceiveActivity" android:theme="@android:style/Theme.Translucent" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.MemberShowCodeActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.BusinessesActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+	   	<activity android:name=".memberday.FlowDayActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+	   	<activity android:name=".memberday.FlowReceiveActivity" android:theme="@android:style/Theme.Translucent" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".life.LifeMainActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
     	<activity android:name=".life.LifeAddActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>    	
     	<activity android:name=".life.AreaRegionActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
