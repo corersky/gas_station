@@ -32,6 +32,11 @@ public class Circleview extends ImageView implements Runnable {
 	 */
 	int screnWidth = 0;
 	
+	/**
+	 * 奖项个数
+	 */
+	int viewNum=0;
+	
 	boolean isNotifyMainThread=false;
 	
 	public void setFlagStop() {
@@ -43,9 +48,10 @@ public class Circleview extends ImageView implements Runnable {
 	 * @param context
 	 * @param width 屏幕宽度
 	 */
-	public Circleview(Context context,int width) {
+	public Circleview(Context context, int width, int viewNum) {
 		super(context);
 		this.screnWidth = width;
+		this.viewNum=viewNum;
 		init();
 		new Thread(this).start();
 	}
@@ -159,48 +165,7 @@ public class Circleview extends ImageView implements Runnable {
 	 * @return
 	 */
 	 float getRoteCenter(int place){
-		float roter = 0.0f;
-		switch (place) {
-			case 1:
-				roter = 15;
-				break;
-			case 2:
-				roter = 15*3;
-				break;
-			case 3:
-				roter = 15*5;
-				break;
-			case 4:
-				roter = 15*7;
-				break;
-			case 5:
-				roter = 15*9;
-				break;
-			case 6:
-				roter = 15*11;
-				break;
-			case 7:
-				roter = 15*13;
-				break;
-			case 8:
-				roter = 15*15;
-				break;
-			case 9:
-				roter = 15*17;
-				break;
-			case 10:
-				roter = 15*19;
-				break;
-			case 11:
-				roter = 15*21;
-				break;
-			case 12:
-				roter = 15*23;
-				break;
-			default:
-				break;
-		}
-		return roter;
+		 return (float) (360/viewNum*(place-0.5));
 	 }
 	
 	/**

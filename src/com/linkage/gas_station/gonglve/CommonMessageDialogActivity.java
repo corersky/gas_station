@@ -234,16 +234,14 @@ public class CommonMessageDialogActivity extends BaseActivity {
 					Map map=(Map) msg.obj;
 					showCustomToast(map.get("comments").toString());
 
-					
+					Intent intent=getIntent();
 					if(map.get("seqId")!=null) {
-						Intent intent=getIntent();
 						Bundle bundle=new Bundle();
 						bundle.putString("seqId", map.get("seqId").toString());
 						intent.putExtras(bundle);
-						setResult(RESULT_OK, intent);
 					}
+					setResult(RESULT_OK, intent);
 					finish();
-					
 				}
 				else if(msg.what==-2) {
 					showCustomToast("Á´Â·Á¬½ÓÊ§°Ü");

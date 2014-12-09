@@ -360,4 +360,29 @@ public interface StrategyManager {
 	//返回信息 deal_result： -1：验证码错误或失效 0：提交失败 1：提交成功 2：CRM接口订购达到最大次数 3:加油成功 
 	public Map saveXjqOrder(String seqId,Long phoneNum,Long offerId,String verCode,String areaCode,int inType,int payType,Long quanOfferId);
 
+	//无锡抽奖活动
+	//获取当前用户总的抽奖机会和剩余的抽奖机会
+	//public Map getLotteryCondition(Long phoneNum,String areaCode,Long activityId);
+	
+	//会员等级列表
+	public Map[] getVipByPhone(Long phoneNum,String areaCode,Long activityId);
+	
+	//会员商品列表
+	public Map[] getTasks(Long phoneNum,String areaCode,Long activityId);
+	
+	//领取奖品
+	public Map getPrizeById(Long phoneNum,String areaCode,Long activityId,Long userWinId);
+	
+	//用户抽奖
+	//public Map drawLottery(Long phoneNum,String machineCode,String areaCode,Long activityId);
+	
+	//获取当前用户中奖信息
+	//public Map[] getLotteryInfo(Long phoneNum,String month,Long activityId);
+	
+	//获取人品排行榜
+	public Map[] getRpList(Long phoneNum, String areaCode,Long activityId,int start,int pageSize);
+
+	//分销平台领流量
+	//ptype 1:为自己充流量 2：为别人充流量
+	public Map getFlowByCode(Long phoneNum,String areaCode,Long activityId,int ptype,String verCode,String activeCode,Long rePhoneNum);
 }

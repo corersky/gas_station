@@ -25,6 +25,7 @@ import com.lidroid.xutils.BitmapUtils;
 import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
+import com.linkage.gas_station.util.BitmapHelp;
 
 public class MemberShowCodeActivity extends BaseActivity {
 	
@@ -46,7 +47,7 @@ public class MemberShowCodeActivity extends BaseActivity {
 		
 		((GasStationApplication) getApplication()).tempActivity.add(MemberShowCodeActivity.this);
 		
-		bitmapUtils=new BitmapUtils(MemberShowCodeActivity.this);
+		bitmapUtils=BitmapHelp.getBitmapUtils(this);
 		bitmapUtils.configDefaultLoadingImage(R.drawable.ic_launcher);
 		bitmapUtils.configDefaultLoadFailedImage(R.drawable.ic_launcher);
 		

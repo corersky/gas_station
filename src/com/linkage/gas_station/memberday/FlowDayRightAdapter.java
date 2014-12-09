@@ -15,6 +15,7 @@ import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.model.MemberBuyModel;
+import com.linkage.gas_station.util.BitmapHelp;
 
 public class FlowDayRightAdapter extends BaseAdapter {
 	
@@ -28,7 +29,7 @@ public class FlowDayRightAdapter extends BaseAdapter {
 		this.memberBuyModels=memberBuyModels;
 		this.context=context;
 		
-		bitmapUtils=new BitmapUtils(context);
+		bitmapUtils=BitmapHelp.getBitmapUtils(context);
 		config=new BitmapDisplayConfig();
 		config.setLoadFailedDrawable(context.getResources().getDrawable(R.drawable.member_define_icon));
 		config.setLoadingDrawable(context.getResources().getDrawable(R.drawable.member_define_icon));

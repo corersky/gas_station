@@ -9,6 +9,7 @@ import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.gonglve.CustomStrategyActivity;
+import com.linkage.gas_station.gonglve.ShakeActivity;
 import com.linkage.gas_station.jpush.JPushReceiver;
 import com.linkage.gas_station.login.LoginOutActivity;
 import com.linkage.gas_station.main.Fragment1.OnJumpListener;
@@ -59,6 +60,7 @@ public class HomeActivity extends FragmentActivity {
 	RelativeLayout home_without_meal=null;
 	TextView without_meal_num=null;
 	ImageView without_meal_wantjiayou=null;
+	ImageView title_yiy=null;
 	
 	ArrayList<Fragment> fragment_list=null;
 	//数据初次加载判读是否成功
@@ -137,6 +139,18 @@ public class HomeActivity extends FragmentActivity {
 			}});
 		title_refresh_progress=(ProgressBar) findViewById(R.id.title_refresh_progress);
 		title_back=(ImageView) findViewById(R.id.title_back);
+		title_yiy=(ImageView) findViewById(R.id.title_yiy);
+		title_yiy.setOnClickListener(new ImageView.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(HomeActivity.this, ShakeActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putString("activityId", "8");
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}});
 		home_refresh=(TextView) findViewById(R.id.home_refresh);
 		home_page0=(ImageView) findViewById(R.id.home_page0);
 		home_page1=(ImageView) findViewById(R.id.home_page1);
@@ -527,6 +541,13 @@ public class HomeActivity extends FragmentActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		
+		if(Util.compYiyTime(HomeActivity.this)) {
+			title_yiy.setVisibility(View.GONE);
+		}
+		else {
+			title_yiy.setVisibility(View.VISIBLE);
+		}
 		
 		IntentFilter filter=new IntentFilter();
 		filter.addAction(JPushReceiver.refreshGonglve);

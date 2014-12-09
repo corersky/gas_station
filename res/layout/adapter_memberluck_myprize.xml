@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/memberluck_myprize_prize_layout"
+    android:background="#f39c12"
+    android:orientation="horizontal" >
+    <TextView 
+	    android:id="@+id/memberluck_myprize_time"
+        android:layout_weight="1"
+        android:text="抽奖时间"
+        android:gravity="center"
+        android:padding="10dip"
+        android:layout_gravity="center_vertical"
+        android:textColor="@android:color/white"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"/>
+	<TextView 
+	    android:id="@+id/memberluck_myprize_prize"
+        android:layout_weight="1"
+        android:text="奖品"
+        android:gravity="center"
+        android:padding="10dip"
+        android:layout_gravity="center_vertical"
+        android:textColor="@android:color/white"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"/>
+	<LinearLayout 
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content">
+        <TextView 
+	    	android:id="@+id/memberluck_myprize_oper"
+            android:background="@drawable/memberluck_red"
+            android:gravity="center"
+            android:visibility="invisible"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

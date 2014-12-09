@@ -51,7 +51,7 @@ public class BaseActivity extends Activity {
 		View view=LayoutInflater.from(BaseActivity.this).inflate(R.layout.custom_toast, null);
 		TextView custom_toast_text=(TextView) view.findViewById(R.id.custom_toast_text);
 		custom_toast_text.setText(str);
-		toast.setDuration(2000);
+		toast.setDuration(3000);
 		toast.setGravity(Gravity.TOP, 0, formatDipToPx(BaseActivity.this, 75));
 		toast.setView(view);
 		toast.show();

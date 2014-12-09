@@ -25,6 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,6 +33,11 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -53,24 +59,10 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.AndroidHttpTransport;
 import org.xmlpull.v1.XmlPullParserException;
 
-import com.linkage.gas_station.BaseActivity;
-import com.linkage.gas_station.GasStationApplication;
-import com.linkage.gas_station.jpush.JPushReceiver;
-import com.linkage.gas_station.model.ContactModel;
-import com.linkage.gas_station.model.OutputInfoModel;
-import com.linkage.gas_station.util.hessian.CommonManager;
-import com.linkage.gas_station.util.hessian.GetWebDate;
-import com.linkage.gas_station.util.hessian.StrategyManager;
-import com.linkage.gasstationjni.GasJni;
-
-import net.sourceforge.pinyin4j.PinyinHelper;
-import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
-import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -85,6 +77,21 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+
+import com.linkage.gas_station.BaseActivity;
+import com.linkage.gas_station.GasStationApplication;
+import com.linkage.gas_station.gonglve.MemberDrawActivity;
+import com.linkage.gas_station.jiayou.JiayouActivity;
+import com.linkage.gas_station.jpush.JPushReceiver;
+import com.linkage.gas_station.model.ContactModel;
+import com.linkage.gas_station.model.OutputInfoModel;
+import com.linkage.gas_station.util.hessian.CommonManager;
+import com.linkage.gas_station.util.hessian.GetWebDate;
+import com.linkage.gas_station.util.hessian.StrategyManager;
+import com.linkage.gas_station.yxapi.YXEntryActivity;
+import com.linkage.gasstationjni.GasJni;
 
 public class Util {
 	
@@ -1142,10 +1149,13 @@ public class Util {
 				super.handleMessage(msg);
 				if(msg.obj!=null) {
 					Map map=(Map) msg.obj;
-					System.out.println(map.get("result").toString());
 					if(Integer.parseInt(map.get("result").toString())==1) {
 						BaseActivity.showCustomToastWithContext(map.get("comments").toString(), context);
 					}
+					System.out.println("发出广播");
+					Intent intent=new Intent("refreshMember");
+	            	intent.setAction("refreshMember");
+	            	context.sendBroadcast(intent);
 				}
 			}
 		};
@@ -1268,4 +1278,64 @@ public class Util {
 				
 			}}).start();
 	}
+	
+	/**
+     * 得到屏幕宽度
+     * @return 单位:px
+     */
+    public static int getScreenWidth(Context context) {
+        int screenWidth;
+        WindowManager wm=(WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm=new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+        screenWidth=dm.widthPixels;
+        return screenWidth;
+    }
+     
+    /**
+     * 得到屏幕高度
+     * @return 单位:px
+     */
+    public static int getScreenHeight(Context context) {
+        int screenHeight;
+        WindowManager wm=(WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm=new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+        screenHeight=dm.heightPixels;
+        return screenHeight;
+    }
+    
+    /**
+     * 摇一摇时间设置
+     * @param context
+     */
+    public static void setYiyTime(Context context) {
+    	Calendar cal=Calendar.getInstance();
+    	String time=cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH);
+    	SharedPreferences sp=context.getSharedPreferences("gas", Activity.MODE_PRIVATE);
+    	SharedPreferences.Editor editor=sp.edit();
+    	editor.putString("yiy", time);
+    	editor.commit();
+    }
+    
+    /**
+     * 判断今天是否参加摇一摇活动
+     * @param context
+     * @return
+     */
+    public static boolean compYiyTime(Context context) {
+    	//非无锡不判断
+    	if(!Util.getUserInfo(context).get(1).equals("0510")) {
+    		return true;
+    	}
+    	Calendar cal=Calendar.getInstance();
+    	String time=cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH);
+    	SharedPreferences sp=context.getSharedPreferences("gas", Activity.MODE_PRIVATE);
+    	if(sp.getString("yiy", "").equals(time)) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
 }

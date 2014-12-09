@@ -29,6 +29,7 @@ import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.jiayou.JiayouMovieActivity;
 import com.linkage.gas_station.model.MarketModel;
+import com.linkage.gas_station.util.BitmapHelp;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
 import com.linkage.gas_station.util.hessian.StrategyManager;
@@ -75,7 +76,7 @@ public class Movie_New_Activity extends BaseActivity {
 		ticket_map=new LinkedHashMap<String, LinkedList<MarketModel>>();
 		ticket_order_list=new ArrayList<MarketModel>();
 		
-		bitmapUtils=new BitmapUtils(this);
+		bitmapUtils=BitmapHelp.getBitmapUtils(this);
 		bitmapUtils.configDefaultLoadingImage(R.drawable.gonglve_title_2_default);
 		bitmapUtils.configDefaultLoadFailedImage(R.drawable.gonglve_title_2_default);
 		

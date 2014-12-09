@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.lidroid.xutils.BitmapUtils;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.model.OilListModel;
+import com.linkage.gas_station.util.BitmapHelp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ public class DirectionalFlowAdapter extends BaseAdapter {
 		this.direc_buy_button=direc_buy_button;
 		this.direc_buy_money=direc_buy_money;
 		
-		bitmapUtils=new BitmapUtils(context);
+		bitmapUtils=BitmapHelp.getBitmapUtils(context);
 		bitmapUtils.configDefaultLoadingImage(R.drawable.gonglve_title_2_default);
 		bitmapUtils.configDefaultLoadFailedImage(R.drawable.gonglve_title_2_default);
 	}

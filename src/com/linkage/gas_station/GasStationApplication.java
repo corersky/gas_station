@@ -18,7 +18,7 @@ public class GasStationApplication extends Application {
 	//联系人信息
 	ArrayList<ContactModel> model_list=null;
 	//通用hessian请求     http://192.168.69.42:8099/flowOilStation
-	public final String[] COMMONURL=new String[]{"http://61.160.128.38:7010/flowOilStation", "http://61.160.128.39:7010/flowOilStation"};
+	public final String[] COMMONURL=new String[]{"http://61.160.128.38:7001/flowOilStation", "http://61.160.128.39:7001/flowOilStation"};
 	//用户专属省份
 	public final String PROVINCE="江苏";
 	//本地区专属url  激活界面的验证码    IMSI    版本更新检测
@@ -39,6 +39,8 @@ public class GasStationApplication extends Application {
 	public boolean isJumpToMonitor=false;
 	//是否由加油成功跳转到团购
 	public boolean isJumpToTuan=false;
+	//摇一摇标志位刷新
+	public boolean isYiyMonitor=false;
 	//是否应用已经被打开
 	public boolean isAppOpen=false;
 	//附属activity，当用户被强制退出的时候使用

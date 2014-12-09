@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.lidroid.xutils.BitmapUtils;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.model.MarketModel;
+import com.linkage.gas_station.util.BitmapHelp;
 
 public class GridAdapter extends BaseAdapter {
 
@@ -32,7 +33,7 @@ public class GridAdapter extends BaseAdapter {
 		super();
 		this.context = c;
 		
-		bitmapUtils=new BitmapUtils(c);
+		bitmapUtils=BitmapHelp.getBitmapUtils(c);
 		bitmapUtils.configDefaultLoadingImage(R.drawable.gonglve_title_2_default);
 		bitmapUtils.configDefaultLoadFailedImage(R.drawable.gonglve_title_2_default);
 	}

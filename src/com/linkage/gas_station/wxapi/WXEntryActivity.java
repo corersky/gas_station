@@ -29,20 +29,20 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
    public void onResp(BaseResp resp) {   
        switch (resp.errCode) {  
        case BaseResp.ErrCode.ERR_OK:
-    	   Toast.makeText(WXEntryActivity.this, "分享成功", 3000).show();
-    	   System.out.println("OK");
-    	   com.linkage.gas_station.util.Util.shareInfo(WXEntryActivity.this);
-    	   break;
+    	   	Toast.makeText(WXEntryActivity.this, "分享成功", 3000).show();
+    	   	System.out.println("OK");
+    	   	com.linkage.gas_station.util.Util.shareInfo(WXEntryActivity.this);
+    	   	break;
        case BaseResp.ErrCode.ERR_USER_CANCEL:
 			Toast.makeText(WXEntryActivity.this, "分享取消", 3000).show();
 			break;
-		case BaseResp.ErrCode.ERR_AUTH_DENIED:
+       case BaseResp.ErrCode.ERR_AUTH_DENIED:
 			Toast.makeText(WXEntryActivity.this, "您没有微信分享权限", 3000).show();
 			break;
-		default:
+       default:
 			Toast.makeText(WXEntryActivity.this, "未知错误，分享失败", 3000).show();
 			break;
-		}
+       }
  
        // TODO 微信分享 成功之后调用接口  
        this.finish();  

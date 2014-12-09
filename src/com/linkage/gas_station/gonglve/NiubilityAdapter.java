@@ -8,7 +8,6 @@ import com.linkage.gas_station.model.NiubilityModel;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

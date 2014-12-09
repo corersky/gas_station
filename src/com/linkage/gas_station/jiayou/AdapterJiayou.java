@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.lidroid.xutils.BitmapUtils;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.myview.GalleryFlow;
+import com.linkage.gas_station.util.BitmapHelp;
 
 import android.content.Context;
 import android.view.View;
@@ -28,7 +29,7 @@ public class AdapterJiayou extends BaseAdapter {
 		this.context=context;
 		this.height=height;
 		this.name=name;
-		bitmapUtils=new BitmapUtils(context);
+		bitmapUtils=BitmapHelp.getBitmapUtils(context);
 		bitmapUtils.configDefaultLoadingImage(R.drawable.gonglve_title_2_default);
 		bitmapUtils.configDefaultLoadFailedImage(R.drawable.gonglve_title_2_default);
 	}

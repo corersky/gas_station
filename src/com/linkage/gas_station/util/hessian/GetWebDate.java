@@ -60,6 +60,23 @@ public class GetWebDate {
 	}
 	
 	/**
+	 * 流量活动请求
+	 * @param context
+	 * @return
+	 */
+	public static HessianProxyFactory getActivityHessionFactiory(Context context) {
+		ArrayList<String> list=Util.getUserInfo(context);
+		GasJni hj=new GasJni();
+		YeatsHessianProxyFactory factory=new YeatsHessianProxyFactory();
+		String nativeResult=hj.stringFromJNI(System.currentTimeMillis()+Util.getTimeExtra(context), Util.getVersionName(context), list.get(0), Util.getDeviceId(context), list.get(3));
+		factory.setSignature(nativeResult);
+		factory.setDebug(false);
+		factory.setReadTimeout(30000);
+		factory.setConnectTimeOut(30000);
+		return factory;
+	}
+	
+	/**
 	 * 一般情况下hessian调用
 	 * @return HessianProxyFactory对象
 	 */

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f39c12"
+    android:orientation="vertical" >
+    <TextView 
+        android:text="恭喜你"
+        android:textColor="#cb2828"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_margin="10dip"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"/>
+	<TextView 
+        android:id="@+id/memberluck_content"
+        android:text="您的人品真是好到没话说，\n获得 100元天翼支付卡！"
+        android:lineSpacingExtra="8dip"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_margin="5dip"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"/>
+	<LinearLayout 
+	    android:orientation="horizontal"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:gravity="center">
+	    <TextView  
+	        android:id="@+id/memberluck_get"
+	        android:background="#cb2828"
+	        android:text="领取"
+	        android:textColor="@android:color/white"
+    		android:layout_width="90dip"
+    		android:layout_height="wrap_content"
+    		android:paddingLeft="10dip"
+    		android:paddingRight="10dip"
+    		android:paddingTop="5dip"
+    		android:paddingBottom="5dip"
+    		android:gravity="center"
+    		android:textSize="16sp"
+    		android:layout_margin="10dip" />
+	    <TextView 
+	        android:id="@+id/memberluck_share"
+	        android:background="#cb2828"
+	        android:text="分享"
+	        android:textColor="@android:color/white"
+    		android:layout_width="90dip"
+    		android:layout_height="wrap_content"
+    		android:paddingLeft="10dip"
+    		android:paddingRight="10dip"
+    		android:paddingTop="5dip"
+    		android:paddingBottom="5dip"
+    		android:gravity="center"
+    		android:textSize="16sp"
+    		android:layout_margin="10dip" />
+	</LinearLayout>
+</LinearLayout>

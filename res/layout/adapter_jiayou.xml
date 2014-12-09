@@ -40,8 +40,8 @@
 		        android:textColor="@android:color/black"
 		        android:textSize="18sp"
 		        android:padding="5dip"
-		        android:gravity="center"
-		        android:layout_width="match_parent"
+				android:singleLine="true"
+		        android:layout_width="200dip"
 		    	android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>

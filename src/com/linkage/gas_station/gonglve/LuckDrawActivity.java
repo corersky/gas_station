@@ -33,6 +33,7 @@ import com.linkage.gas_station.main.MainActivity;
 import com.linkage.gas_station.myview.Circleview;
 import com.linkage.gas_station.myview.Circleview.OnFinishListener;
 import com.linkage.gas_station.oil_treasure.TreasurePullRichDetailActivity;
+import com.linkage.gas_station.util.BitmapHelp;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
 import com.linkage.gas_station.util.hessian.LotteryManager;
@@ -93,7 +94,7 @@ public class LuckDrawActivity extends BaseActivity {
 		strArrays_my=new ArrayList<HashMap<String, Object>>();
 		maxNum=getCurrentMonth();
 		
-		bitmapUtils=new BitmapUtils(this);
+		bitmapUtils=BitmapHelp.getBitmapUtils(this);
 		
 		init();
 	}
@@ -168,7 +169,7 @@ public class LuckDrawActivity extends BaseActivity {
 		FrameLayout layout=(FrameLayout) findViewById(R.id.Lottery);
 	    int screnWidth=getWindowManager().getDefaultDisplay().getWidth();
 	    
-	    claert=new Circleview(this,screnWidth);
+	    claert=new Circleview(this, screnWidth, 12);
 	    claert.setOnFinishListener(new OnFinishListener() {
 			
 			@Override

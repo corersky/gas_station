@@ -63,6 +63,10 @@
 -dontwarn cn.jpush.**
 -keep class cn.jpush.** { *; }
 
+-libraryjars libs/library_nineoldandroids_2.4.0.jar
+-dontwarn com.nineoldandroids.**
+-keep class com.nineoldandroids.** { *; }
+
 -keep class im.yixin.sdk.api.YXMessage {*;}
 -keep class im.yixin.sdk.api.** implements im.yixin.sdk.api.YXMessage$YXMessageData{*;}
 

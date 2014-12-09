@@ -7,6 +7,7 @@ import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.model.MemberBuyModel;
+import com.linkage.gas_station.util.BitmapHelp;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -33,7 +34,7 @@ public class MemberRightAdapter extends BaseAdapter {
 		this.memberBuyModels=memberBuyModels;
 		this.activity=activity;
 		
-		bitmapUtils=new BitmapUtils(context);
+		bitmapUtils=BitmapHelp.getBitmapUtils(context);
 		config=new BitmapDisplayConfig();
 		config.setLoadFailedDrawable(context.getResources().getDrawable(R.drawable.member_define_icon));
 		config.setLoadingDrawable(context.getResources().getDrawable(R.drawable.member_define_icon));

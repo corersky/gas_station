@@ -65,6 +65,7 @@ import com.linkage.gas_station.oil_treasure.TreasureMainActivity;
 import com.linkage.gas_station.qqapi.QQActivity;
 import com.linkage.gas_station.share.ShareActivity_New;
 import com.linkage.gas_station.sinaweiboapi.WBMainActivity;
+import com.linkage.gas_station.util.BitmapHelp;
 import com.linkage.gas_station.util.FlowBankParse;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
@@ -95,7 +96,7 @@ public class GonglveActivity extends BaseActivity {
 	//初始号码
 	long initPhoneNum=-1;
 	//当前版本支持的活动类型
-	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
+	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 29};
 	//活动加载标志位
 	boolean isLoadActivity=false;
 	boolean isLoadBank=false;
@@ -134,7 +135,7 @@ public class GonglveActivity extends BaseActivity {
 		
 		((GasStationApplication) getApplicationContext()).isRefreshTuan=false;
 		
-		bitmapUtils=new BitmapUtils(this);
+		bitmapUtils=BitmapHelp.getBitmapUtils(this);
 		bitmapUtils.configDefaultLoadingImage(R.drawable.gonglve_title_2_default);
 		bitmapUtils.configDefaultLoadFailedImage(R.drawable.gonglve_title_2_default);
 		
@@ -382,6 +383,14 @@ public class GonglveActivity extends BaseActivity {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
+						else if(activity_type==28) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
+						else if(activity_type==29) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
 						TextView tuan_tip=(TextView) view.findViewById(R.id.tuan_tip);
 						if (activity_type == 3 || activity_type == 4
 								|| activity_type == 5 || activity_type == 6
@@ -395,7 +404,8 @@ public class GonglveActivity extends BaseActivity {
 								|| activity_type == 21 || activity_type == 22
 								|| activity_type == 23 || activity_type == 24
 								|| activity_type == 25 || activity_type == 26
-								|| activity_type == 27 ) {
+								|| activity_type == 27 || activity_type == 28
+								|| activity_type == 29) {
 							tuan_tip.setText(temp2.get(i)
 									.getActivity_description());
 						}
@@ -946,6 +956,14 @@ public class GonglveActivity extends BaseActivity {
 									}
 							}});
 						}
+						else if(activity_type==28) {
+							activity_go.setVisibility(View.INVISIBLE);
+							tuan_go.setImageResource(R.drawable.jyb);	
+						}
+						else if(activity_type==29) {
+							activity_go.setVisibility(View.INVISIBLE);
+							tuan_go.setImageResource(R.drawable.dh);	
+						}
 						tuan_go.setOnClickListener(new ImageView.OnClickListener() {
 
 							@Override
@@ -1104,6 +1122,24 @@ public class GonglveActivity extends BaseActivity {
 								}
 								else if(activity_type==27) {			
 									loadQXJY(temp2.get(num).getActivity_id(), Integer.parseInt(temp2.get(num).getActivity_type()));
+								}
+								else if(activity_type==28) {
+									Intent intent=new Intent(GonglveActivity.this, MemberDrawActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putString("activityName", temp2.get(num).getActivity_name());
+									bundle.putLong("activityId", Long.parseLong(temp2.get(num).getActivity_id()));
+									bundle.putString("desp", temp2.get(num).getActivity_url());
+									bundle.putString("activity_url", temp2.get(num).getActivity_url());
+									bundle.putString("activity_rule", temp2.get(num).getActivity_rule());
+									intent.putExtras(bundle);
+									startActivity(intent);
+								}
+								else if(activity_type==29) {
+									Intent intent=new Intent(GonglveActivity.this, ExchangeActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putLong("activityId", Long.parseLong(temp2.get(num).getActivity_id()));
+									intent.putExtras(bundle);
+									startActivity(intent);
 								}
 							}});
 						LinearLayout tangou_point=(LinearLayout) view.findViewById(R.id.tangou_point);
@@ -1526,7 +1562,7 @@ public class GonglveActivity extends BaseActivity {
 						}
 						else {
 							str1 = (String) map[i].get("id");
-							str2 = (String) map[i].get("offer_name")+"$"+(String) map[i].get("offer_name3");
+							str2 = (String) map[i].get("offer_name")+"$"+(((String) map[i].get("offer_name3")).equals("0元")?"":(String) map[i].get("offer_name3"));
 							str3 = (String) map[i].get("offer_name2");
 						}
 						String object = str2+"&"+str3+"&"+str1+"&0&0";

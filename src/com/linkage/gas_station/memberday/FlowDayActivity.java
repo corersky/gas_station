@@ -289,7 +289,7 @@ public class FlowDayActivity extends BaseActivity {
 					try {
 						ArrayList<String> list=Util.getUserInfo(FlowDayActivity.this);
 						
-						StrategyManager strategyManager=GetWebDate.getHessionFactiory(FlowDayActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
+						StrategyManager strategyManager=GetWebDate.getActivityHessionFactiory(FlowDayActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
 						Map[] map=strategyManager.userFlowPrizes(Long.parseLong(list.get(0)), list.get(1));
 						m.obj=map;
 						m.what=1;
@@ -442,7 +442,7 @@ public class FlowDayActivity extends BaseActivity {
 							
 							adapter_before.notifyDataSetChanged();
 							
-							String endTime=map.get("memberDay").toString()+" 00:00:00";
+							String endTime=map.get("flowDay").toString()+" 00:00:00";
 							SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 							try {
 								date_start=format.parse(endTime);
@@ -483,7 +483,7 @@ public class FlowDayActivity extends BaseActivity {
 					try {
 						ArrayList<String> list=Util.getUserInfo(FlowDayActivity.this);
 						
-						StrategyManager strategyManager=GetWebDate.getHessionFactiory(FlowDayActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
+						StrategyManager strategyManager=GetWebDate.getActivityHessionFactiory(FlowDayActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
 						Map map=strategyManager.flowPrizes(Long.parseLong(list.get(0)), list.get(1));
 						m.obj=map;
 						m.what=1;
@@ -649,7 +649,7 @@ public class FlowDayActivity extends BaseActivity {
 					try {
 						ArrayList<String> list=Util.getUserInfo(FlowDayActivity.this);
 						
-						StrategyManager strategyManager=GetWebDate.getHessionFactiory(FlowDayActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
+						StrategyManager strategyManager=GetWebDate.getActivityHessionFactiory(FlowDayActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
 						Map[] map=strategyManager.getflowByCost(Long.parseLong(list.get(0)), list.get(1), prizeType);
 						m.obj=map;
 						m.what=1;

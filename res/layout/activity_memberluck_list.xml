@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include 
+        layout="@layout/main_title"/>
+    <TextView 
+        android:id="@+id/memberluck_list_title"
+        android:textColor="@android:color/white"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+        android:background="#f39c12"
+        android:padding="10dip"
+        android:lineSpacingExtra="5dip"
+        android:text="尊敬的用户：\n您的人品已经超过了80%的用户，请继续保持"/>
+	<ImageView 
+	    android:layout_marginLeft="20dip"
+	    android:layout_marginTop="5dip"
+	    android:layout_marginBottom="5dip"
+	    android:src="@drawable/memberluck_20"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"/>
+	<include 
+	    layout="@layout/adapter_memberluck_list">
+	    
+	</include>
+	<ListView
+	    android:id="@+id/memberluck_list_listview"
+	    android:fadingEdge="none"
+	    android:listSelector="@null"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent">
+	    
+	</ListView>"
+</LinearLayout>

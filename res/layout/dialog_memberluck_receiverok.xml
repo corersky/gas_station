@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f39c12"
+    android:orientation="vertical" >
+    <TextView 
+        android:text="领取成功"
+        android:gravity="center"
+		android:padding="10dip"
+		android:textSize="18sp"
+        android:textColor="#cb2828"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"/>
+	<TextView 
+	    android:id="@+id/receiverok_text"
+        android:gravity="center"
+   		android:layout_margin="10dip"
+		android:padding="5dip"
+        android:textColor="@android:color/white"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"/>
+	<TextView  
+        android:id="@+id/receiverok_commit"
+        android:background="#cb2828"
+        android:text="确定"
+        android:textColor="@android:color/white"
+   		android:layout_width="match_parent"
+   		android:layout_height="wrap_content"
+   		android:padding="10dip"
+   		android:gravity="center"
+   		android:textSize="16sp"
+   		android:layout_margin="10dip" />
+</LinearLayout>

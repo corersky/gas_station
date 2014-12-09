@@ -192,6 +192,7 @@ public class ShakeListener implements SensorEventListener {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									// TODO Auto-generated method stub
+									Util.setYiyTime(context);
 									start();
 								}
 							}).setNegativeButton("²é¿´ÏêÇé", new DialogInterface.OnClickListener() {
@@ -199,6 +200,7 @@ public class ShakeListener implements SensorEventListener {
 								@Override
 								public void onClick(DialogInterface arg0, int arg1) {
 									// TODO Auto-generated method stub
+									Util.setYiyTime(context);
 									start();
 									
 									sign_adver(adver_id);

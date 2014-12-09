@@ -26,6 +26,7 @@ import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.bbs.BBSMainTabActivity;
+import com.linkage.gas_station.gonglve.ExchangeActivity;
 import com.linkage.gas_station.jpush.JPushReceiver;
 import com.linkage.gas_station.main.MainActivity;
 import com.linkage.gas_station.share.ShareActivity_New;

@@ -492,6 +492,10 @@ public class LifeMainActivity extends BaseActivity {
 				
 				if(msg.what==1) {
 					Map map=(Map)msg.obj;
+					if(map==null||map.get("result")==null) {
+						showCustomToast("费费通接口异常，请稍后再试");
+						return; 
+					}
 					if(map.get("result").toString().equals("1")) {
 						Object[] sfList=(Object[]) map.get("sfList");
 						if(sfList.length>0) {

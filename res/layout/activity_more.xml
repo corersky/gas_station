@@ -352,7 +352,7 @@
 			    android:padding="6dip">
 			    <ImageView 
 			        android:src="@drawable/more_pic_07"
-			        android:id="@+id/more_pic_07"
+			        android:id="@+id/more_pic_07_"
 			        android:layout_width="wrap_content"
 			    	android:layout_height="wrap_content"
 			    	android:layout_centerVertical="true"/>
@@ -364,7 +364,7 @@
 			        android:text="加油站论坛"
 			        android:layout_centerVertical="true"
 			        android:layout_margin="5dip"
-			        android:layout_toRightOf="@id/more_pic_07"/>	    
+			        android:layout_toRightOf="@id/more_pic_07_"/>	    
 			    <ImageView 
 			        android:gravity="right"
 			        android:layout_margin="5dip"
