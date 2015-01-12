@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
+import com.linkage.gas_station.util.Util;
 
 public class ShakeActivity extends BaseActivity {
 	
@@ -47,7 +48,12 @@ public class ShakeActivity extends BaseActivity {
 	
 	public void init() {
 		yao_layout=(RelativeLayout) findViewById(R.id.yao_layout);
-		yao_layout.setBackgroundResource(R.drawable.yao_bg);
+		if(Util.getUserArea(this).equals("0971")) {
+			yao_layout.setBackgroundResource(R.drawable.yao_bg);
+		}
+		else {
+			yao_layout.setBackgroundResource(R.drawable.yao_bg);
+		}
 		title_back=(ImageView) findViewById(R.id.title_back);
 		title_back.setVisibility(View.VISIBLE);
 		title_back.setOnClickListener(new ImageView.OnClickListener() {

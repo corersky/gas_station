@@ -292,24 +292,38 @@ public class JiayouActivity extends BaseActivity {
 				switch(currentChoice%can_jiayou_num) {
 				case 0:
 					if(model_list.containsKey(province_array[0])) {
-						Intent intent=new Intent();
-						Bundle bundle=new Bundle();
-						intent.setClass(JiayouActivity.this, JiayouDetaiActivity.class);
-						bundle.putString("offerId", model_list.get(province_array[0]).get(currentItem1).getOffer_id());
-						bundle.putString("offer_name", model_list.get(province_array[0]).get(currentItem1).getOffer_name());
-						bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp1));
-						bundle.putString("type", "simple_station");
-						intent.putExtras(bundle);
-						startActivity(intent);
+						//青海定制
+						if(Util.getUserArea(JiayouActivity.this).equals("0971")) {
+							Intent intent=new Intent();
+							Bundle bundle=new Bundle();
+							intent.setClass(JiayouActivity.this, JiayouQHDetailActivity.class);
+							bundle.putString("offerId", model_list.get(province_array[0]).get(currentItem1).getOffer_id());
+							bundle.putString("offer_name", model_list.get(province_array[0]).get(currentItem1).getOffer_name());
+							bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp1));
+							bundle.putString("type", "simple_station");
+							intent.putExtras(bundle);
+							startActivity(intent);
+						}
+						else {
+							Intent intent=new Intent();
+							Bundle bundle=new Bundle();
+							intent.setClass(JiayouActivity.this, JiayouDetaiActivity.class);
+							bundle.putString("offerId", model_list.get(province_array[0]).get(currentItem1).getOffer_id());
+							bundle.putString("offer_name", model_list.get(province_array[0]).get(currentItem1).getOffer_name());
+							bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp1));
+							bundle.putString("type", "simple_station");
+							intent.putExtras(bundle);
+							startActivity(intent);
+						}
 					}
 					else {
 						showCustomToast("数据正在加载中...");
 					}
 					break;
 				case 1:
-					//青海定制
-					if(Util.getUserArea(JiayouActivity.this).equals("0971")) {
-						if(model_list.containsKey(province_array[1])) {
+					if(model_list.containsKey(province_array[1])) {
+						//青海定制
+						if(Util.getUserArea(JiayouActivity.this).equals("0971")) {
 							Intent intent=new Intent();
 							Bundle bundle=new Bundle();
 							intent.setClass(JiayouActivity.this, JiayouCardDetailActivity.class);
@@ -319,41 +333,42 @@ public class JiayouActivity extends BaseActivity {
 							bundle.putString("desp", "流量卡  ");
 							intent.putExtras(bundle);
 							startActivity(intent);
-						}	
-						else {
-							showCustomToast("数据正在加载中...");
 						}
-					}
-					//江苏定制
+						//江苏定制
+						else {
+							Intent intent=new Intent();
+							Bundle bundle=new Bundle();
+							intent.setClass(JiayouActivity.this, JiayouCardDetailActivity.class);
+							bundle.putString("from", "jiayoucard");
+							bundle.putString("cost", jiayou_choice_2_center2.getText().toString());
+							bundle.putString("amount", jiayou_choice_2_center1.getText().toString());
+							bundle.putString("desp", "长期有效流量  ");
+							intent.putExtras(bundle);
+							startActivity(intent);
+						}
+					}	
 					else {
-						Intent intent=new Intent();
-						Bundle bundle=new Bundle();
-						intent.setClass(JiayouActivity.this, JiayouCardDetailActivity.class);
-						bundle.putString("from", "jiayoucard");
-						bundle.putString("cost", jiayou_choice_2_center2.getText().toString());
-						bundle.putString("amount", jiayou_choice_2_center1.getText().toString());
-						bundle.putString("desp", "长期有效流量  ");
-						intent.putExtras(bundle);
-						startActivity(intent);
-					}					
+						showCustomToast("数据正在加载中...");
+					}				
 					break;
 				case 2:
 					if(model_list.containsKey(province_array[2])) {
 						Intent intent=new Intent();
-						Bundle bundle=new Bundle();
-						intent.setClass(JiayouActivity.this, JiayouDetaiActivity.class);
-						bundle.putString("offerId", model_list.get(province_array[2]).get(currentItem1).getOffer_id());
-						bundle.putString("offer_name", model_list.get(province_array[2]).get(currentItem1).getOffer_name());						
+						Bundle bundle=new Bundle();					
 						//青海定制
 						if(Util.getUserArea(JiayouActivity.this).equals("0971")) {
+							intent.setClass(JiayouActivity.this, JiayouQHDetailActivity.class);
 							bundle.putString("type", "simple_station");
 							bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp5));
 						}
 						//江苏定制
 						else {
+							intent.setClass(JiayouActivity.this, JiayouDetaiActivity.class);
 							bundle.putString("type", "night_station");
 							bundle.putString("offer_description", getResources().getString(R.string.jiayou_desp3));
 						}
+						bundle.putString("offerId", model_list.get(province_array[2]).get(currentItem1).getOffer_id());
+						bundle.putString("offer_name", model_list.get(province_array[2]).get(currentItem1).getOffer_name());	
 						intent.putExtras(bundle);
 						startActivity(intent);
 					}

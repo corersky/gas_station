@@ -68,6 +68,8 @@ public class FlowDayActivity extends BaseActivity {
 	boolean isRightLoading=false;
 	Date date_start=null;
 	
+	int[] prize_types={1, 2, 3, 4, 5};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -242,6 +244,17 @@ public class FlowDayActivity extends BaseActivity {
 					for(int i=0;i<objs.length;i++) {
 						Map map=(Map) objs[i];
 						MemberBuyModel model=new MemberBuyModel();
+						
+						boolean addFlag=false;
+						for(int j=0;j<prize_types.length;j++) {
+							if(prize_types[j]==Integer.parseInt(map.get("prize_type").toString())) {
+								addFlag=true;
+							}
+						}
+						if(!addFlag) {
+							continue;
+						}
+						
 						model.setGenerate_time(map.get("generate_time")!=null?map.get("generate_time").toString():"");
 						model.setId(map.get("id")!=null?map.get("id").toString():"");
 						model.setPhone_num(map.get("phone_num")!=null?map.get("phone_num").toString():"");

@@ -86,6 +86,7 @@ public class MemberluckUpdateActivity extends BaseActivity {
 							model.setVip_benefits(Integer.parseInt(map.get("vip_benefits").toString()));
 							model.setVip_level(Integer.parseInt(map.get("vip_level").toString()));
 							model.setVip_name(map.get("vip_name").toString());
+							model.setOffer_tips(map.get("offer_tips")!=null?map.get("offer_tips").toString():"");
 							models.add(model);
 						}
 						adapter.notifyDataSetChanged();

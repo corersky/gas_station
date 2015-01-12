@@ -2,10 +2,10 @@ package com.linkage.gas_station.gonglve;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +85,22 @@ public class AdapterMemberluckUpdate extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				((MemberluckUpdateActivity) context).pay(""+models.get(position).getOffer_id());
+				new AlertDialog.Builder(context).setTitle("提示").setMessage(models.get(position).getOffer_tips()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						((MemberluckUpdateActivity) context).pay(""+models.get(position).getOffer_id());
+					}
+				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						
+					}
+				}).show();
+				
 			}});
 		return convertView;
 	}

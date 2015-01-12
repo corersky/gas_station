@@ -20,6 +20,7 @@ public class GonglveTuanModel implements Parcelable {
 	String activity_url="";
 	String offer_name="";
 	String activity_rule="";
+	String total_flow="";
 	
 	int is_jion=0;
 	double unrecevice_num=0;
@@ -66,6 +67,7 @@ public class GonglveTuanModel implements Parcelable {
 		activity_url=source.readString();
 		offer_name=source.readString();
 		activity_rule=source.readString();
+		total_flow=source.readString();
 	}
 	
 	public String getActivity_description() {
@@ -177,6 +179,7 @@ public class GonglveTuanModel implements Parcelable {
 		dest.writeString(activity_url);
 		dest.writeString(offer_name);
 		dest.writeString(activity_rule);
+		dest.writeString(total_flow);
 	}
 	
 	public int getIs_jion() {
@@ -217,6 +220,14 @@ public class GonglveTuanModel implements Parcelable {
 
 	public void setActivity_rule(String activity_rule) {
 		this.activity_rule = activity_rule;
+	}
+
+	public String getTotal_flow() {
+		return total_flow;
+	}
+
+	public void setTotal_flow(String total_flow) {
+		this.total_flow = total_flow;
 	}
 
 

@@ -244,9 +244,17 @@ public class MainActivity extends TabActivity {
 		super.onResume();
 		
 		if(((GasStationApplication) getApplication()).webTab!=0) {
-			host.setCurrentTab(((GasStationApplication) getApplication()).webTab);
-			((RadioButton) main_group.getChildAt(2)).toggle();
-			setRadioButton("spec3", R.drawable.sign_blue, 2);
+			if(((GasStationApplication) getApplication()).webTab==-1) {
+				host.setCurrentTab(0);
+				((RadioButton) main_group.getChildAt(0)).toggle();
+				setRadioButton("spec1", R.drawable.home_blue, 0);
+				((GasStationApplication) getApplication()).webTab=0;
+			}
+			else {
+				host.setCurrentTab(((GasStationApplication) getApplication()).webTab);
+				((RadioButton) main_group.getChildAt(2)).toggle();
+				setRadioButton("spec3", R.drawable.sign_blue, 2);
+			}
 		}
 		
 		Util.setLoginOut(MainActivity.this, false);

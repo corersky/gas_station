@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.model.MemberluckRPModel;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -83,12 +85,27 @@ public class AdapterMemberluckRP extends BaseAdapter {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent intent=new Intent(context, CommonMessageDialogActivity.class);
-					Bundle bundle=new Bundle();
-					bundle.putString("offerId", ""+models.get(position).getOffer_id());
-					bundle.putString("activityId", activityId);
-					intent.putExtras(bundle);
-					context.startActivity(intent);
+					new AlertDialog.Builder(context).setTitle("提示").setMessage(models.get(position).getOffer_tips()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							Intent intent=new Intent(context, CommonMessageDialogActivity.class);
+							Bundle bundle=new Bundle();
+							bundle.putString("offerId", ""+models.get(position).getOffer_id());
+							bundle.putString("activityId", activityId);
+							intent.putExtras(bundle);
+							context.startActivity(intent);
+						}
+					}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							
+						}
+					}).show();
+					
 				}});
 			holder.adapter_memberluck_rp_name.setText(models.get(position).getOffer_name());
 		}

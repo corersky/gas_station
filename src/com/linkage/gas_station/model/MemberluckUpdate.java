@@ -7,6 +7,14 @@ public class MemberluckUpdate {
 	int offer_id=0;
 	String vip_name="";
 	String offer_name="";
+	String offer_tips="";
+	
+	public String getOffer_tips() {
+		return offer_tips;
+	}
+	public void setOffer_tips(String offer_tips) {
+		this.offer_tips = offer_tips;
+	}
 	public int getBill_offer_id() {
 		return bill_offer_id;
 	}

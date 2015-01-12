@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -26,8 +27,6 @@ import com.linkage.gas_station.model.BindInfoModel;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.FftManager;
 import com.linkage.gas_station.util.hessian.GetWebDate;
-import com.mobeta.android.dslv.DragSortListView;
-import com.mobeta.android.dslv.DragSortListView.RemoveListener;
 
 public class LifeManageActivity extends BaseActivity {
 	
@@ -35,7 +34,7 @@ public class LifeManageActivity extends BaseActivity {
 	TextView title_name=null;
 	
 	TextView life_namager_add=null;
-	DragSortListView life_namager_list=null;
+	ListView life_namager_list=null;
 	SimpleAdapter adapter=null;
 	ArrayList<HashMap<String, Object>> uilist=null;
 	ArrayList<BindInfoModel> model_list=null;
@@ -102,7 +101,7 @@ public class LifeManageActivity extends BaseActivity {
 				intent.putExtras(bundle);
 				startActivityForResult(intent, 600);
 			}});
-		life_namager_list=(DragSortListView) findViewById(R.id.life_namager_list);
+		life_namager_list=(ListView) findViewById(R.id.life_namager_list);
 		adapter=new SimpleAdapter(this, uilist, R.layout.adapter_lifemanage, new String[]{"name"}, new int[]{R.id.lifemanage_num});
 		life_namager_list.setAdapter(adapter);
 		life_namager_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -128,31 +127,6 @@ public class LifeManageActivity extends BaseActivity {
 						
 					}
 				}).show();
-			}
-		});
-		life_namager_list.setRemoveListener(new RemoveListener() {
-			
-			@Override
-			public void remove(final int which) {
-				// TODO Auto-generated method stub
-				new AlertDialog.Builder(LifeManageActivity.this).setTitle("提示").setMessage("确定删除该条账户？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int arg0) {
-						// TODO Auto-generated method stub
-
-						isDoSomething=true;
-						addBindInfo(which);
-					}
-				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						adapter.notifyDataSetChanged();
-					}
-				}).show();
-				
 			}
 		});
 		

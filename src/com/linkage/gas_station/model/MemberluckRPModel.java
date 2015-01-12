@@ -9,6 +9,13 @@ public class MemberluckRPModel {
 	int task_benefits=0;
 	String offer_name="";
 	String task_name="";
+	String offer_tips="";
+	public String getOffer_tips() {
+		return offer_tips;
+	}
+	public void setOffer_tips(String offer_tips) {
+		this.offer_tips = offer_tips;
+	}
 	public String getTask_name() {
 		return task_name;
 	}

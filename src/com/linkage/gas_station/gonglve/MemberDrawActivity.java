@@ -103,7 +103,7 @@ public class MemberDrawActivity extends BaseActivity {
 				Intent intent=new Intent(MemberDrawActivity.this, MemberluckRPActivity.class);
 				Bundle bundle=new Bundle();
 				bundle.putLong("activityId", getIntent().getExtras().getLong("activityId"));
-				bundle.putString("activityName", getIntent().getExtras().getString("activityName"));
+				bundle.putString("activity_name", getIntent().getExtras().getString("activity_name"));
 				bundle.putString("activity_url", getIntent().getExtras().getString("activity_url"));
 				bundle.putString("activity_rule", getIntent().getExtras().getString("activity_rule"));
 				intent.putExtras(bundle);

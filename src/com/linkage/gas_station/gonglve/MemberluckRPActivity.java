@@ -102,6 +102,7 @@ public class MemberluckRPActivity extends BaseActivity {
 							model.setTask_id(Integer.parseInt(map.get("task_id").toString()));
 							model.setTask_type(Integer.parseInt(map.get("task_type").toString()));
 							model.setTask_name(map.get("task_name")==null?"":map.get("task_name").toString());
+							model.setOffer_tips(map.get("offer_tips")!=null?map.get("offer_tips").toString():"");
 							models.add(model);
 						}
 						adapter.notifyDataSetChanged();

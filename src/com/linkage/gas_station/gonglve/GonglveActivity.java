@@ -96,7 +96,7 @@ public class GonglveActivity extends BaseActivity {
 	//初始号码
 	long initPhoneNum=-1;
 	//当前版本支持的活动类型
-	int[] allowedType={2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 29};
+	int[] allowedType={2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
 	//活动加载标志位
 	boolean isLoadActivity=false;
 	boolean isLoadBank=false;
@@ -278,7 +278,7 @@ public class GonglveActivity extends BaseActivity {
 						final TextView activity_text=(TextView) view.findViewById(R.id.activity_text);
 						final RelativeLayout tuan_layout=(RelativeLayout) view.findViewById(R.id.tuan_layout);
 						final int activity_type=Integer.parseInt(temp2.get(i).getActivity_type());
-						if(activity_type==2 || activity_type==4 || activity_type==5 || activity_type==6) {
+						if(activity_type==2 || activity_type==4 || activity_type==30 || activity_type==6 || activity_type==31) {
 							tuan_layout.setVisibility(View.VISIBLE);
 							activity_layout.setVisibility(View.GONE);
 						}
@@ -391,9 +391,21 @@ public class GonglveActivity extends BaseActivity {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
+						else if(activity_type==30) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
+						else if(activity_type==31) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
+						else if(activity_type==32) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
 						TextView tuan_tip=(TextView) view.findViewById(R.id.tuan_tip);
 						if (activity_type == 3 || activity_type == 4
-								|| activity_type == 5 || activity_type == 6
+								|| activity_type == 31 || activity_type == 6
 								|| activity_type == 7 || activity_type == 8
 								|| activity_type == 9 || activity_type == 10
 								|| activity_type == 11 || activity_type == 12
@@ -405,7 +417,8 @@ public class GonglveActivity extends BaseActivity {
 								|| activity_type == 23 || activity_type == 24
 								|| activity_type == 25 || activity_type == 26
 								|| activity_type == 27 || activity_type == 28
-								|| activity_type == 29) {
+								|| activity_type == 29 || activity_type == 30
+								|| activity_type == 32 ) {
 							tuan_tip.setText(temp2.get(i)
 									.getActivity_description());
 						}
@@ -434,11 +447,16 @@ public class GonglveActivity extends BaseActivity {
 							old_cost.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 						}						
 						TextView persons=(TextView) view.findViewById(R.id.persons);
-						if(activity_type!=6) {
-							persons.setText(Html.fromHtml("已有<font color='red'>"+temp2.get(i).getPersons().toString()+"</font>人购买"));
+						if(activity_type==6||activity_type==31) {
+							if(!Util.getUserArea(GonglveActivity.this).equals("0971")) {
+								persons.setText(Html.fromHtml("本月已签到<font color='red'>"+temp2.get(i).getTotal_num()+"</font>次，已领取<font color='red'>"+temp2.get(i).getTotal_num()*5+"</font>M流量"));
+							}
+							else {
+								persons.setText(Html.fromHtml("本月已签到<font color='red'>"+temp2.get(i).getTotal_num()+"</font>次，已领取<font color='red'>"+Integer.parseInt(temp2.get(i).getTotal_flow())+"</font>M流量"));
+							}
 						}
 						else {
-							persons.setText(Html.fromHtml("本月已签到<font color='red'>"+temp2.get(i).getTotal_num()+"</font>次，已领取<font color='red'>"+temp2.get(i).getTotal_num()*5+"</font>M流量"));
+							persons.setText(Html.fromHtml("已有<font color='red'>"+temp2.get(i).getPersons().toString()+"</font>人购买"));
 						}
 						TextView activity_end_time=(TextView) view.findViewById(R.id.activity_end_time);
 						activity_end_time.setTag(temp2.get(i).getActivity_end_time().toString());
@@ -523,7 +541,7 @@ public class GonglveActivity extends BaseActivity {
 									}
 								}});
 						}
-						else if(activity_type==4||activity_type==5) {
+						else if(activity_type==4||activity_type==30) {
 							tuan_go.setImageResource(R.drawable.qianggou_button);
 						}
 						else if(activity_type==6) {
@@ -964,6 +982,28 @@ public class GonglveActivity extends BaseActivity {
 							activity_go.setVisibility(View.INVISIBLE);
 							tuan_go.setImageResource(R.drawable.dh);	
 						}
+						else if(activity_type==30) {
+							activity_go.setVisibility(View.INVISIBLE);
+							tuan_go.setImageResource(R.drawable.dh);	
+						}
+						else if(activity_type==31) {
+							tuan_go.setImageResource(R.drawable.shake_button);
+						}
+						else if(activity_type==32) {
+							activity_go.setImageResource(R.drawable.record_list);
+							activity_go.setOnClickListener(new ImageView.OnClickListener() {
+
+								@Override
+								public void onClick(View arg0) {
+									// TODO Auto-generated method stub
+									Intent intent=new Intent(GonglveActivity.this, RecordListActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putLong("activityId", Long.parseLong(activityId));
+									intent.putExtras(bundle);
+									startActivity(intent);
+								}});
+							tuan_go.setImageResource(R.drawable.qianggou_button);
+						}
 						tuan_go.setOnClickListener(new ImageView.OnClickListener() {
 
 							@Override
@@ -990,7 +1030,7 @@ public class GonglveActivity extends BaseActivity {
 								else if(activity_type==4) {
 									loadJumpActivity(temp2.get(num).getActivity_id(), Integer.parseInt(temp2.get(num).getActivity_type()));
 								}
-								else if(activity_type==5) {
+								else if(activity_type==30) {
 									loadJumpActivity(temp2.get(num).getActivity_id(), Integer.parseInt(temp2.get(num).getActivity_type()));
 								}
 								else if(activity_type==6) {
@@ -1126,7 +1166,7 @@ public class GonglveActivity extends BaseActivity {
 								else if(activity_type==28) {
 									Intent intent=new Intent(GonglveActivity.this, MemberDrawActivity.class);
 									Bundle bundle=new Bundle();
-									bundle.putString("activityName", temp2.get(num).getActivity_name());
+									bundle.putString("activity_name", temp2.get(num).getActivity_name());
 									bundle.putLong("activityId", Long.parseLong(temp2.get(num).getActivity_id()));
 									bundle.putString("desp", temp2.get(num).getActivity_url());
 									bundle.putString("activity_url", temp2.get(num).getActivity_url());
@@ -1140,6 +1180,20 @@ public class GonglveActivity extends BaseActivity {
 									bundle.putLong("activityId", Long.parseLong(temp2.get(num).getActivity_id()));
 									intent.putExtras(bundle);
 									startActivity(intent);
+								}
+								else if(activity_type==30) {
+									Intent intent=new Intent(GonglveActivity.this, PotOfGoldActivity.class);
+									startActivity(intent);
+								}
+								else if(activity_type==31) {
+									Intent intent=new Intent(GonglveActivity.this, ShakeActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putString("activityId", temp2.get(num).getActivity_id());
+									intent.putExtras(bundle);
+									startActivity(intent);								
+								}
+								else if(activity_type==32) {
+									loadJumpActivity(temp2.get(num).getActivity_id(), Integer.parseInt(temp2.get(num).getActivity_type()));
 								}
 							}});
 						LinearLayout tangou_point=(LinearLayout) view.findViewById(R.id.tangou_point);
@@ -1285,6 +1339,7 @@ public class GonglveActivity extends BaseActivity {
 							model.setActivity_url(map[i].get("activity_url")==null?"":map[i].get("activity_url").toString());
 							model.setOffer_name(map[i].get("offer_name")==null?"":map[i].get("offer_name").toString());
 							model.setActivity_rule(map[i].get("activity_rule")==null?"":map[i].get("activity_rule").toString());
+							model.setTotal_flow(map[i].get("total_flow")==null?"":map[i].get("total_flow").toString());
 							temp2.add(model);
 						}
 						m.what=1;
@@ -1556,6 +1611,11 @@ public class GonglveActivity extends BaseActivity {
 							str3 = "";
 						}
 						else if(activity_type==23) {
+							str1 = (String) map[i].get("offer_id");
+							str2 = (String) map[i].get("offer_name");
+							str3 = "";
+						}
+						else if(activity_type==32) {
 							str1 = (String) map[i].get("offer_id");
 							str2 = (String) map[i].get("offer_name");
 							str3 = "";
@@ -2359,7 +2419,7 @@ public class GonglveActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		
-		if(((GasStationApplication) getApplication()).webTab!=0) {
+		if(((GasStationApplication) getApplication()).webTab!=0&&((GasStationApplication) getApplication()).webTab!=-1) {
 			defaultLoad=1;
 			gonglve_tuan_layout.setVisibility(View.VISIBLE);
 			gonglve_bank_layout.setVisibility(View.GONE);

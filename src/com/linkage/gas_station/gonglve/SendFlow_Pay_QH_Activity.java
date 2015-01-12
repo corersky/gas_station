@@ -28,13 +28,14 @@ import com.linkage.gas_station.util.hessian.GetWebDate;
 import com.linkage.gas_station.util.hessian.PublicManager;
 import com.linkage.gas_station.util.hessian.StrategyManager;
 
-public class SendFlow_Pay_Activity extends BaseActivity {
+public class SendFlow_Pay_QH_Activity extends BaseActivity {
 	
 	TextView title_name=null;
 	ImageView title_back=null;
 	
 	TextView sendflow_content=null;
 	EditText send_flow_other_num=null;
+	EditText send_flow_other_num_more=null;
 	EditText send_flow_yz=null;
 	ImageView send_flow_getyz=null;
 	TextView send_flow_time=null;
@@ -57,9 +58,9 @@ public class SendFlow_Pay_Activity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_sendflow_pay);
+		setContentView(R.layout.activity_sendflow_pay_qh);
 		
-		((GasStationApplication) getApplication()).tempActivity.add(SendFlow_Pay_Activity.this);
+		((GasStationApplication) getApplication()).tempActivity.add(SendFlow_Pay_QH_Activity.this);
 		
 		init();
 	}
@@ -86,18 +87,22 @@ public class SendFlow_Pay_Activity extends BaseActivity {
 			public void onCheckedChanged(RadioGroup arg0, int arg1) {
 				// TODO Auto-generated method stub
 				if(arg1==R.id.send_flow_me) {
-					send_flow_other_num.setText(""+Util.getUserInfo(SendFlow_Pay_Activity.this).get(0));
+					send_flow_other_num.setText(""+Util.getUserInfo(SendFlow_Pay_QH_Activity.this).get(0));
 					send_flow_other_num.setEnabled(false);
+					send_flow_other_num_more.setVisibility(View.GONE);
 					orderType=1;
 				}
 				else if(arg1==R.id.send_flow_other) {
 					send_flow_other_num.setText("");
 					send_flow_other_num.setEnabled(true);
+					send_flow_other_num_more.setText("");
+					send_flow_other_num_more.setVisibility(View.VISIBLE);
 					orderType=2;
 				}
 			}
 		});
 		send_flow_other_num=(EditText) findViewById(R.id.send_flow_other_num);
+		send_flow_other_num_more=(EditText) findViewById(R.id.send_flow_other_num_more);
 		send_flow_yz=(EditText) findViewById(R.id.send_flow_yz);
 		send_flow_getyz=(ImageView) findViewById(R.id.send_flow_getyz);
 		send_flow_getyz.setOnClickListener(new ImageView.OnClickListener() {
@@ -126,7 +131,7 @@ public class SendFlow_Pay_Activity extends BaseActivity {
 				}				
 			}});
 
-		send_flow_other_num.setText(""+Util.getUserInfo(SendFlow_Pay_Activity.this).get(0));
+		send_flow_other_num.setText(""+Util.getUserInfo(SendFlow_Pay_QH_Activity.this).get(0));
 		send_flow_other_num.setEnabled(false);
 	}
 
@@ -162,21 +167,21 @@ public class SendFlow_Pay_Activity extends BaseActivity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				LinkedList<String> wholeUrl=Util.getWholeUrl(SendFlow_Pay_Activity.this);
+				LinkedList<String> wholeUrl=Util.getWholeUrl(SendFlow_Pay_QH_Activity.this);
 				Message m=new Message();
 				int num=0;
 				boolean flag=true;
 				String currentUsedUrl="";
 				try {
-					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(SendFlow_Pay_Activity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
+					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(SendFlow_Pay_QH_Activity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
 				} catch(Exception e) {
 					currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
 				}
 				while(flag) {
 					try {
 						
-						PublicManager publicManager=GetWebDate.getHessionFactiory(SendFlow_Pay_Activity.this).create(PublicManager.class, currentUsedUrl+"/hessian/publicManager", getClassLoader());
-						ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_Activity.this);
+						PublicManager publicManager=GetWebDate.getHessionFactiory(SendFlow_Pay_QH_Activity.this).create(PublicManager.class, currentUsedUrl+"/hessian/publicManager", getClassLoader());
+						ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_QH_Activity.this);
 						int verCode=publicManager.sendVerCode(Long.parseLong(list.get(0)), list.get(1));
 						m.what=verCode;
 						flag=false;
@@ -273,10 +278,16 @@ public class SendFlow_Pay_Activity extends BaseActivity {
 	}
 	
 	private void saveOrder() {
-		ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_Activity.this);
-		if(send_flow_other_num.getText().toString().equals(list.get(0))) {
-			showCustomToast("不可以输入自己的手机号，请重新输入");
-			return;
+		if(orderType==2) {
+			if(!send_flow_other_num_more.getText().toString().equals(send_flow_other_num.getText().toString())) {
+				showCustomToast("两次号码输入不一致");
+				return;
+			}
+			ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_QH_Activity.this);
+			if(send_flow_other_num_more.getText().toString().equals(list.get(0))) {
+				showCustomToast("不可以输入自己的手机号");
+				return;
+			}
 		}
 		showProgressDialog(R.string.tishi_loading);
 		
@@ -305,20 +316,20 @@ public class SendFlow_Pay_Activity extends BaseActivity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				LinkedList<String> wholeUrl=Util.getWholeUrl(SendFlow_Pay_Activity.this);
+				LinkedList<String> wholeUrl=Util.getWholeUrl(SendFlow_Pay_QH_Activity.this);
 				Message m=new Message();
 				int num=0;
 				boolean flag=true;
 				String currentUsedUrl="";
 				try {
-					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(SendFlow_Pay_Activity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
+					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(SendFlow_Pay_QH_Activity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
 				} catch(Exception e) {
 					currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
 				}
 				while(flag) {
 					try {
-						ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_Activity.this);
-						StrategyManager strategyManager=GetWebDate.getHessionFactiory(SendFlow_Pay_Activity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
+						ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_QH_Activity.this);
+						StrategyManager strategyManager=GetWebDate.getHessionFactiory(SendFlow_Pay_QH_Activity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
 						long temp_time=(currentPayTime==0?System.currentTimeMillis():currentPayTime);
 						currentPayTime=temp_time;
 						Map map=strategyManager.holidayOrder(String.valueOf(temp_time), Long.parseLong(list.get(0)), Long.parseLong(getIntent().getExtras().getString("offerId")), 
@@ -478,6 +489,6 @@ public class SendFlow_Pay_Activity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		//unregisterReceiver(receiver);
-		((GasStationApplication) getApplication()).tempActivity.remove(SendFlow_Pay_Activity.this);
+		((GasStationApplication) getApplication()).tempActivity.remove(SendFlow_Pay_QH_Activity.this);
 	}
 }

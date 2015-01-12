@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.linkage.gas_station"
-    android:versionCode="103"
-    android:versionName="7.9.40"
+    android:versionCode="104"
+    android:versionName="7.9.44"
     android:installLocation="internalOnly" >
 
     <uses-sdk
@@ -110,7 +110,7 @@
             android:configChanges="locale|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+		  		<category android:name="android.intent.category.DEFAULT" />  
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>  
@@ -139,6 +139,7 @@
     	<activity android:name=".jiayou.JiayouActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
     	<activity android:name=".jiayou.JiayouDetaiActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
     	<activity android:name=".jiayou.JiayouCardDetailActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+    	<activity android:name=".jiayou.JiayouQHDetailActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
     	<activity android:name=".jiayou.OrderTrackActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
     	<activity android:name=".jiayou.BankActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
     	<activity android:name=".jiayou.JiayouMovieActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
@@ -176,6 +177,7 @@
 	   	<activity android:name=".gonglve.CommonMessageDialogActivity" android:theme="@android:style/Theme.Translucent" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".gonglve.RedenvelopeSearchActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".gonglve.SendFlow_Pay_Activity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+  		<activity android:name=".gonglve.SendFlow_Pay_QH_Activity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
   		<activity android:name=".gonglve.SendRedenvelopeDetail" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>	   	
 	   	<activity android:name=".gonglve.RecordListActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>	   	
 	   	<activity android:name=".gonglve.Receiver24IconActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>	   	
@@ -189,6 +191,8 @@
  	   	<activity android:name=".gonglve.MemberluckUpdateActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".gonglve.MemberluckListActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".gonglve.ExchangeActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".gonglve.PotOfGoldActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".util.WebDetailActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".memberday.CaptureActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.MemberActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.MemberReceiveActivity" android:theme="@android:style/Theme.Translucent" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
