@@ -11,6 +11,7 @@ import com.linkage.gas_station.gonglve.GonglveActivity;
 import com.linkage.gas_station.jiayou.JiayouActivity;
 import com.linkage.gas_station.jpush.JPushReceiver;
 import com.linkage.gas_station.more.MoreActivity;
+import com.linkage.gas_station.service.UpdateService;
 import com.linkage.gas_station.util.AsyncImageLoad;
 import com.linkage.gas_station.util.AsyncSingleImageLoad;
 import com.linkage.gas_station.util.Util;
@@ -76,6 +77,11 @@ public class MainActivity extends TabActivity {
 		checkNetwork();
 		
 		init();
+
+		Intent intent_update=new Intent(this, UpdateService.class);
+		startService(intent_update);
+		
+		((GasStationApplication) getApplication()).tempActivity.add(MainActivity.this);
 	}
 	
 	public void init() {
@@ -296,6 +302,7 @@ public class MainActivity extends TabActivity {
 		((GasStationApplication) MainActivity.this.getApplication()).isAppOpen=false;
 		Util.cleanBitmap(AsyncSingleImageLoad.getInstance(MainActivity.this).getGonglve_Title_2_Detail(), MainActivity.this);
 		Util.cleanBitmap(AsyncImageLoad.getInstance(MainActivity.this).getChoice(1), MainActivity.this);
+		((GasStationApplication) getApplication()).tempActivity.remove(MainActivity.this);
 		super.onDestroy();
 	}
 	

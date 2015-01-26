@@ -111,6 +111,18 @@
 			    		android:layout_height="wrap_content"/>
 		    	</RelativeLayout>
 			</LinearLayout>
+			<TextView 
+			    android:id="@+id/jiayou_detail_card_tip"
+			    android:visibility="gone"
+	        	android:layout_width="match_parent"
+	        	android:layout_below="@id/jiayou_detail_card_pay_layout"
+	        	android:layout_marginTop="3dip"
+	        	android:gravity="right"
+	    		android:textSize="13sp"   
+	        	android:paddingRight="20dip"
+	    		android:layout_height="wrap_content"
+	    		android:textColor="#ffff4444"
+    	        android:text="温馨提示:订购成功,不予退订.详情请咨询10000"/>
 			<LinearLayout 
 			    android:layout_width="match_parent"
 		   		android:layout_height="wrap_content"

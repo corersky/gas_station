@@ -3,6 +3,7 @@ package com.linkage.gas_station.login;
 import java.util.ArrayList;
 
 import com.baidu.mobstat.StatService;
+import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.util.Util;
 
@@ -54,6 +55,8 @@ public class WelcomeActivity extends Activity {
 			startActivity(intent);
 			finish();
 		}		
+		
+		((GasStationApplication) getApplication()).tempActivity.add(WelcomeActivity.this);
 	}
 	
 	public void init() {
@@ -176,6 +179,7 @@ public class WelcomeActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		Util.cleanBitmap(bmp_list);
+		((GasStationApplication) getApplication()).tempActivity.remove(WelcomeActivity.this);
 	}
 
 

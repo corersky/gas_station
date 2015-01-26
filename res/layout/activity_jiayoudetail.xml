@@ -33,12 +33,12 @@
 	    <RelativeLayout 
 	        android:layout_width="match_parent"
 	    	android:background="@drawable/zhufu_bg"
-	    	android:layout_height="150dip"
+	    	android:layout_height="180dip"
 	    	android:layout_marginLeft="7dip"
 	    	android:layout_marginRight="7dip">
 	    	<LinearLayout 
 	    	    android:layout_width="match_parent"
-		    	android:layout_height="100dip"
+		    	android:layout_height="130dip"
 		    	android:gravity="center"
 		    	android:orientation="vertical">
 	    	    <RadioGroup 
@@ -67,6 +67,7 @@
 		    	</RadioGroup>
 				<LinearLayout 
 				    android:layout_below="@id/jiayou_detail_night"
+				    android:id="@+id/jiayou_detail_pay_layout"
 			        android:orientation="horizontal"
 			        android:layout_width="match_parent"
 			    	android:layout_height="wrap_content"
@@ -108,6 +109,18 @@
 				    		android:layout_height="wrap_content"/>
 			    	</RelativeLayout>
 				</LinearLayout>
+				<TextView 
+				    android:id="@+id/jiayou_detail_tip"
+				    android:visibility="gone"
+		        	android:layout_width="match_parent"
+		        	android:layout_below="@id/jiayou_detail_pay_layout"
+		        	android:layout_marginTop="3dip"
+		        	android:gravity="right"
+		    		android:textSize="13sp"   
+		        	android:paddingRight="20dip"
+		    		android:layout_height="wrap_content"
+		    		android:textColor="#ffff4444"
+	    	        android:text="温馨提示:订购成功,不予退订.详情请咨询10000"/>
 	    	</LinearLayout>	    	
 			<LinearLayout 
 			    android:layout_width="match_parent"

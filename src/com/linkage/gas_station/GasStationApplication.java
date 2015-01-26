@@ -97,7 +97,7 @@ public class GasStationApplication extends Application {
 		//创建SD卡文件
 		File file=new File(Environment.getExternalStorageDirectory().getPath()+"/gas");
 		if(!file.exists()) {
-			file.mkdir();
+			file.mkdirs();
 		}		
 		tempActivity=new ArrayList<Activity>();	
 	}

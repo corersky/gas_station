@@ -60,6 +60,8 @@ import org.ksoap2.transport.AndroidHttpTransport;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -82,15 +84,12 @@ import android.view.WindowManager;
 
 import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
-import com.linkage.gas_station.gonglve.MemberDrawActivity;
-import com.linkage.gas_station.jiayou.JiayouActivity;
 import com.linkage.gas_station.jpush.JPushReceiver;
 import com.linkage.gas_station.model.ContactModel;
 import com.linkage.gas_station.model.OutputInfoModel;
 import com.linkage.gas_station.util.hessian.CommonManager;
 import com.linkage.gas_station.util.hessian.GetWebDate;
 import com.linkage.gas_station.util.hessian.StrategyManager;
-import com.linkage.gas_station.yxapi.YXEntryActivity;
 import com.linkage.gasstationjni.GasJni;
 
 public class Util {
@@ -689,6 +688,7 @@ public class Util {
 						PackageInfo info=manager.getPackageInfo(context.getPackageName(), PackageManager.GET_CONFIGURATIONS);
 						CommonManager commonManager=GetWebDate.getHessionFactiory(context).create(CommonManager.class, ((GasStationApplication) context.getApplicationContext()).AreaUrl+"/hessian/commonManager", context.getClassLoader());
 						commonManager.saveVersion(Util.getDeviceId(context)+Util.getMacAddress(context),android.os.Build.VERSION.RELEASE, info.versionName);
+						System.out.println("abc:"+android.os.Build.BRAND);
 						flag=false;
 						((GasStationApplication) context.getApplicationContext()).AreaUrl=currentUsedUrl;
 					} catch(Error e) {
@@ -1338,4 +1338,21 @@ public class Util {
     		return false;
     	}
     }
+    
+    /**
+	 * 判断服务是否存在
+	 * @param context
+	 * @return
+	 */
+	public static boolean isServiceWorked(Context context, String serviceName) {  
+		ActivityManager myManager=(ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);  
+		ArrayList<RunningServiceInfo> runningService = (ArrayList<RunningServiceInfo>) myManager.getRunningServices(100);  
+		for(int i = 0 ; i<runningService.size();i++) {  
+			System.out.println(runningService.get(i).service.getClassName().toString());
+			if(runningService.get(i).service.getClassName().toString().equals(serviceName)) {  
+				return true;  
+			}  
+		}  
+		return false;  
+	}
 }

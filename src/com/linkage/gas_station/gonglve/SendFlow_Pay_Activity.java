@@ -273,10 +273,12 @@ public class SendFlow_Pay_Activity extends BaseActivity {
 	}
 	
 	private void saveOrder() {
-		ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_Activity.this);
-		if(send_flow_other_num.getText().toString().equals(list.get(0))) {
-			showCustomToast("不可以输入自己的手机号，请重新输入");
-			return;
+		if(orderType==2) {
+			ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_Activity.this);
+			if(send_flow_other_num.getText().toString().equals(list.get(0))) {
+				showCustomToast("不可以输入自己的手机号，请重新输入");
+				return;
+			}
 		}
 		showProgressDialog(R.string.tishi_loading);
 		

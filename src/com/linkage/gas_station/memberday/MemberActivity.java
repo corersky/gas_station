@@ -62,6 +62,7 @@ public class MemberActivity extends BaseActivity {
 	TextView member_day=null;
 	TextView member_hour=null;
 	TextView member_min=null;
+	TextView member_sec=null;
 	TextView member_level_desp=null;
 	
 	//是否已经关闭刷新时间线程
@@ -198,6 +199,7 @@ public class MemberActivity extends BaseActivity {
 		member_day=(TextView) findViewById(R.id.member_day);
 		member_hour=(TextView) findViewById(R.id.member_hour);
 		member_min=(TextView) findViewById(R.id.member_min);
+		member_sec=(TextView) findViewById(R.id.member_sec);
 		
 		userPrizes();
 		memberPrizes();
@@ -215,10 +217,12 @@ public class MemberActivity extends BaseActivity {
 					int day=(int) ((calTime/(60*60*24*1000))<0?0:(calTime/(60*60*24*1000)));
 					int hour=(int) ((calTime-60*60*24*1000*day)/(60*60*1000)<0?0:(calTime-60*60*24*1000*day)/(60*60*1000));
 					int minute=(int) ((calTime-60*60*24*1000*day-60*60*1000*hour)/(1000*60)<0?0:(calTime-60*60*24*1000*day-60*60*1000*hour)/(60*1000));
+					int sec=(int) ((calTime-60*60*24*1000*day-60*60*1000*hour-60*1000*minute)/1000);
 					System.out.println(day+" "+hour+" "+minute);
 					member_day.setText(day<10?"0"+day:""+day);
 					member_hour.setText(hour<10?"0"+hour:""+hour);
 					member_min.setText(minute<10?"0"+minute:""+minute);
+					member_sec.setText(sec<10?"0"+sec:""+sec);
 					handler.postDelayed(runnable, 1000);
 				}
 				

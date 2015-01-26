@@ -54,6 +54,7 @@ public class JiayouDetaiActivity extends BaseActivity {
 	RadioGroup jiayou_detail_night=null;
 	RadioButton jiayou_nextmonth=null;
 	RadioButton jiayou_thismonth=null;
+	TextView jiayou_detail_tip=null;
 	
 	ArrayList<String> list=null;
 	//¿ªÆôµ¹¼ÆÊ±
@@ -162,6 +163,10 @@ public class JiayouDetaiActivity extends BaseActivity {
 				}				
 			}
 		});
+		jiayou_detail_tip=(TextView) findViewById(R.id.jiayou_detail_tip);
+		if(Util.getUserArea(JiayouDetaiActivity.this).equals("0971")) {
+			jiayou_detail_tip.setVisibility(View.VISIBLE);
+		}
 		if(!getIntent().getExtras().getString("type").equals("simple_station")) {
 			jiayou_detail_night.setVisibility(View.VISIBLE);
 		}

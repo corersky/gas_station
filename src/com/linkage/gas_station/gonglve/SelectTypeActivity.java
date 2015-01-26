@@ -17,6 +17,7 @@ import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.jiayou.JiayouDetaiActivity;
+import com.linkage.gas_station.util.Util;
 
 public class SelectTypeActivity extends BaseActivity implements OnClickListener , OnItemClickListener{
 	
@@ -107,10 +108,12 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 				bundle.putInt("activity_type", getIntent().getExtras().getInt("activity_type"));
 			}
 			else if(getIntent().getExtras().getInt("activity_type")==23) {
-				data=new Intent(this , SendFlow_Pay_Activity.class);
-			}
-			else if(getIntent().getExtras().getInt("activity_type")==32) {
-				data=new Intent(this , SendFlow_Pay_QH_Activity.class);
+				if(Util.getUserArea(SelectTypeActivity.this).equals("0971")) {
+					data=new Intent(this , SendFlow_Pay_QH_Activity.class);
+				}
+				else {
+					data=new Intent(this , SendFlow_Pay_Activity.class);
+				}
 			}
 			else {
 				data=new Intent(this , JiayouDetaiActivity.class);
@@ -165,20 +168,6 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 					}
 				}
 				else if(getIntent().getExtras().getInt("activity_type")==23) {
-					if(selectObj.getTypeId()==84) {
-						bundle.putString("offer_description", "说明：省内漫游,有效期24小时");
-					}
-					else if(selectObj.getTypeId()==92) {
-						bundle.putString("offer_description", "说明:省内漫游,有效期:8月16日0时 - 28日24时");
-					}
-					else if(selectObj.getTypeId()==93) {
-						bundle.putString("offer_description", "说明:省内漫游,有效期:9月6日0时 - 8日24时");
-					}
-					else if(selectObj.getTypeId()==94) {
-						bundle.putString("offer_description", "说明:省内漫游,有效期:10月1日0时 - 7日24时");
-					}
-				}
-				else if(getIntent().getExtras().getInt("activity_type")==32) {
 					if(selectObj.getTypeId()==84) {
 						bundle.putString("offer_description", "说明：省内漫游,有效期24小时");
 					}

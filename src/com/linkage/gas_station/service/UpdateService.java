@@ -3,16 +3,9 @@ package com.linkage.gas_station.service;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.linkage.gas_station.GasStationApplication;
-import com.linkage.gas_station.R;
-import com.linkage.gas_station.model.UpdateModel;
-import com.linkage.gas_station.update.DownloadService;
-import com.linkage.gas_station.util.Util;
-import com.linkage.gas_station.util.hessian.GetWebDate;
-import com.linkage.gas_station.util.hessian.PublicManager;
-
 import android.app.AlertDialog;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -21,12 +14,22 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.text.Html;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.linkage.gas_station.GasStationApplication;
+import com.linkage.gas_station.R;
+import com.linkage.gas_station.model.UpdateModel;
+import com.linkage.gas_station.update.DownloadService;
+import com.linkage.gas_station.util.Util;
+import com.linkage.gas_station.util.hessian.GetWebDate;
+import com.linkage.gas_station.util.hessian.PublicManager;
 
 public class UpdateService extends Service {
 
@@ -64,6 +67,7 @@ public class UpdateService extends Service {
 				if(msg.what!=0) {					
 					UpdateModel model=new UpdateModel();
 					Map map=(Map)msg.obj;
+					model.setAndroid_forced_update(Integer.parseInt(map.get("android_forced_update")==null?"0":map.get("android_forced_update").toString()));
 					model.setVersion(map.get("android").toString());
 					if(map.get("android_comments")!=null) {
 						model.setMessage(map.get("android_comments").toString());
@@ -71,22 +75,25 @@ public class UpdateService extends Service {
 					else {
 						model.setMessage("");
 					}
-					if(model!=null) {
-						PackageManager manager=UpdateService.this.getPackageManager();
-						try {
-							PackageInfo info=manager.getPackageInfo(UpdateService.this.getPackageName(), PackageManager.GET_CONFIGURATIONS);
-							if(info.versionCode<Integer.parseInt(model.getVersion())) {
-								showUpdateBox(map.get("android_url").toString(), model.getMessage(), map.get("android").toString());
+					PackageManager manager=UpdateService.this.getPackageManager();
+					try {
+						PackageInfo info=manager.getPackageInfo(UpdateService.this.getPackageName(), PackageManager.GET_CONFIGURATIONS);
+						if(info.versionCode<Integer.parseInt(model.getVersion())) {
+							if(model.getAndroid_forced_update()==1) {
+								showUpdateBoxMust(UpdateService.this, map.get("android_url").toString(), model.getMessage(), map.get("android").toString());
 							}
 							else {
-								if(!from.equals("")) {
-									Toast.makeText(UpdateService.this, "当前版本已经是最新版本", 2000).show();
-								}
+								showUpdateBox(map.get("android_url").toString(), model.getMessage(), map.get("android").toString());
 							}
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
+						else {
+							if(!from.equals("")) {
+								Toast.makeText(UpdateService.this, "当前版本已经是最新版本", 2000).show();
+							}
+						}
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}					
 				}
 			}
@@ -197,6 +204,9 @@ public class UpdateService extends Service {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if(Util.isServiceWorked(UpdateService.this, "com.linkage.gas_station.update.DownloadService")) {
+					return;
+				}
 				Intent intent=new Intent(UpdateService.this, DownloadService.class);
 				Bundle bundle=new Bundle();
 				bundle.putString("download_url", download_url);
@@ -217,4 +227,62 @@ public class UpdateService extends Service {
 			}});
     } 
 
+	/**
+     * 显示下线提示
+     * @param mContext
+     */
+    public void showUpdateBoxMust(final Context mContext, final String download_url, String update_des, final String download_version) {
+    	final WindowManager wmanager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+    	final View view = LayoutInflater.from(mContext).inflate(R.layout.activity_update, null);
+    	TextView update_desp = (TextView) view.findViewById(R.id.update_desp);
+    	ImageView update_now=(ImageView) view.findViewById(R.id.update_now);
+		update_now.setOnClickListener(new ImageView.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				wmanager.removeView(view);
+				if(((GasStationApplication) getApplication()).tempActivity!=null&&((GasStationApplication) getApplication()).tempActivity.size()>0) {
+					for(int i=0;i<((GasStationApplication) getApplication()).tempActivity.size();i++) {
+						((GasStationApplication) getApplication()).tempActivity.get(i).finish();
+					}
+				}
+				if(Util.isServiceWorked(UpdateService.this, "com.linkage.gas_station.update.DownloadService")) {
+					return;
+				}
+				Intent intent=new Intent(UpdateService.this, DownloadService.class);
+				Bundle bundle=new Bundle();
+				bundle.putString("download_url", download_url);
+				bundle.putString("download_name", getResources().getString(R.string.app_name));
+				bundle.putString("download_id", "0");
+				bundle.putString("download_version", download_version);
+				intent.putExtras(bundle);
+				startService(intent);
+			}});
+		ImageView update_later=(ImageView) view.findViewById(R.id.update_later);
+		update_later.setOnClickListener(new ImageView.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				wmanager.removeView(view);
+				if(((GasStationApplication) getApplication()).tempActivity!=null&&((GasStationApplication) getApplication()).tempActivity.size()>0) {
+					for(int i=0;i<((GasStationApplication) getApplication()).tempActivity.size();i++) {
+						((GasStationApplication) getApplication()).tempActivity.get(i).finish();
+					}
+				}
+			}});
+    	update_des=update_des.replace("\\n", "<br>");
+		update_desp.setText(Html.fromHtml(update_des));
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        layoutParams.format = 1;
+        layoutParams.flags =layoutParams.flags | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
+        layoutParams.alpha = 1f;
+        layoutParams.gravity = Gravity.CENTER;
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
+        wmanager.addView(view, layoutParams);
+        wmanager.updateViewLayout(view, layoutParams);
+    }
 }

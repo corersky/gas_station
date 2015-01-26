@@ -133,14 +133,14 @@ public class JiayouQHDetailActivity extends BaseActivity {
 		
 		jiayou_qh_3=(RadioButton) findViewById(R.id.jiayou_qh_3);
 		jiayou_qh_6=(RadioButton) findViewById(R.id.jiayou_qh_6);
-		SpannableString sp6=new SpannableString("连订三个月，按月收费\n（预流量包，送免费流量）");
-		sp6.setSpan(new ForegroundColorSpan(Color.RED), 11, 23, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-		sp6.setSpan(new AbsoluteSizeSpan(12, true), 11, 23, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		SpannableString sp6=new SpannableString("连订三个月，按月收费\n（连订流量包，更有免费流量赠送）");
+		sp6.setSpan(new ForegroundColorSpan(Color.RED), 11, 27, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+		sp6.setSpan(new AbsoluteSizeSpan(12, true), 11, 27, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 		jiayou_qh_6.setText(sp6);
 		jiayou_qh_9=(RadioButton) findViewById(R.id.jiayou_qh_9);
-		SpannableString sp9=new SpannableString("连订六个月，按月收费\n（订的久送的多，有钱，任性）");
-		sp9.setSpan(new ForegroundColorSpan(Color.RED), 11, 25, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-		sp9.setSpan(new AbsoluteSizeSpan(12, true), 11, 25, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		SpannableString sp9=new SpannableString("连订六个月，按月收费\n（流量包订得越久，免费流量送的越多）");
+		sp9.setSpan(new ForegroundColorSpan(Color.RED), 11, 29, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+		sp9.setSpan(new AbsoluteSizeSpan(12, true), 11, 29, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 		jiayou_qh_9.setText(sp9);
 	}
 	

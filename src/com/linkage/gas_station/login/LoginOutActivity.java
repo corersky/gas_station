@@ -1,5 +1,6 @@
 package com.linkage.gas_station.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -45,6 +46,9 @@ public class LoginOutActivity extends BaseActivity {
 				startActivity(intent);
 				if(((GasStationApplication) getApplication()).tempActivity.size()>0) {
 					for(int i=0;i<((GasStationApplication) getApplication()).tempActivity.size();i++) {
+						if(((GasStationApplication) getApplication()).tempActivity.get(i)==((Activity) MainActivity.getInstance())) {
+							continue;
+						}
 						((GasStationApplication) getApplication()).tempActivity.get(i).finish();
 					}
 				}
@@ -62,7 +66,6 @@ public class LoginOutActivity extends BaseActivity {
 						((GasStationApplication) getApplication()).tempActivity.get(i).finish();
 					}
 				}
-				MainActivity.getInstance().finish();
 				finish();
 			}});
 	}

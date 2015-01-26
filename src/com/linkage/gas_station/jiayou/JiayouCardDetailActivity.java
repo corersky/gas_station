@@ -55,6 +55,7 @@ public class JiayouCardDetailActivity extends BaseActivity {
 	LinearLayout jiayou_card_result_layout=null;
 	TextView jiayou_card_result_text=null;
 	TextView jiayou_card_result_text2=null;
+	TextView jiayou_detail_card_tip=null;
 	
 	ArrayList<String> list=null;
 	//¿ªÆôµ¹¼ÆÊ±
@@ -143,10 +144,6 @@ public class JiayouCardDetailActivity extends BaseActivity {
 				}				
 			}});
 		jiayou_card_pay2=(TextView) findViewById(R.id.jiayou_card_pay2);
-		if(Util.getUserArea(JiayouCardDetailActivity.this).equals("0971")) {
-			jiayou_card_pay2.setEnabled(false);
-			jiayou_card_pay2.setClickable(false);
-		}
 		jiayou_card_pay2.setOnClickListener(new TextView.OnClickListener() {
 
 			@Override
@@ -214,6 +211,12 @@ public class JiayouCardDetailActivity extends BaseActivity {
 		jiayou_card_result_layout=(LinearLayout) findViewById(R.id.jiayou_card_result_layout);
 		jiayou_card_result_text=(TextView) findViewById(R.id.jiayou_card_result_text);
 		jiayou_card_result_text2=(TextView) findViewById(R.id.jiayou_card_result_text2);
+		jiayou_detail_card_tip=(TextView) findViewById(R.id.jiayou_detail_card_tip);
+		if(Util.getUserArea(JiayouCardDetailActivity.this).equals("0971")) {
+			jiayou_card_pay2.setEnabled(false);
+			jiayou_card_pay2.setClickable(false);
+			jiayou_detail_card_tip.setVisibility(View.VISIBLE);
+		}
 		getUserType();
 		if(!Util.getUserArea(JiayouCardDetailActivity.this).equals("0971")){
 			getYiLastMoney();

@@ -3,7 +3,6 @@ package com.linkage.gas_station.memberday;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Map;
@@ -54,6 +53,7 @@ public class FlowDayActivity extends BaseActivity {
 	TextView member_day=null;
 	TextView member_hour=null;
 	TextView member_min=null;
+	TextView member_sec=null;
 	TextView member_level_desp=null;
 	LinearLayout member_selecttype=null;
 	ListView listview=null;
@@ -101,6 +101,7 @@ public class FlowDayActivity extends BaseActivity {
 		
 		member_level_desp=(TextView) findViewById(R.id.member_level_desp);
 		member_left_tab=(TextView) findViewById(R.id.member_left_tab);
+		member_left_tab.setText("特惠包抢购");
 		member_left_tab.setOnClickListener(new TextView.OnClickListener() {
 
 			@Override
@@ -124,6 +125,7 @@ public class FlowDayActivity extends BaseActivity {
 				member_right_listview.setVisibility(View.GONE);
 			}});
 		member_right_tab=(TextView) findViewById(R.id.member_right_tab);
+		member_right_tab.setText("已抢特惠包");
 		member_right_tab.setOnClickListener(new TextView.OnClickListener() {
 
 			@Override
@@ -187,6 +189,7 @@ public class FlowDayActivity extends BaseActivity {
 		member_day=(TextView) findViewById(R.id.member_day);
 		member_hour=(TextView) findViewById(R.id.member_hour);
 		member_min=(TextView) findViewById(R.id.member_min);
+		member_sec=(TextView) findViewById(R.id.member_sec);
 		
 		member_selecttype=(LinearLayout) findViewById(R.id.member_selecttype);
 		listview=(ListView) findViewById(R.id.listview);
@@ -209,10 +212,12 @@ public class FlowDayActivity extends BaseActivity {
 					int day=(int) ((calTime/(60*60*24*1000))<0?0:(calTime/(60*60*24*1000)));
 					int hour=(int) ((calTime-60*60*24*1000*day)/(60*60*1000)<0?0:(calTime-60*60*24*1000*day)/(60*60*1000));
 					int minute=(int) ((calTime-60*60*24*1000*day-60*60*1000*hour)/(1000*60)<0?0:(calTime-60*60*24*1000*day-60*60*1000*hour)/(60*1000));
+					int sec=(int) ((calTime-60*60*24*1000*day-60*60*1000*hour-60*1000*minute)/1000);
 					System.out.println(day+" "+hour+" "+minute);
 					member_day.setText(day<10?"0"+day:""+day);
 					member_hour.setText(hour<10?"0"+hour:""+hour);
 					member_min.setText(minute<10?"0"+minute:""+minute);
+					member_sec.setText(sec<10?"0"+sec:""+sec);
 					handler.postDelayed(runnable, 1000);
 				}
 				
@@ -303,7 +308,13 @@ public class FlowDayActivity extends BaseActivity {
 						ArrayList<String> list=Util.getUserInfo(FlowDayActivity.this);
 						
 						StrategyManager strategyManager=GetWebDate.getActivityHessionFactiory(FlowDayActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
-						Map[] map=strategyManager.userFlowPrizes(Long.parseLong(list.get(0)), list.get(1));
+						Map[] map=null;
+						if(getIntent().getExtras().getInt("activity_type")==26) {
+							map=strategyManager.userFlowPrizes(Long.parseLong(list.get(0)), list.get(1));
+						}
+						else if(getIntent().getExtras().getInt("activity_type")==34) {
+							map=strategyManager.qhUserFlowPrizes(Long.parseLong(list.get(0)), list.get(1), Long.parseLong(getIntent().getExtras().getString("activityId")));
+						}
 						m.obj=map;
 						m.what=1;
 						flag=false;
@@ -413,15 +424,27 @@ public class FlowDayActivity extends BaseActivity {
 						member_day_notstart_layout.setVisibility(View.GONE);
 					}
 					else if(!map.get("flowDay").toString().equals("")) {
-						member_day_no_layout.setVisibility(View.GONE);
-						Calendar cal=Calendar.getInstance();
-						String year=""+cal.get(Calendar.YEAR);
-						String month=(cal.get(Calendar.MONTH)+1)<10?"0"+(cal.get(Calendar.MONTH)+1):""+(cal.get(Calendar.MONTH)+1);
-						String day=cal.get(Calendar.DAY_OF_MONTH)<10?"0"+cal.get(Calendar.DAY_OF_MONTH):""+cal.get(Calendar.DAY_OF_MONTH);
-						
-						String year_=map.get("flowDay").toString().split("-")[0];
-						String month_=map.get("flowDay").toString().split("-")[1];
-						String day_=map.get("flowDay").toString().split("-")[2];
+						member_day_no_layout.setVisibility(View.GONE);						
+						long currentTime=new Date().getTime();
+						long activityTime=0;
+						if(map.get("flowDay").toString().indexOf(":")!=-1) {
+							SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+							try {
+								activityTime=format.parse(map.get("flowDay").toString()).getTime();
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						else {
+							SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+							try {
+								activityTime=format.parse(map.get("flowDay").toString()).getTime();
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
 						
 						Object[] memberPrizes=(Object[])map.get("flowPrizes");
 						strs_left.clear();
@@ -443,7 +466,7 @@ public class FlowDayActivity extends BaseActivity {
 							strs_left.add(model);
 						}
 						
-						if(year.equals(year_)&&month.equals(month_)&&day.equals(day_)) {
+						if(currentTime>activityTime) {
 							member_day_start_layout.setVisibility(View.VISIBLE);
 							member_day_notstart_layout.setVisibility(View.GONE);
 							
@@ -495,9 +518,15 @@ public class FlowDayActivity extends BaseActivity {
 				while(flag) {
 					try {
 						ArrayList<String> list=Util.getUserInfo(FlowDayActivity.this);
-						
+						Map map=null;
 						StrategyManager strategyManager=GetWebDate.getActivityHessionFactiory(FlowDayActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
-						Map map=strategyManager.flowPrizes(Long.parseLong(list.get(0)), list.get(1));
+						if(getIntent().getExtras().getInt("activity_type")==26) {
+							map=strategyManager.flowPrizes(Long.parseLong(list.get(0)), list.get(1));
+						}
+						else if(getIntent().getExtras().getInt("activity_type")==34) {
+							map=strategyManager.qhFlowPrizes(Long.parseLong(list.get(0)), list.get(1), Long.parseLong(getIntent().getExtras().getString("activityId")));
+						}
+						
 						m.obj=map;
 						m.what=1;
 						flag=false;

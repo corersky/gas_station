@@ -385,4 +385,14 @@ public interface StrategyManager {
 	//分销平台领流量
 	//ptype 1:为自己充流量 2：为别人充流量
 	public Map getFlowByCode(Long phoneNum,String areaCode,Long activityId,int ptype,String verCode,String activeCode,Long rePhoneNum);
+	
+	//流量日
+	//获取奖品列表
+	//result.put("flowDay", minDay); 下期流量日时间，为空就显示敬请期待。
+	//result.put("flowPrizes", prizes); 奖品列表数组
+	public Map qhFlowPrizes(Long phoneNum,String areaCode,Long activityId);
+	
+	//获取用户兑换列表
+	public Map[] qhUserFlowPrizes(Long phoneNum,String areaCode,Long activityId);
+
 }

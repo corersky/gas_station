@@ -19,7 +19,6 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
@@ -586,8 +585,7 @@ public class ReloadActivity extends BaseActivity {
 									System.out.println("极光推送返回："+arg0);
 								}});
 							//重置一下加油界面滚动位置
-							((GasStationApplication) getApplication()).jumpJiayouNum=-1;
-							//intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);					
+							((GasStationApplication) getApplication()).jumpJiayouNum=-1;			
 							//上传用户信息
 							System.out.println("上传");
 							Util.uploadClientInfo(ReloadActivity.this);

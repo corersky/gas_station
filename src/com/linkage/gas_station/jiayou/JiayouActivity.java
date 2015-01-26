@@ -321,9 +321,9 @@ public class JiayouActivity extends BaseActivity {
 					}
 					break;
 				case 1:
-					if(model_list.containsKey(province_array[1])) {
-						//青海定制
-						if(Util.getUserArea(JiayouActivity.this).equals("0971")) {
+					//青海定制
+					if(Util.getUserArea(JiayouActivity.this).equals("0971")) {
+						if(model_list.containsKey(province_array[1])) {
 							Intent intent=new Intent();
 							Bundle bundle=new Bundle();
 							intent.setClass(JiayouActivity.this, JiayouCardDetailActivity.class);
@@ -333,23 +333,23 @@ public class JiayouActivity extends BaseActivity {
 							bundle.putString("desp", "流量卡  ");
 							intent.putExtras(bundle);
 							startActivity(intent);
-						}
-						//江苏定制
+						}	
 						else {
-							Intent intent=new Intent();
-							Bundle bundle=new Bundle();
-							intent.setClass(JiayouActivity.this, JiayouCardDetailActivity.class);
-							bundle.putString("from", "jiayoucard");
-							bundle.putString("cost", jiayou_choice_2_center2.getText().toString());
-							bundle.putString("amount", jiayou_choice_2_center1.getText().toString());
-							bundle.putString("desp", "长期有效流量  ");
-							intent.putExtras(bundle);
-							startActivity(intent);
+							showCustomToast("数据正在加载中...");
 						}
-					}	
+					}
+					//江苏定制
 					else {
-						showCustomToast("数据正在加载中...");
-					}				
+						Intent intent=new Intent();
+						Bundle bundle=new Bundle();
+						intent.setClass(JiayouActivity.this, JiayouCardDetailActivity.class);
+						bundle.putString("from", "jiayoucard");
+						bundle.putString("cost", jiayou_choice_2_center2.getText().toString());
+						bundle.putString("amount", jiayou_choice_2_center1.getText().toString());
+						bundle.putString("desp", "长期有效流量  ");
+						intent.putExtras(bundle);
+						startActivity(intent);
+					}			
 					break;
 				case 2:
 					if(model_list.containsKey(province_array[2])) {

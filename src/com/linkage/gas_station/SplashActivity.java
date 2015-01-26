@@ -3,6 +3,7 @@ package com.linkage.gas_station;
 import com.baidu.mobstat.StatService;
 import com.linkage.gas_station.login.AdvActivity;
 import com.linkage.gas_station.login.WelcomeActivity;
+import com.linkage.gas_station.main.MainActivity;
 import com.linkage.gas_station.service.UpdateService;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
@@ -28,6 +29,9 @@ public class SplashActivity extends Activity {
 		if(getIntent().getDataString()!=null&&!getIntent().getDataString().equals("")) {
 			if(((GasStationApplication) getApplication()).tempActivity!=null&&((GasStationApplication) getApplication()).tempActivity.size()>0) {
 				for(int i=0;i<((GasStationApplication) getApplication()).tempActivity.size();i++) {
+					if(((GasStationApplication) getApplication()).tempActivity.get(i)==((Activity) MainActivity.getInstance())) {
+						continue;
+					}
 					((GasStationApplication) getApplication()).tempActivity.get(i).finish();
 				}
 			}
@@ -119,14 +123,16 @@ public class SplashActivity extends Activity {
 					}
 				}}).start();
 			
-			Intent intent_update=new Intent(this, UpdateService.class);
-			startService(intent_update);
-			
 			//首次使用
 			if(Util.getUserInfo(SplashActivity.this).get(0).equals("")) {
 				((GasStationApplication) getApplicationContext()).AreaUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
 				Intent intent=new Intent(this, WelcomeActivity.class);
 				startActivity(intent);
+				
+				//首次使用再次检测版本信息
+				Intent intent_update=new Intent(this, UpdateService.class);
+				startService(intent_update);
+				
 			}
 			else {
 				((GasStationApplication) getApplicationContext()).AreaUrl=Util.getStartURL(SplashActivity.this);
@@ -135,6 +141,8 @@ public class SplashActivity extends Activity {
 			}
 			finish();
 		}
+		
+		((GasStationApplication) getApplication()).tempActivity.add(SplashActivity.this);
 	}
 	
 	@Override
@@ -149,6 +157,13 @@ public class SplashActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onPause();
 		StatService.onPause(this);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		((GasStationApplication) getApplication()).tempActivity.remove(SplashActivity.this);
 	}
 
 }

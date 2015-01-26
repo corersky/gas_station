@@ -33,7 +33,7 @@
 	    <RelativeLayout 
 	        android:layout_width="match_parent"
 	    	android:background="@drawable/zhufu_bg"
-	    	android:layout_height="260dip"
+	    	android:layout_height="270dip"
 	    	android:layout_marginLeft="7dip"
 	    	android:layout_marginRight="7dip">
 	    	<LinearLayout 
@@ -127,12 +127,13 @@
 				</LinearLayout>
 				<TextView 
 		        	android:layout_width="match_parent"
+		        	android:layout_marginTop="3dip"
 		        	android:gravity="right"
 		    		android:textSize="13sp"   
 		        	android:paddingRight="20dip"
 		    		android:layout_height="wrap_content"
 		    		android:textColor="#ffff4444"
-	    	        android:text="详情请咨询10000"/>
+	    	        android:text="温馨提示:订购成功,不予退订.详情请咨询10000"/>
 	    	</LinearLayout>	    	
 			<LinearLayout 
 			    android:layout_width="match_parent"

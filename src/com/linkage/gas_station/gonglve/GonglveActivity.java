@@ -96,7 +96,7 @@ public class GonglveActivity extends BaseActivity {
 	//初始号码
 	long initPhoneNum=-1;
 	//当前版本支持的活动类型
-	int[] allowedType={2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
+	int[] allowedType={2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34};
 	//活动加载标志位
 	boolean isLoadActivity=false;
 	boolean isLoadBank=false;
@@ -278,7 +278,7 @@ public class GonglveActivity extends BaseActivity {
 						final TextView activity_text=(TextView) view.findViewById(R.id.activity_text);
 						final RelativeLayout tuan_layout=(RelativeLayout) view.findViewById(R.id.tuan_layout);
 						final int activity_type=Integer.parseInt(temp2.get(i).getActivity_type());
-						if(activity_type==2 || activity_type==4 || activity_type==30 || activity_type==6 || activity_type==31) {
+						if(activity_type==2 || activity_type==4 || activity_type==30 || activity_type==6 || activity_type==31 || activity_type==33) {
 							tuan_layout.setVisibility(View.VISIBLE);
 							activity_layout.setVisibility(View.GONE);
 						}
@@ -375,7 +375,7 @@ public class GonglveActivity extends BaseActivity {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
-						else if(activity_type==26) {
+						else if(activity_type==26||activity_type==34) {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
@@ -388,18 +388,6 @@ public class GonglveActivity extends BaseActivity {
 							activity_layout.setVisibility(View.VISIBLE);
 						}
 						else if(activity_type==29) {
-							tuan_layout.setVisibility(View.GONE);
-							activity_layout.setVisibility(View.VISIBLE);
-						}
-						else if(activity_type==30) {
-							tuan_layout.setVisibility(View.GONE);
-							activity_layout.setVisibility(View.VISIBLE);
-						}
-						else if(activity_type==31) {
-							tuan_layout.setVisibility(View.GONE);
-							activity_layout.setVisibility(View.VISIBLE);
-						}
-						else if(activity_type==32) {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
@@ -418,7 +406,7 @@ public class GonglveActivity extends BaseActivity {
 								|| activity_type == 25 || activity_type == 26
 								|| activity_type == 27 || activity_type == 28
 								|| activity_type == 29 || activity_type == 30
-								|| activity_type == 32 ) {
+								|| activity_type == 33 || activity_type == 34 ) {
 							tuan_tip.setText(temp2.get(i)
 									.getActivity_description());
 						}
@@ -944,7 +932,7 @@ public class GonglveActivity extends BaseActivity {
 									intent.putExtras(bundle);
 									startActivity(intent);
 								}});
-							tuan_go.setImageResource(R.drawable.qianggou_button);
+							tuan_go.setImageResource(R.drawable.dinggou_button);
 						}
 						else if(activity_type==24) {
 							activity_go.setVisibility(View.INVISIBLE);
@@ -954,7 +942,7 @@ public class GonglveActivity extends BaseActivity {
 							activity_go.setVisibility(View.INVISIBLE);
 							tuan_go.setImageResource(R.drawable.wap_button);
 						}
-						else if(activity_type==26) {
+						else if(activity_type==26||activity_type==34) {
 							activity_go.setVisibility(View.INVISIBLE);
 							tuan_go.setImageResource(R.drawable.th);	
 						}
@@ -989,20 +977,9 @@ public class GonglveActivity extends BaseActivity {
 						else if(activity_type==31) {
 							tuan_go.setImageResource(R.drawable.shake_button);
 						}
-						else if(activity_type==32) {
-							activity_go.setImageResource(R.drawable.record_list);
-							activity_go.setOnClickListener(new ImageView.OnClickListener() {
-
-								@Override
-								public void onClick(View arg0) {
-									// TODO Auto-generated method stub
-									Intent intent=new Intent(GonglveActivity.this, RecordListActivity.class);
-									Bundle bundle=new Bundle();
-									bundle.putLong("activityId", Long.parseLong(activityId));
-									intent.putExtras(bundle);
-									startActivity(intent);
-								}});
-							tuan_go.setImageResource(R.drawable.qianggou_button);
+						else if(activity_type==33) {
+							activity_go.setVisibility(View.INVISIBLE);
+							tuan_go.setImageResource(R.drawable.jyb);	
 						}
 						tuan_go.setOnClickListener(new ImageView.OnClickListener() {
 
@@ -1150,13 +1127,11 @@ public class GonglveActivity extends BaseActivity {
 									intent.putExtras(bundle);
 									startActivity(intent);
 								}
-								else if(activity_type==26) {
+								else if(activity_type==26||activity_type==34) {
 									Intent intent=new Intent(GonglveActivity.this, FlowDayActivity.class);
 									Bundle bundle=new Bundle();
-									bundle.putString("activity_name", temp2.get(num).getActivity_name());
-									bundle.putString("activity_url", "/activity/hongbao.html");
 									bundle.putString("activityId", temp2.get(num).getActivity_id());
-									bundle.putString("activity_rule", "发流量红包咯！份数有限，快来抢！");
+									bundle.putInt("activity_type", activity_type);
 									intent.putExtras(bundle);
 									startActivity(intent);
 								}
@@ -1181,10 +1156,6 @@ public class GonglveActivity extends BaseActivity {
 									intent.putExtras(bundle);
 									startActivity(intent);
 								}
-								else if(activity_type==30) {
-									Intent intent=new Intent(GonglveActivity.this, PotOfGoldActivity.class);
-									startActivity(intent);
-								}
 								else if(activity_type==31) {
 									Intent intent=new Intent(GonglveActivity.this, ShakeActivity.class);
 									Bundle bundle=new Bundle();
@@ -1192,8 +1163,12 @@ public class GonglveActivity extends BaseActivity {
 									intent.putExtras(bundle);
 									startActivity(intent);								
 								}
-								else if(activity_type==32) {
-									loadJumpActivity(temp2.get(num).getActivity_id(), Integer.parseInt(temp2.get(num).getActivity_type()));
+								else if(activity_type==33) {
+									Intent intent=new Intent(GonglveActivity.this, PotOfGoldActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putString("activity_url", temp2.get(num).getActivity_url());
+									intent.putExtras(bundle);
+									startActivity(intent);
 								}
 							}});
 						LinearLayout tangou_point=(LinearLayout) view.findViewById(R.id.tangou_point);
@@ -1611,11 +1586,6 @@ public class GonglveActivity extends BaseActivity {
 							str3 = "";
 						}
 						else if(activity_type==23) {
-							str1 = (String) map[i].get("offer_id");
-							str2 = (String) map[i].get("offer_name");
-							str3 = "";
-						}
-						else if(activity_type==32) {
 							str1 = (String) map[i].get("offer_id");
 							str2 = (String) map[i].get("offer_name");
 							str3 = "";

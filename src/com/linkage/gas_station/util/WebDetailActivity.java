@@ -3,6 +3,7 @@ package com.linkage.gas_station.util;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -34,9 +35,22 @@ public class WebDetailActivity extends BaseActivity {
 		web_webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 		WebSettings settings=web_webview.getSettings();
 		settings.setJavaScriptEnabled(true);
-		web_webview.setWebViewClient(new WebViewClient() );
+		web_webview.setWebViewClient(new WebViewClient());
+		web_webview.setWebChromeClient(new MyWebChromeClient());  
 		settings.setBuiltInZoomControls(false);
 		web_webview.loadUrl(getIntent().getExtras().getString("url"));
+	}
+	
+
+	private class MyWebChromeClient extends WebChromeClient {  
+	    @Override  
+	    public void onProgressChanged(WebView view, int newProgress) {  
+	    	web_pb.setProgress(newProgress);  
+	        if(newProgress==100){  
+	        	web_pb.setVisibility(View.GONE);  
+	        }  
+	        super.onProgressChanged(view, newProgress);  
+	    }
 	}
 	
 	@Override
