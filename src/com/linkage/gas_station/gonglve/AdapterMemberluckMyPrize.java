@@ -18,10 +18,12 @@ public class AdapterMemberluckMyPrize extends BaseAdapter {
 
 	ArrayList<MemberluckMyPrizeModel> models=null;
 	Context context=null;
+	boolean isShowGet=true;
 	
-	public AdapterMemberluckMyPrize(Context context, ArrayList<MemberluckMyPrizeModel> models) {
+	public AdapterMemberluckMyPrize(Context context, ArrayList<MemberluckMyPrizeModel> models, boolean isShowGet) {
 		this.context=context;
 		this.models=models;
+		this.isShowGet=isShowGet;
 	}
 
 	@Override
@@ -67,10 +69,16 @@ public class AdapterMemberluckMyPrize extends BaseAdapter {
 		holder.memberluck_myprize_time.setTextColor(Color.BLACK);
 		holder.memberluck_myprize_time.setText(models.get(position).getGenerate_time());
 		holder.memberluck_myprize_prize.setTextColor(Color.BLACK);
-		holder.memberluck_myprize_prize.setText(models.get(position).getLevel_name());
-		holder.memberluck_myprize_oper.setVisibility(View.VISIBLE);
-		holder.memberluck_myprize_oper.setText("领取");
-		holder.memberluck_myprize_oper.setTextColor(Color.WHITE);
+		if(isShowGet) {
+			holder.memberluck_myprize_prize.setText(models.get(position).getLevel_name());
+			holder.memberluck_myprize_oper.setVisibility(View.VISIBLE);
+			holder.memberluck_myprize_oper.setText("领取");
+			holder.memberluck_myprize_oper.setTextColor(Color.WHITE);
+		}
+		else {
+			holder.memberluck_myprize_prize.setText(models.get(position).getPrize_name());
+			holder.memberluck_myprize_oper.setVisibility(View.INVISIBLE);
+		}
 		if(models.get(position).getState()==1) {
 			holder.memberluck_myprize_oper.setBackgroundResource(R.drawable.memberluck_gray);
 		}

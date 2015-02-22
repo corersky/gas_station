@@ -58,6 +58,7 @@ import com.linkage.gas_station.memberday.MemberActivity;
 import com.linkage.gas_station.model.GifTableListModel;
 import com.linkage.gas_station.model.GonglveTuanModel;
 import com.linkage.gas_station.model.ProductGroupModel;
+import com.linkage.gas_station.more.MoreActivity;
 import com.linkage.gas_station.myview.FixedSpeedScroller;
 import com.linkage.gas_station.myview.MyScrollLayout;
 import com.linkage.gas_station.myview.MyScrollLayout.PageListener;
@@ -96,7 +97,7 @@ public class GonglveActivity extends BaseActivity {
 	//初始号码
 	long initPhoneNum=-1;
 	//当前版本支持的活动类型
-	int[] allowedType={2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34};
+	int[] allowedType={2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35};
 	//活动加载标志位
 	boolean isLoadActivity=false;
 	boolean isLoadBank=false;
@@ -391,6 +392,10 @@ public class GonglveActivity extends BaseActivity {
 							tuan_layout.setVisibility(View.GONE);
 							activity_layout.setVisibility(View.VISIBLE);
 						}
+						else if(activity_type==35) {
+							tuan_layout.setVisibility(View.GONE);
+							activity_layout.setVisibility(View.VISIBLE);
+						}
 						TextView tuan_tip=(TextView) view.findViewById(R.id.tuan_tip);
 						if (activity_type == 3 || activity_type == 4
 								|| activity_type == 31 || activity_type == 6
@@ -406,7 +411,8 @@ public class GonglveActivity extends BaseActivity {
 								|| activity_type == 25 || activity_type == 26
 								|| activity_type == 27 || activity_type == 28
 								|| activity_type == 29 || activity_type == 30
-								|| activity_type == 33 || activity_type == 34 ) {
+								|| activity_type == 33 || activity_type == 34 
+								|| activity_type == 35 ) {
 							tuan_tip.setText(temp2.get(i)
 									.getActivity_description());
 						}
@@ -932,7 +938,12 @@ public class GonglveActivity extends BaseActivity {
 									intent.putExtras(bundle);
 									startActivity(intent);
 								}});
-							tuan_go.setImageResource(R.drawable.dinggou_button);
+							if(activityId.equals("55")) {
+								tuan_go.setImageResource(R.drawable.activity_cy);
+							}
+							else {
+								tuan_go.setImageResource(R.drawable.dinggou_button);
+							}
 						}
 						else if(activity_type==24) {
 							activity_go.setVisibility(View.INVISIBLE);
@@ -943,8 +954,13 @@ public class GonglveActivity extends BaseActivity {
 							tuan_go.setImageResource(R.drawable.wap_button);
 						}
 						else if(activity_type==26||activity_type==34) {
+							if(activityId.equals("54")) {
+								tuan_go.setImageResource(R.drawable.qianggou_button);	
+							}
+							else {
+								tuan_go.setImageResource(R.drawable.th);	
+							}
 							activity_go.setVisibility(View.INVISIBLE);
-							tuan_go.setImageResource(R.drawable.th);	
 						}
 						else if(activity_type==27) {
 							tuan_go.setImageResource(R.drawable.qxjy_buy);
@@ -980,6 +996,10 @@ public class GonglveActivity extends BaseActivity {
 						else if(activity_type==33) {
 							activity_go.setVisibility(View.INVISIBLE);
 							tuan_go.setImageResource(R.drawable.jyb);	
+						}
+						else if(activity_type==35) {
+							activity_go.setVisibility(View.INVISIBLE);
+							tuan_go.setImageResource(R.drawable.jyb);
 						}
 						tuan_go.setOnClickListener(new ImageView.OnClickListener() {
 
@@ -1167,6 +1187,13 @@ public class GonglveActivity extends BaseActivity {
 									Intent intent=new Intent(GonglveActivity.this, PotOfGoldActivity.class);
 									Bundle bundle=new Bundle();
 									bundle.putString("activity_url", temp2.get(num).getActivity_url());
+									intent.putExtras(bundle);
+									startActivity(intent);
+								}
+								else if(activity_type==35) {
+									Intent intent=new Intent(GonglveActivity.this, ShareRedEnvelopesActivity.class);
+									Bundle bundle=new Bundle();
+									bundle.putString("activityId", temp2.get(num).getActivity_id());
 									intent.putExtras(bundle);
 									startActivity(intent);
 								}

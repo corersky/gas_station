@@ -394,5 +394,30 @@ public interface StrategyManager {
 	
 	//获取用户兑换列表
 	public Map[] qhUserFlowPrizes(Long phoneNum,String areaCode,Long activityId);
+	
+	//青海秒杀用户列表
+	public Map[] qhMSList(Long phoneNum,String areaCode,Long activityId,Long prizeId);
+	
+	//抢红包活动
+	//获取流量包列表
+	public Map[] getRedPackets(Long phoneNum,String areaCode,Long activityId);
+	
+	//获取当前用户当天的抽奖机会和剩余的抽奖机会
+	public Map getJSLotteryCondition(Long phoneNum,String areaCode,Long activityId);
+	
+	//用户抽奖
+	public Map drawJSLottery(Long phoneNum,String machineCode,String areaCode,Long activityId);
+	
+	//中奖记录
+	
+	//购买流量
+	public Map saveJSOrder(String seqId,Long phoneNum,String verCode,String areaCode,Long activityId,Long offerId);
+	
+	//赠送流量
+	//sendType 1:随机 2：指定  指定params:号码:流量,号码:流量
+	public Map sendRedPackets(String orderId,Long phoneNum,String areaCode,Long activityId,int sendType,Long offerId,String params);
+	
+	//赠送记录
+	public Map[] getRedList(Long phoneNum,String areaCode,Long activityId);
 
 }

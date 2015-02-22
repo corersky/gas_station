@@ -91,6 +91,7 @@ public class MemberDrawActivity extends BaseActivity {
 				Intent intent=new Intent(MemberDrawActivity.this, MemberluckMyPrizeActivity.class);
 				Bundle bundle=new Bundle();
 				bundle.putLong("activityId", getIntent().getExtras().getLong("activityId"));
+				bundle.putBoolean("isShowGet", true);
 				intent.putExtras(bundle);
 				startActivity(intent);
 			}});

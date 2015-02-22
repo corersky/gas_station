@@ -180,6 +180,12 @@ public class SelectTypeActivity extends BaseActivity implements OnClickListener 
 					else if(selectObj.getTypeId()==94) {
 						bundle.putString("offer_description", "说明:省内漫游,有效期:10月1日0时 - 7日24时");
 					}
+					else if(selectObj.getTypeId()==156) {
+						bundle.putString("offer_description", "说明:过年喽，分享流量红包给你的亲朋好友吧！");
+					}
+					else if(selectObj.getTypeId()==159) {
+						bundle.putString("offer_description", "说明:过年喽，分享流量红包给你的亲朋好友吧！");
+					}
 				}
 				else {
 					bundle.putString("offer_description", "");

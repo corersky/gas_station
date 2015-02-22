@@ -2,12 +2,6 @@ package com.linkage.gas_station.share;
 
 import java.util.ArrayList;
 
-import com.baidu.mobstat.StatService;
-import com.linkage.gas_station.BaseActivity;
-import com.linkage.gas_station.GasStationApplication;
-import com.linkage.gas_station.R;
-import com.linkage.gas_station.model.ContactModel;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,8 +9,15 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.baidu.mobstat.StatService;
+import com.linkage.gas_station.BaseActivity;
+import com.linkage.gas_station.GasStationApplication;
+import com.linkage.gas_station.R;
+import com.linkage.gas_station.model.ContactModel;
 
 public class SelectContactsActivity extends BaseActivity {
 	
@@ -57,9 +58,10 @@ public class SelectContactsActivity extends BaseActivity {
 				setResult(RESULT_OK, intent);
 				finish();
 			}});
+
 		contacts_letter=(TextView) findViewById(R.id.contacts_letter);
 		contacts_list=(ListView) findViewById(R.id.contacts_list);
-		adapter=new SelectContactsAdapter(SelectContactsActivity.this, model_list);
+		adapter=new SelectContactsAdapter(SelectContactsActivity.this, model_list, getIntent().getExtras().getInt("type"));
 		contacts_list.setAdapter(adapter);
 		contacts_list.setOnScrollListener(new OnScrollListener() {
 			
@@ -86,6 +88,28 @@ public class SelectContactsActivity extends BaseActivity {
 			}
 		});
 		adapter.notifyDataSetChanged();		
+		if(getIntent().getExtras().getInt("type")==1) {
+			contacts_share.setVisibility(View.VISIBLE);
+		}
+		else if(getIntent().getExtras().getInt("type")==0) {
+			contacts_share.setVisibility(View.GONE);
+			contacts_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					Intent intent=getIntent();
+					Bundle bundle=new Bundle();
+					bundle.putString("tag", getIntent().getExtras().getString("tag"));
+					bundle.putString("num", model_list_temp.get(position).getPhoneNum());
+					intent.putExtras(bundle);
+					setResult(RESULT_OK, intent);
+					finish();
+				}
+			});
+		}
+		
 	}
 	
 	@Override

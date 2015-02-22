@@ -18,10 +18,12 @@ public class SelectContactsAdapter extends BaseAdapter {
 	
 	ArrayList<ContactModel> model_list=null;
 	Context context=null;
+	int type=0;
 	
-	public SelectContactsAdapter(Context context, ArrayList<ContactModel> model_list) {
+	public SelectContactsAdapter(Context context, ArrayList<ContactModel> model_list, int type) {
 		this.context=context;
 		this.model_list=model_list;
+		this.type=type;
 	}
 
 	@Override
@@ -56,6 +58,12 @@ public class SelectContactsAdapter extends BaseAdapter {
 		}
 		else {
 			holder=(Share_Holder) convertView.getTag();
+		}
+		if(type==1) {
+			holder.contacts_check.setVisibility(View.VISIBLE);
+		}
+		else {
+			holder.contacts_check.setVisibility(View.GONE);
 		}
 		if(model_list.get(position).isChecked()) {
 			holder.contacts_check.setChecked(true);

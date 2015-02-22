@@ -52,14 +52,14 @@ public class WebDetailActivity extends BaseActivity {
 	        super.onProgressChanged(view, newProgress);  
 	    }
 	}
-	
-	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		if(web_webview.canGoBack()) {
-			web_webview.goBack();				
-			return;
-		}
-		super.onBackPressed();
-	}
+//	
+//	@Override
+//	public void onBackPressed() {
+//		// TODO Auto-generated method stub
+//		if(web_webview.canGoBack()) {
+//			web_webview.goBack();				
+//			return;
+//		}
+//		super.onBackPressed();
+//	}
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.linkage.gas_station"
-    android:versionCode="105"
-    android:versionName="7.9.46"
+    android:versionCode="106"
+    android:versionName="7.9.48"
     android:installLocation="internalOnly" >
 
     <uses-sdk
@@ -192,7 +192,13 @@
  	   	<activity android:name=".gonglve.MemberluckListActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".gonglve.ExchangeActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".gonglve.PotOfGoldActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
- 	   	<activity android:name=".util.WebDetailActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".gonglve.ShareRedEnvelopesActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".gonglve.SendShareRedEnvelopesActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".gonglve.RandomShareRedEnvelopesActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".gonglve.BuyShareRedEnvelopesActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".gonglve.ShareRedEnvelopesRecordActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+ 	   	<activity android:name=".gonglve.ShareRedEnvelopesLucjDrawActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+	   	<activity android:name=".util.WebDetailActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
  	   	<activity android:name=".memberday.CaptureActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.MemberActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.MemberReceiveActivity" android:theme="@android:style/Theme.Translucent" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
@@ -200,6 +206,7 @@
 	   	<activity android:name=".memberday.BusinessesActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.FlowDayActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".memberday.FlowReceiveActivity" android:theme="@android:style/Theme.Translucent" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
+  		<activity android:name=".memberday.FlowDayRecordListActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
 	   	<activity android:name=".life.LifeMainActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>
     	<activity android:name=".life.LifeAddActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>    	
     	<activity android:name=".life.AreaRegionActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|navigation"></activity>

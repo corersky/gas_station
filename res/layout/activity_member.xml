@@ -219,6 +219,7 @@
 			        		android:layout_marginTop="5dip"
 			        		android:background="@drawable/member_bg">
 			                <TextView 
+			                    android:id="@+id/member_next_tip"
 			                    android:text="下期会员日，更多精彩值得期待"
 			                    android:layout_margin="3dip"
 			                    android:background="#09b311"

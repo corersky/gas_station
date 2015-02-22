@@ -127,6 +127,9 @@ public class ShareActivity_New extends BaseActivity {
 					Util.getContactData(ShareActivity_New.this);
 				}
 				Intent intent=new Intent(ShareActivity_New.this, SelectContactsActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putInt("type", 1);
+				intent.putExtras(bundle);
 				startActivityForResult(intent, 100);
 			}});
 		share_content=(TextView) findViewById(R.id.share_content);

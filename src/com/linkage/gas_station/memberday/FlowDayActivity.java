@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,11 +38,13 @@ public class FlowDayActivity extends BaseActivity {
 	
 	TextView title_name=null;
 	ImageView title_back=null;
+	TextView title_right=null;
 
 	TextView member_left_tab=null;
 	TextView member_right_tab=null;
 	ListView member_right_listview=null;
 	FlowDayRightAdapter adapter_right=null;
+	TextView member_next_tip=null;
 	ListView member_next_listview=null;
 	FlowDayLeftAdapter adapter_before=null;
 	ListView member_left_listview=null;
@@ -98,10 +101,17 @@ public class FlowDayActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				finish();
 			}});
+		title_right=(TextView) findViewById(R.id.title_right);
 		
 		member_level_desp=(TextView) findViewById(R.id.member_level_desp);
 		member_left_tab=(TextView) findViewById(R.id.member_left_tab);
-		member_left_tab.setText("特惠包抢购");
+		if(getIntent().getExtras().getString("activityId").equals("57")) {
+			member_left_tab.setText("特惠包订购");
+		}
+		else {
+			member_left_tab.setText("特惠包抢购");
+		}
+		
 		member_left_tab.setOnClickListener(new TextView.OnClickListener() {
 
 			@Override
@@ -125,7 +135,12 @@ public class FlowDayActivity extends BaseActivity {
 				member_right_listview.setVisibility(View.GONE);
 			}});
 		member_right_tab=(TextView) findViewById(R.id.member_right_tab);
-		member_right_tab.setText("已抢特惠包");
+		if(getIntent().getExtras().getString("activityId").equals("57")) {
+			member_right_tab.setText("已订特惠包");
+		}
+		else {
+			member_right_tab.setText("已抢特惠包");
+		}
 		member_right_tab.setOnClickListener(new TextView.OnClickListener() {
 
 			@Override
@@ -182,6 +197,8 @@ public class FlowDayActivity extends BaseActivity {
 		member_right_listview.setVisibility(View.GONE);
 		
 		member_left_layout=(RelativeLayout) findViewById(R.id.member_left_layout);
+		member_next_tip=(TextView) findViewById(R.id.member_next_tip);
+		member_next_tip.setText("下期节日特惠，更多精彩值得期待");
 		member_next_listview=(ListView) findViewById(R.id.member_next_listview);
 		adapter_before=new FlowDayLeftAdapter(FlowDayActivity.this, strs_left_before, false);
 		member_next_listview.setAdapter(adapter_before);
@@ -200,7 +217,7 @@ public class FlowDayActivity extends BaseActivity {
 		flowPrizes();
 	}
 	
-	Handler handler=new Handler() {
+	Handler handler_time=new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
@@ -218,9 +235,11 @@ public class FlowDayActivity extends BaseActivity {
 					member_hour.setText(hour<10?"0"+hour:""+hour);
 					member_min.setText(minute<10?"0"+minute:""+minute);
 					member_sec.setText(sec<10?"0"+sec:""+sec);
-					handler.postDelayed(runnable, 1000);
+					handler_time.postDelayed(runnable, 1000);
 				}
-				
+				else {
+					flowPrizes();
+				}
 			}
 		}
 	};
@@ -231,7 +250,7 @@ public class FlowDayActivity extends BaseActivity {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			handler.sendEmptyMessage(0);
+			handler_time.sendEmptyMessage(0);
 		}
 	};
 	
@@ -469,20 +488,41 @@ public class FlowDayActivity extends BaseActivity {
 						if(currentTime>activityTime) {
 							member_day_start_layout.setVisibility(View.VISIBLE);
 							member_day_notstart_layout.setVisibility(View.GONE);
-							
+							if(getIntent().getExtras().getString("activityId").equals("54")&&strs_left.size()>0) {
+								title_right.setVisibility(View.VISIBLE);
+								title_right.setText("中奖用户查询");
+								title_right.setOnClickListener(new OnClickListener() {
+									
+									@Override
+									public void onClick(View v) {
+										// TODO Auto-generated method stub
+										Intent intent=new Intent(FlowDayActivity.this, FlowDayRecordListActivity.class);
+										Bundle bundle=new Bundle();
+										bundle.putString("activityId", getIntent().getExtras().getString("activityId"));
+										bundle.putString("prizeId", strs_left.get(0).getPrize_id());
+										intent.putExtras(bundle);
+										startActivity(intent);
+									}
+								});
+							}
+							adapter_before.notifyDataSetChanged();
 							adapter_left.notifyDataSetChanged();
 						}
 						else {
 							member_day_start_layout.setVisibility(View.GONE);
 							member_day_notstart_layout.setVisibility(View.VISIBLE);
+							if(getIntent().getExtras().getString("activityId").equals("54")) {
+								title_right.setVisibility(View.GONE);
+							}
 							
 							adapter_before.notifyDataSetChanged();
+							adapter_left.notifyDataSetChanged();
 							
 							String endTime=map.get("flowDay").toString()+" 00:00:00";
 							SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 							try {
 								date_start=format.parse(endTime);
-								handler.post(runnable);
+								handler_time.post(runnable);
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -801,7 +841,7 @@ public class FlowDayActivity extends BaseActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		isStopThread=true;
-		handler.removeCallbacks(runnable);
+		handler_time.removeCallbacks(runnable);
 		
 		((GasStationApplication) getApplication()).tempActivity.remove(FlowDayActivity.this);
 	};

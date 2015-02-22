@@ -43,7 +43,7 @@ public class PotOfGoldActivity extends BaseActivity {
 	
 	private void init() {
 		title_name=(TextView) findViewById(R.id.title_name);
-		title_name.setText("会员日");
+		title_name.setText("一桶金");
 		title_back=(ImageView) findViewById(R.id.title_back);
 		title_back.setVisibility(View.VISIBLE);
 		title_back.setOnClickListener(new ImageView.OnClickListener() {

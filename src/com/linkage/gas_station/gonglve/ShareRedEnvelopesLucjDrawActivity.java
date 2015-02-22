@@ -1,128 +1,90 @@
 package com.linkage.gas_station.gonglve;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baidu.mobstat.StatService;
 import com.linkage.gas_station.BaseActivity;
 import com.linkage.gas_station.GasStationApplication;
 import com.linkage.gas_station.R;
 import com.linkage.gas_station.util.Util;
 import com.linkage.gas_station.util.hessian.GetWebDate;
-import com.linkage.gas_station.util.hessian.PublicManager;
 import com.linkage.gas_station.util.hessian.StrategyManager;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.ObjectAnimator;
 
-public class SendFlow_Pay_QH_Activity extends BaseActivity {
+public class ShareRedEnvelopesLucjDrawActivity extends BaseActivity {
 	
-	TextView title_name=null;
-	ImageView title_back=null;
+	ImageView shareredenvelopes_lottery_point=null;
+	ImageView shareredenvelopes_lottery_view=null;
+	TextView shareredenvelopes_lottery_drawnum=null;
+	TextView shareredenvelopes_lottery_lists=null;
 	
-	TextView sendflow_content=null;
-	EditText send_flow_other_num=null;
-	EditText send_flow_other_num_more=null;
-	EditText send_flow_yz=null;
-	ImageView send_flow_getyz=null;
-	TextView send_flow_time=null;
-	TextView send_flow_desp=null;
-	Button send_flow_submit=null;
+	//旋转结束位置
+	int lastValue=0;
 	
-	//开启倒计时
-	boolean isStartTime=false;
-	//倒计时初始化时间
-	long day=0;
-	//提交时间戳
-	long currentPayTime=0;
-	
-	Timer timer=null;
-	DetailTimer timetask=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_sendflow_pay_qh);
-		
-		((GasStationApplication) getApplication()).tempActivity.add(SendFlow_Pay_QH_Activity.this);
+		setContentView(R.layout.activity_shareredenvelopes_luckdraw);
 		
 		init();
 	}
 	
 	private void init() {
-		title_name=(TextView) findViewById(R.id.title_name);
-		title_name.setText(getResources().getString(R.string.jiayou_zhifu));
-		title_back=(ImageView) findViewById(R.id.title_back);
-		title_back.setVisibility(View.VISIBLE);
-		title_back.setOnClickListener(new ImageView.OnClickListener() {
+		shareredenvelopes_lottery_point=(ImageView) findViewById(R.id.shareredenvelopes_lottery_point);
+		shareredenvelopes_lottery_point.setOnClickListener(new ImageView.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				finish();
+				drawLottery();
+			}});
+		shareredenvelopes_lottery_view=(ImageView) findViewById(R.id.shareredenvelopes_lottery_view);
+		shareredenvelopes_lottery_drawnum=(TextView) findViewById(R.id.shareredenvelopes_lottery_drawnum);
+		shareredenvelopes_lottery_lists=(TextView) findViewById(R.id.shareredenvelopes_lottery_lists);
+		shareredenvelopes_lottery_lists.setOnClickListener(new TextView.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(ShareRedEnvelopesLucjDrawActivity.this, MemberluckMyPrizeActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putLong("activityId", Long.parseLong(getIntent().getExtras().getString("activityId")));
+				bundle.putBoolean("isShowGet", false);
+				intent.putExtras(bundle);
+				startActivity(intent);
 			}});
 		
-		sendflow_content=(TextView) findViewById(R.id.sendflow_content);
-		sendflow_content.setText(getIntent().getExtras().getString("offer_name"));
-		send_flow_other_num=(EditText) findViewById(R.id.send_flow_other_num);
-		send_flow_other_num_more=(EditText) findViewById(R.id.send_flow_other_num_more);
-		send_flow_yz=(EditText) findViewById(R.id.send_flow_yz);
-		send_flow_getyz=(ImageView) findViewById(R.id.send_flow_getyz);
-		send_flow_getyz.setOnClickListener(new ImageView.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				send_flow_getyz.setEnabled(false);
-				verCode();
-			}});
-		send_flow_time=(TextView) findViewById(R.id.send_flow_time);
-		send_flow_desp=(TextView) findViewById(R.id.send_flow_desp);
-		send_flow_desp.setText(getIntent().getExtras().getString("offer_description"));
-		send_flow_submit=(Button) findViewById(R.id.send_flow_submit);
-		send_flow_submit.setOnClickListener(new Button.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub	
-				if(send_flow_yz.getText().toString().equals("")) {
-					showCustomToast(getResources().getString(R.string.yzm_null));
-				}
-				else {
-					saveOrder();
-					send_flow_submit.setClickable(false);
-				}				
-			}});
+		getJSLotteryCondition();
 	}
-
-	/**
-	 * 获取验证码
-	 */
-	public void verCode() {
-				
+	
+	public void getJSLotteryCondition() {
+		showProgressDialog(R.string.tishi_loading);
 		final Handler handler=new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				// TODO Auto-generated method stub
+				super.handleMessage(msg);
+				dismissProgressDialog();
 				if(msg.what==1) {
-					showCustomToast(getResources().getString(R.string.yzm_comp));
-					//验证码开启标志位
-					send_flow_time.setVisibility(View.VISIBLE);
-					send_flow_getyz.setVisibility(View.GONE);
-					day=new Date().getTime();
-					isStartTime=true;
+					Map map=(Map) msg.obj;
+					shareredenvelopes_lottery_drawnum.setText(map.get("lottery_cnt").toString());
 				}
 				else if(msg.what==-1) {
 					showCustomToast("链路连接失败");
@@ -130,32 +92,31 @@ public class SendFlow_Pay_QH_Activity extends BaseActivity {
 				else {
 					showCustomToast(getResources().getString(R.string.timeout_exp));
 				}
-				send_flow_getyz.setEnabled(true);
 			}
 		};
 		
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				LinkedList<String> wholeUrl=Util.getWholeUrl(SendFlow_Pay_QH_Activity.this);
+				LinkedList<String> wholeUrl=Util.getWholeUrl(ShareRedEnvelopesLucjDrawActivity.this);
 				Message m=new Message();
 				int num=0;
 				boolean flag=true;
 				String currentUsedUrl="";
 				try {
-					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(SendFlow_Pay_QH_Activity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
+					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(ShareRedEnvelopesLucjDrawActivity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
 				} catch(Exception e) {
 					currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
 				}
 				while(flag) {
 					try {
-						
-						PublicManager publicManager=GetWebDate.getHessionFactiory(SendFlow_Pay_QH_Activity.this).create(PublicManager.class, currentUsedUrl+"/hessian/publicManager", getClassLoader());
-						ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_QH_Activity.this);
-						int verCode=publicManager.sendVerCode(Long.parseLong(list.get(0)), list.get(1));
-						m.what=verCode;
+						ArrayList<String> list=Util.getUserInfo(ShareRedEnvelopesLucjDrawActivity.this);					
+						StrategyManager strategyManager=GetWebDate.getHessionFactiory(ShareRedEnvelopesLucjDrawActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
+						Map map=strategyManager.getJSLotteryCondition(Long.parseLong(list.get(0)), list.get(1), Long.parseLong(getIntent().getExtras().getString("activityId")));
+						m.obj=map;
+						m.what=1;
 						flag=false;
 						((GasStationApplication) getApplicationContext()).AreaUrl=currentUsedUrl;
 					} catch(Error e) {
@@ -243,37 +204,92 @@ public class SendFlow_Pay_QH_Activity extends BaseActivity {
 						}
 						m.what=0;
 					}
-				}
-				
+				}				
 				handler.sendMessage(m);
-			}}).start();
+			}
+		}).start();
 	}
-	
-	private void saveOrder() {
-		if(!send_flow_other_num_more.getText().toString().equals(send_flow_other_num.getText().toString())) {
-			showCustomToast("两次号码输入不一致");
-			send_flow_submit.setClickable(true);
-			return;
-		}
+
+	/**
+	 * 用户抽奖
+	 */
+	private void drawLottery() {
+		
 		showProgressDialog(R.string.tishi_loading);
 		
 		final Handler handler=new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				// TODO Auto-generated method stub
-				super.handleMessage(msg);
 				dismissProgressDialog();
 				if(msg.what==1) {
-					Map map=(Map) msg.obj;
-					showCustomToast(map.get("comments").toString());
-					send_flow_submit.setClickable(true);
-					finish();
-				}
-				else if(msg.what==-2) {
-					showCustomToast("链路连接失败");
+					final Map map=(Map) msg.obj;
+					if(map.get("result").toString().equals("1")) {
+						int level_id=Integer.parseInt(map.get("level_id").toString());
+						int place=4-level_id;
+						System.out.println("当前的位置:"+place+"");
+						
+						//最终角度
+						final int finalRotate=(int) (360/4*(place+0.5));
+
+						AnimatorSet set=new AnimatorSet();
+						set.playTogether(ObjectAnimator.ofFloat(shareredenvelopes_lottery_view, "rotation", lastValue, finalRotate+360*3));
+						set.setDuration(3000);
+						set.start();
+						set.addListener(new AnimatorListener() {
+							
+							@Override
+							public void onAnimationStart(Animator arg0) {
+								// TODO Auto-generated method stub
+								shareredenvelopes_lottery_point.setEnabled(false);
+								shareredenvelopes_lottery_point.setClickable(false);
+							}
+							
+							@Override
+							public void onAnimationRepeat(Animator arg0) {
+								// TODO Auto-generated method stub
+								
+							}
+							
+							@Override
+							public void onAnimationEnd(Animator arg0) {
+								// TODO Auto-generated method stub
+								shareredenvelopes_lottery_point.setEnabled(true);
+								shareredenvelopes_lottery_point.setClickable(true);
+								lastValue=finalRotate;
+								shareredenvelopes_lottery_drawnum.setText(map.get("lottery_cnt").toString());	
+								new AlertDialog.Builder(ShareRedEnvelopesLucjDrawActivity.this).setTitle("提示").setMessage(map.get("comments").toString()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+									
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										// TODO Auto-generated method stub
+										
+									}
+								}).show();
+							}
+							
+							@Override
+							public void onAnimationCancel(Animator arg0) {
+								// TODO Auto-generated method stub
+								
+							}
+						});
+					}					
+					else {
+						showCustomToast(map.get("comments").toString());
+						shareredenvelopes_lottery_point.setEnabled(true);
+						shareredenvelopes_lottery_point.setClickable(true);
+					}
 				}
 				else if(msg.what==-1) {
+					showCustomToast("链路连接失败");
+					shareredenvelopes_lottery_point.setEnabled(true);
+					shareredenvelopes_lottery_point.setClickable(true);
+				}
+				else {
 					showCustomToast(getResources().getString(R.string.timeout_exp));
+					shareredenvelopes_lottery_point.setEnabled(true);
+					shareredenvelopes_lottery_point.setClickable(true);
 				}
 			}
 		};
@@ -283,32 +299,28 @@ public class SendFlow_Pay_QH_Activity extends BaseActivity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				LinkedList<String> wholeUrl=Util.getWholeUrl(SendFlow_Pay_QH_Activity.this);
+				LinkedList<String> wholeUrl=Util.getWholeUrl(ShareRedEnvelopesLucjDrawActivity.this);
 				Message m=new Message();
 				int num=0;
 				boolean flag=true;
 				String currentUsedUrl="";
 				try {
-					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(SendFlow_Pay_QH_Activity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
+					currentUsedUrl=((GasStationApplication) getApplicationContext()).AreaUrl.equals("")?Util.getWholeUrl(ShareRedEnvelopesLucjDrawActivity.this).get(0):((GasStationApplication) getApplicationContext()).AreaUrl;
 				} catch(Exception e) {
 					currentUsedUrl=((GasStationApplication) getApplicationContext()).COMMONURL[0];
 				}
 				while(flag) {
 					try {
-						ArrayList<String> list=Util.getUserInfo(SendFlow_Pay_QH_Activity.this);
-						StrategyManager strategyManager=GetWebDate.getHessionFactiory(SendFlow_Pay_QH_Activity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
-						long temp_time=(currentPayTime==0?System.currentTimeMillis():currentPayTime);
-						currentPayTime=temp_time;
-						Map map=strategyManager.holidayOrder(String.valueOf(temp_time), Long.parseLong(list.get(0)), Long.parseLong(getIntent().getExtras().getString("offerId")), 
-								send_flow_yz.getText().toString(), list.get(1), 
-								getIntent().getExtras().getInt("activity_id"), 1, 0, 0, 2, Long.parseLong(send_flow_other_num.getText().toString()));
+						ArrayList<String> list=Util.getUserInfo(ShareRedEnvelopesLucjDrawActivity.this);					
+						StrategyManager strategyManager=GetWebDate.getHessionFactiory(ShareRedEnvelopesLucjDrawActivity.this).create(StrategyManager.class, currentUsedUrl+"/hessian/strategyManager", getClassLoader());
+						Map map=strategyManager.drawJSLottery(Long.parseLong(list.get(0)), Util.getDeviceId(ShareRedEnvelopesLucjDrawActivity.this)+Util.getMacAddress(ShareRedEnvelopesLucjDrawActivity.this), list.get(1), Long.parseLong(getIntent().getExtras().getString("activityId")));
 						m.obj=map;
-						m.what=1;		
+						m.what=1;
 						flag=false;
 						((GasStationApplication) getApplicationContext()).AreaUrl=currentUsedUrl;
 					} catch(Error e) {
 						flag=false;
-						m.what=-2;
+						m.what=-1;
 			        } catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -389,73 +401,10 @@ public class SendFlow_Pay_QH_Activity extends BaseActivity {
 								flag=false;
 							}
 						}
-						m.what=-1;
-						m.obj=null;
+						m.what=0;
 					}
 				}				
 				handler.sendMessage(m);
 			}}).start();
-	}
-	
-	class DetailTimer extends TimerTask {
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			Message m=new Message();
-			handler_detailTime.sendMessage(m);
-		}
-		
-	}
-	
-	Handler handler_detailTime=new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			if(isStartTime) {
-				
-				Date today=new Date();		
-				int day_=0;
-				int hour_=0;
-				int minute_=0;
-				int second_=0;
-				day_=(int) ((today.getTime()-day)/(24*60*60*1000));
-				hour_=(int)(today.getTime()-day)/(60*60*1000)-day_*24;
-				minute_=(int) (today.getTime()-day)/(60*1000)-day_*24*60-hour_*60;
-				second_=(int) (today.getTime()-day)/1000-day_*24*60*60-hour_*60*60-minute_*60;
-				if(minute_>0) {
-					send_flow_time.setVisibility(View.GONE);
-					send_flow_getyz.setVisibility(View.VISIBLE);
-					((GasStationApplication) getApplicationContext()).loginTime=0;
-				}
-				else {
-					send_flow_time.setText(""+(60-second_)+"秒发");
-				}
-			}
-		}
-	};
-	
-	protected void onResume() {
-		super.onResume();
-		timer=new Timer();
-		timetask=new DetailTimer();
-		timer.schedule(timetask, new Date(), 1000);
-		StatService.onResume(this);
-	};
-	
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		timer.cancel();
-		StatService.onPause(this);
-	}
-
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		//unregisterReceiver(receiver);
-		((GasStationApplication) getApplication()).tempActivity.remove(SendFlow_Pay_QH_Activity.this);
 	}
 }

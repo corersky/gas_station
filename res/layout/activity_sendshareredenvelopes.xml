@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical" >
+    <include 
+        layout="@layout/main_title"/>
+    <ScrollView 
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent">
+        <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:gravity="center_horizontal"
+		    android:orientation="vertical" >
+		    <RelativeLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="60dip"
+			    android:layout_marginTop="5dip"
+			    android:layout_marginBottom="5dip"
+			    android:layout_marginLeft="7dip"
+			    android:layout_marginRight="7dip"
+			    android:background="@android:color/white" >
+	            <TextView 
+	                android:id="@+id/sendshareredenvelopes_label"
+		            android:text="可派发流量:"
+		            android:textColor="#777777"
+		            android:textSize="18sp"
+		            android:layout_marginLeft="20dip"
+		            android:layout_centerVertical="true"
+		  			android:layout_width="wrap_content"
+		  			android:layout_height="wrap_content"/>
+	            <TextView 
+	                android:id="@+id/sendshareredenvelopes_total"
+		            android:layout_alignBaseline="@id/sendshareredenvelopes_label"
+		            android:layout_toRightOf="@id/sendshareredenvelopes_label"
+		            android:textColor="#da181a"
+		            android:textSize="30sp"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="35dip"
+		            android:text="0"
+		  			android:layout_width="wrap_content"
+		  			android:layout_height="wrap_content"/>
+	            <TextView 
+	                android:layout_toRightOf="@id/sendshareredenvelopes_total"
+	                android:layout_alignBaseline="@id/sendshareredenvelopes_total"
+		            android:text="M"
+		            android:textSize="18sp"
+		            android:layout_marginLeft="15dip"
+		            android:textColor="#777777"
+		  			android:layout_width="wrap_content"
+		  			android:layout_height="wrap_content"/>
+	        </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/shareredenvelopes_add_layout"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical" >
+	            
+	        </LinearLayout>
+	        <ImageView 
+	            android:id="@+id/shareredenvelopes_add"
+	            android:src="@drawable/shareredenvelopes_add"
+	            android:layout_marginTop="10dip"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"/>
+	        <ImageView 
+	            android:id="@+id/shareredenvelopes_sendnow"
+	            android:src="@drawable/shareredenvelopes_sendnow"
+	            android:layout_margin="20dip"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"/>
+	        
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

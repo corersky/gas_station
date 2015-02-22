@@ -59,7 +59,7 @@ public class MemberluckMyPrizeActivity extends BaseActivity {
 		title_name.setText("ÎÒµÄ½±Æ·");
 		
 		adapter_memberluck_myprize_listview=(ListView) findViewById(R.id.adapter_memberluck_myprize_listview);
-		adapter=new AdapterMemberluckMyPrize(MemberluckMyPrizeActivity.this, models);
+		adapter=new AdapterMemberluckMyPrize(MemberluckMyPrizeActivity.this, models, getIntent().getExtras().getBoolean("isShowGet"));
 		adapter_memberluck_myprize_listview.setAdapter(adapter);
 		
 		getLotteryInfo();
